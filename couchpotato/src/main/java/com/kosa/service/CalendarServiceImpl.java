@@ -3,6 +3,8 @@ package com.kosa.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,8 @@ public class CalendarServiceImpl implements CalendarService {
 	@Autowired
 	private CalendarMapper mapper;
 
+	@Autowired
+	private SqlSessionFactory sqlSessionFactory;
 
 	@Override
 	public  Map<String, Object> getTotalReviewsByUser(String userId) {
@@ -63,6 +67,17 @@ public class CalendarServiceImpl implements CalendarService {
 			log.info(e.getMessage());
 		}
 		return list;
+	}
+
+	@Override
+	public int deleteReview(Map<String, String> review) {
+		int count = 0;
+		try {
+			count = mapper.deleteReview(review);		
+		} catch (Exception e) {
+			log.info(e.getMessage());
+		}
+		return count;
 	}
 
 

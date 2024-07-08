@@ -103,7 +103,6 @@
                     // 이벤트를 클릭했을 때: calEvent.start(현재 이벤트의 날짜)
                     var clickedDate = calEvent.start.format('YYYY-MM-DD');
                 
-                    alert('View: ' + view.name); // 현재 뷰 이름 표시
                     contentsDetailsByDate(clickedDate); // 특정 날짜에 대한 영화 정보 가져오기
                 }
             }); // end fullCalendar
@@ -132,17 +131,36 @@
             url: '/getcontentdetail',  // db에서 영화 정보 가져오는 URL
             type: 'GET',  // 요청 방식
             data: { date: clickedDate },
-            success: function(detailData) {
-                var resultHtml = ' '; // 빈 문자열 정의
+            success: function(detailData) { 
+            	console.log(detailData); // detailData 출력
+            	
+                // JSON 데이터 파싱
+                var resultHtml = '';
                 
-                detailData.forEach( function(data) {
-                    resultHtml += '<p>콘텐츠 이름: ' + data.content_name + '</p>';
-                    resultHtml += '<p>리뷰: ' + data.review_text + '</p>';
-                    resultHtml += '<p>평점: ' + data.rating + '</p>';
-                    resultHtml += '<p>작성일: ' + data.review_create_at + '</p>';
+                detailData.forEach(function(data) {  // 반복문
+                    resultHtml +=
+                        '<div class="review-item">' +
+                            '<img src="/resources/images/gamja_profile.png" alt="Movie Thumbnail" class="review-img">' +
+                            '<div class="review-contents">' +
+                                '<div class="review-title-rate">' + 
+                                    '<div class="review-title">' + data.content_name + '</div>' +
+                                    '<div class="review-rating">' + data.rating + '</div>' +
+                                '</div>'+
+                                '<div class="review-text">' + data.review_text + '</div>' +          
+                            '</div>' +
+                            '<div class="review-edit-time">' +
+                                '<div class="button-group">' +
+                                    '<button class="edit-btn" onclick="location.href=\'/modifyreview\'">수정</button>' +
+                                    '<button class="delete-btn" onclick="deleteReview(\'' + data.content_name + '\', \'' + data.review_create_at + '\')">삭제</button>' +
+                                '</div>' +
+                                '<div class="review-time">' + data.review_create_at + '</div>' +
+                            '</div>' +
+                        '</div>';
                 });
                 
+                // 모달 바디에 결과 HTML 삽입
                 $('#modal-body').html(resultHtml);
+                // 모달 표시
                 $('#myModal').css('display', 'block');
             },
             error: function(xhr, status, error){
@@ -150,6 +168,32 @@
             }
         });
     }
+    
+    
+    function deleteReview(contentName, reviewCreateAt) {    
+    	
+    	// JavaScript 객체
+    	const obj = {  
+						content_name: contentName,
+						review_create_at: reviewCreateAt
+					}
+    	$.ajax({
+    		url: '/deletereview',  // 삭제 요청을 보낼 url
+    		type: 'POST',  // 요청 방식
+			contentType: 'application/json',  // 요청 데이터의 MIME 타입 
+			data: JSON.stringify(obj),   // 객체를 json 문자열로 반환
+			success: function(response) {
+				alert(response.message);  // 서버에서 받은 메시지 출력
+				if (response.redirectUrl) {
+				    window.location.href = response.redirectUrl;  // 리디렉션 URL로 이동
+				}
+			},
+    		error: function(xhr, status, error) {
+    			alert('리뷰 삭제에 실패하였습니다');
+    		}
+    	})
+    }
+    
     </script>
 </body>
 </html>
