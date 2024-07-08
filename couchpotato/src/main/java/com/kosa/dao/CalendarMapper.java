@@ -23,4 +23,7 @@ public interface CalendarMapper {
 	// getReviewByDate
 	public List<CalendarDTO> getContentDetailByDate(CalendarDTO calDto);
 
+	// deleteReview
+	public int deleteReview(Map<String, String> review);
+
 }
