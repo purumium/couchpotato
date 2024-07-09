@@ -4,84 +4,9 @@
 
 <mapper namespace="com.kosa.dao.CalendarMapper"> <!-- 연결할 mapper 클래스 설정: com.kosa.dao.매퍼클래스명 -->
 
-	<!-- 사용자의 리뷰 전체 리스트 개수 -->
-	<select id="getTotalReviewsByUser" parameterType="String" resultType="map">
-		SELECT 
-			u.username AS username, COUNT(*) AS total_reviews
-		FROM 
-			reviews r JOIN users u
-		ON 
-			r.user_number = u.user_number
-		WHERE 
-			u.user_id = #{userId}
-	    GROUP BY
-       		u.username
+	<select id="getList" resultType="int">ㄴ
+	    select count(*) from mandalart
 	</select>
 
 
-	<!-- 각 날짜별 리뷰 개수, 리뷰 생성 날짜 -->
-	<select id="getReviewByDate" parameterType="String" resultType="map">
-		SELECT 
-			TO_CHAR(r.review_create_at, 'YYYY-MM-DD') AS review_create_at,
-			COUNT(*) AS review_total_count
-		FROM 
-			reviews r JOIN users u
-		ON 
-			r.user_number = u.user_number
-		WHERE 
-			u.user_id = #{userId}
-		GROUP BY 
-			r.review_create_at
-	</select>
-	
-	
-	<!-- 나의 리뷰 리스트 전체 목록 가지고 오기 -->
-	<select id="getAllReviewList" parameterType="String" resultType="CalendarDTO">
-			SELECT 
-				r.content_name, r.review_text, r.rating, r.content_image_url, r.review_create_at
-			FROM 
-			  reviews r JOIN users u
-			ON 
-			  r.user_number = u.user_number
-			WHERE 
-				u.user_id = #{userId}
-			ORDER BY 
-				r.review_create_at ASC
-	</select>
-	
-	
-	<!-- userid, reviewdate로 해당 날짜의 데이터 가지고 오기 -->
-	<select id="getContentDetailByDate" parameterType="CalendarDTO" resultType="CalendarDTO">
-	    SELECT
-	        r.content_name, r.review_text, r.rating, r.content_image_url, 
-	        TO_CHAR(r.review_create_at, 'YYYY-MM-DD') AS review_create_at
-	    FROM 
-	        reviews r JOIN users u
-	    ON 
-	        r.user_number = u.user_number
-	    WHERE 
-	        u.user_id = #{user_id}
-	    AND
-	        r.review_create_at = #{review_create_at}
-	</select>	
-	
-	<delete id="deleteReview" parameterType="map">
-		DELETE 
-		FROM 
-			reviews r 
-		WHERE EXISTS (
-			SELECT 1
-			FROM
-				users u
-			WHERE 
-				r.user_number = u.user_number
-			AND
-				u.user_id = #{user_id}
-		)	
-		AND 
-			r.review_create_at = #{review_create_at}
-		AND
-			r.content_name = #{content_name}
-	</delete>
-	
 </mapper>

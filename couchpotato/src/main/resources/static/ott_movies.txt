@@ -1,0 +1,160 @@
+1,통합,돌풍,https://file.kinolights.com/s/content_poster/202406/13/dd96cae9-7bee-439e-a492-bdca763d2c65.webp
+2,통합,인사이드 아웃 2,https://file.kinolights.com/s/content_poster/202405/21/0b8aeda0-42cd-4095-999f-1a69e68cc902.webp
+3,통합,커넥션,https://file.kinolights.com/s/content_poster/202405/21/8e7be140-4129-4708-8c41-30990e7b432e.webp
+4,통합,낮과 밤이 다른 그녀,https://file.kinolights.com/s/content_poster/202406/04/11fedd17-a522-4730-9713-6836eb4cb7d1.webp
+5,통합,탈주,https://file.kinolights.com/s/content_poster/202406/24/e5a074bb-79e5-4c55-ae76-21d4d6d77cf8.webp
+6,통합,핸섬가이즈,https://file.kinolights.com/s/content_poster/202407/02/91d4f173-d2a1-4de1-9728-f381a7874f5e.webp
+7,통합,범죄도시4,https://file.kinolights.com/s/content_poster/202404/24/4c8a0de5-0a01-46c2-8376-a589d6b8714c.webp
+8,통합,인사이드 아웃,https://file.kinolights.com/s/content_poster/202307/12/c24815a6-e897-4775-94f7-f04046e9a93a.webp
+9,통합,오디션,https://file.kinolights.com/s/content_poster/202307/12/793245bb-72ea-4299-bccf-0a0d27c3cf3d.webp
+10,통합,마터스: 천국을 보는 눈,https://file.kinolights.com/s/content_poster/202307/12/46d53b20-8b95-41fb-a256-9819011fc0c9.webp
+11,통합,파묘,https://file.kinolights.com/s/content_poster/202403/03/d1e37861-9999-41b1-9a5b-e3e8377e9d76.webp
+12,통합,나이트 플라이어,https://file.kinolights.com/s/content_poster/202307/12/d410be95-852d-46e7-8dd9-b2921f540820.webp
+13,통합,나는 돈가스가 싫어요,https://file.kinolights.com/s/content_poster/202406/10/b51788a2-5fd9-47dc-b8a8-48dc37eeec22.webp
+14,통합,【최애의 아이】 2기,https://file.kinolights.com/s/content_poster/202406/24/464897a3-bb53-4c14-95db-0bfdc05140c2.webp
+15,통합,감사합니다,https://file.kinolights.com/s/content_poster/202406/10/3e28d53d-3da6-4894-95cf-b85e247a1e3b.webp
+16,통합,해리 포터와 마법사의 돌,https://file.kinolights.com/s/content_poster/202307/12/d3bd0c18-249f-41e1-8013-2395bcd778b6.webp
+17,통합,헨리 : 연쇄살인범의 초상,https://file.kinolights.com/s/content_poster/202307/12/0e948900-f150-4caa-80c9-b6dd586d2fa4.webp
+18,통합,콰이어트 플레이스,https://file.kinolights.com/s/content_poster/202307/12/9ec51a0b-0041-4cc8-a059-b3e9e8ba331c.webp
+19,통합,나는 SOLO <나는 솔로>,https://file.kinolights.com/original/content_poster/202405/10/e27b4fbd-a3ef-4302-835d-3fe0b335e83d.jpeg
+20,통합,콰이어트 플레이스 2,https://file.kinolights.com/s/content_poster/202307/12/07964277-f7b3-41da-9de3-beb1ff5ec56f.webp
+1,넷플릭스,돌풍,https://file.kinolights.com/s/content_poster/202406/13/dd96cae9-7bee-439e-a492-bdca763d2c65.webp
+2,넷플릭스,낮과 밤이 다른 그녀,https://file.kinolights.com/s/content_poster/202406/04/11fedd17-a522-4730-9713-6836eb4cb7d1.webp
+3,넷플릭스,파묘,https://file.kinolights.com/s/content_poster/202403/03/d1e37861-9999-41b1-9a5b-e3e8377e9d76.webp
+4,넷플릭스,【최애의 아이】 2기,https://file.kinolights.com/s/content_poster/202406/24/464897a3-bb53-4c14-95db-0bfdc05140c2.webp
+5,넷플릭스,콰이어트 플레이스,https://file.kinolights.com/s/content_poster/202307/12/9ec51a0b-0041-4cc8-a059-b3e9e8ba331c.webp
+6,넷플릭스,나는 SOLO <나는 솔로>,https://static.kinolights.com/assets/images/poster_lazyload.png
+7,넷플릭스,귀멸의 칼날: 합동 강화 훈련편,https://file.kinolights.com/s/content_poster/202403/10/269b840d-d000-4c3c-9895-9b33c761cad5.webp
+8,넷플릭스,괴수 8호,https://file.kinolights.com/s/content_poster/202404/14/3be6e114-1f0d-4272-a76c-cca5eeec12a7.webp
+9,넷플릭스,시민덕희,https://file.kinolights.com/s/content_poster/202312/06/103ec070-1988-4856-b3e2-6232600cff04.webp
+10,넷플릭스,비버리 힐스 캅: 액셀 F,https://file.kinolights.com/s/content_poster/202312/27/258a4eed-d32c-4399-8d22-85c406b5cabd.webp
+11,넷플릭스,최강야구 시즌 3,https://file.kinolights.com/s/content_poster/202404/10/cf594298-6fca-479e-999d-3f5a2d6ceac4.webp
+12,넷플릭스,돌싱글즈 5,https://file.kinolights.com/s/content_poster/202405/21/c715ba94-45ce-47c7-9264-4b34545b34ae.webp
+13,넷플릭스,서울의 봄,https://file.kinolights.com/s/content_poster/202312/06/11824278-8aec-418d-a2c4-76a49e34a359.webp
+14,넷플릭스,나는 SOLO 그후, 사랑은 계속된다,https://file.kinolights.com/s/content_poster/202309/11/0115be6e-ef82-46f9-b31b-92b5e26c83cb.webp
+15,넷플릭스,씬,https://file.kinolights.com/s/content_poster/202403/08/0641cddf-7064-4b16-9d72-d31364e22e0b.webp
+16,넷플릭스,가족이라서 문제입니다,https://file.kinolights.com/s/content_poster/202405/30/79091e19-9d72-485b-be8c-203c4eea1cc0.webp
+17,넷플릭스,슈퍼셀,https://file.kinolights.com/s/content_poster/202407/04/f1bf8b34-19e3-4802-b28c-66e39f6c6748.webp
+18,넷플릭스,내가 죽던 날,https://file.kinolights.com/s/content_poster/202307/12/8f8dd2d2-7a98-4676-bd33-e765f4612d25.webp
+19,넷플릭스,어게인 1997,https://file.kinolights.com/s/content_poster/202403/19/32a06258-2125-4fdb-a47e-6026dbbb2bc8.webp
+20,넷플릭스,비공식작전,https://file.kinolights.com/s/content_poster/202307/28/5d70ae07-aaa0-44ce-a44c-a86ac94f1588.webp
+1,티빙,낮과 밤이 다른 그녀,https://file.kinolights.com/s/content_poster/202406/04/11fedd17-a522-4730-9713-6836eb4cb7d1.webp
+2,티빙,오디션,https://file.kinolights.com/s/content_poster/202307/12/793245bb-72ea-4299-bccf-0a0d27c3cf3d.webp
+3,티빙,파묘,https://file.kinolights.com/s/content_poster/202403/03/d1e37861-9999-41b1-9a5b-e3e8377e9d76.webp
+4,티빙,감사합니다,https://file.kinolights.com/s/content_poster/202406/10/3e28d53d-3da6-4894-95cf-b85e247a1e3b.webp
+5,티빙,나는 SOLO <나는 솔로>,https://file.kinolights.com/original/content_poster/202405/10/e27b4fbd-a3ef-4302-835d-3fe0b335e83d.jpeg
+6,티빙,귀멸의 칼날: 합동 강화 훈련편,https://file.kinolights.com/s/content_poster/202403/10/269b840d-d000-4c3c-9895-9b33c761cad5.webp
+7,티빙,졸업,https://file.kinolights.com/s/content_poster/202404/04/da27b8be-b932-4b62-a62e-f33f2bb3c9ab.webp
+8,티빙,괴수 8호,https://file.kinolights.com/s/content_poster/202404/14/3be6e114-1f0d-4272-a76c-cca5eeec12a7.webp
+9,티빙,놀아주는 여자,https://file.kinolights.com/s/content_poster/202405/16/050f984d-d978-477e-93d7-69260c4f275d.webp
+10,티빙,서진이네 2,https://file.kinolights.com/s/content_poster/202406/21/95790890-739c-4436-8265-a5ff206fbb51.webp
+11,티빙,시민덕희,https://file.kinolights.com/s/content_poster/202312/06/103ec070-1988-4856-b3e2-6232600cff04.webp
+12,티빙,인 악토버,https://file.kinolights.com/s/content_poster/202407/04/0a0b1310-6f49-4b92-8f75-e8133805149a.webp
+13,티빙,선재 업고 튀어,https://file.kinolights.com/s/content_poster/202405/19/5e1fd440-a988-4aab-8e9d-84d282671bce.webp
+14,티빙,최강야구 시즌 3,https://file.kinolights.com/s/content_poster/202404/10/cf594298-6fca-479e-999d-3f5a2d6ceac4.webp
+15,티빙,돌싱글즈 5,https://file.kinolights.com/s/content_poster/202405/21/c715ba94-45ce-47c7-9264-4b34545b34ae.webp
+16,티빙,외계+인 2부,https://file.kinolights.com/s/content_poster/202312/11/294c4a16-16fa-47fa-988a-e72f9c0d8e60.webp
+17,티빙,조폭인 내가 고등학생이 되었습니다,https://file.kinolights.com/s/content_poster/202405/22/02b6faed-eb0c-4d5b-9362-fe7449a07e96.webp
+18,티빙,나는 SOLO 그후, 사랑은 계속된다,https://file.kinolights.com/s/content_poster/202309/11/0115be6e-ef82-46f9-b31b-92b5e26c83cb.webp
+19,티빙,씬,https://file.kinolights.com/s/content_poster/202403/08/0641cddf-7064-4b16-9d72-d31364e22e0b.webp
+20,티빙,이애위영,https://file.kinolights.com/s/content_poster/202311/08/b297a40e-5b31-429b-9f48-3d94c651c5ce.webp
+1,쿠팡,커넥션,https://file.kinolights.com/s/content_poster/202405/21/8e7be140-4129-4708-8c41-30990e7b432e.webp
+2,쿠팡,해리 포터와 마법사의 돌,https://file.kinolights.com/s/content_poster/202307/12/d3bd0c18-249f-41e1-8013-2395bcd778b6.webp
+3,쿠팡,콰이어트 플레이스,https://file.kinolights.com/s/content_poster/202307/12/9ec51a0b-0041-4cc8-a059-b3e9e8ba331c.webp
+4,쿠팡,나는 SOLO <나는 솔로>,https://file.kinolights.com/original/content_poster/202405/10/e27b4fbd-a3ef-4302-835d-3fe0b335e83d.jpeg
+5,쿠팡,인 악토버,https://file.kinolights.com/s/content_poster/202407/04/0a0b1310-6f49-4b92-8f75-e8133805149a.webp
+6,쿠팡,더 매직스타,https://file.kinolights.com/s/content_poster/202405/23/06442152-7b77-4b7e-b89e-7fe28fd50e55.webp
+7,쿠팡,돌싱글즈 5,https://file.kinolights.com/s/content_poster/202405/21/c715ba94-45ce-47c7-9264-4b34545b34ae.webp
+8,쿠팡,매드 맥스: 분노의 도로,https://file.kinolights.com/s/content_poster/202307/12/4a5e6190-1744-46b0-9f32-830c96083c41.webp
+9,쿠팡,1947 보스톤,https://file.kinolights.com/s/content_poster/202308/28/c55af475-c9b8-4dca-aee1-28dfdb5f50e5.webp
+10,쿠팡,해리 포터와 비밀의 방,https://file.kinolights.com/s/content_poster/202307/12/09e63615-cd3e-466c-90ee-9cdf9f008cdd.webp
+11,쿠팡,나는 SOLO 그후, 사랑은 계속된다,https://file.kinolights.com/s/content_poster/202309/11/0115be6e-ef82-46f9-b31b-92b5e26c83cb.webp
+12,쿠팡,나 혼자 산다,https://file.kinolights.com/s/content_poster/202307/12/649f95a7-6708-4c13-8f59-f2178c3a25ae.webp
+13,쿠팡,해리 포터와 아즈카반의 죄수,https://file.kinolights.com/s/content_poster/202307/12/e073a0ba-ad1b-475d-a52b-a0c25fe44f29.webp
+14,쿠팡,놀면 뭐하니?,https://file.kinolights.com/s/content_poster/202307/12/6d90739b-9c19-4a28-905a-373cd3363349.webp
+15,쿠팡,비공식작전,https://file.kinolights.com/s/content_poster/202307/28/5d70ae07-aaa0-44ce-a44c-a86ac94f1588.webp
+16,쿠팡,미녀와 순정남,https://file.kinolights.com/s/content_poster/202403/26/475b1c18-1146-499c-97d4-37640ca2d85e.webp
+17,쿠팡,전지적 참견 시점,https://file.kinolights.com/s/content_poster/202307/12/8dac8c7b-7e31-4154-a534-a41f2645939d.webp
+18,쿠팡,성적을 부탁해 : 티처스,https://file.kinolights.com/s/content_poster/202310/13/f1049822-81ad-4a2b-97c3-6c7706fcd0af.webp
+19,쿠팡,존 윅 4,https://file.kinolights.com/s/content_poster/202307/12/5c455f05-972a-4a4e-8a48-bc6b39f26dc9.webp
+20,쿠팡,비상선언,https://file.kinolights.com/s/content_poster/202307/12/2d8de05d-a5b9-4e9f-8bbc-a786a874d52d.webp
+1,웨이브,커넥션,https://file.kinolights.com/s/content_poster/202405/21/8e7be140-4129-4708-8c41-30990e7b432e.webp
+2,웨이브,오디션,https://file.kinolights.com/s/content_poster/202307/12/793245bb-72ea-4299-bccf-0a0d27c3cf3d.webp
+3,웨이브,마터스: 천국을 보는 눈,https://file.kinolights.com/s/content_poster/202307/12/46d53b20-8b95-41fb-a256-9819011fc0c9.webp
+4,웨이브,나이트 플라이어,https://file.kinolights.com/s/content_poster/202307/12/d410be95-852d-46e7-8dd9-b2921f540820.webp
+5,웨이브,나는 돈가스가 싫어요,https://file.kinolights.com/s/content_poster/202406/10/b51788a2-5fd9-47dc-b8a8-48dc37eeec22.webp
+6,웨이브,【최애의 아이】 2기,https://file.kinolights.com/s/content_poster/202406/24/464897a3-bb53-4c14-95db-0bfdc05140c2.webp
+7,웨이브,해리 포터와 마법사의 돌,https://file.kinolights.com/s/content_poster/202307/12/d3bd0c18-249f-41e1-8013-2395bcd778b6.webp
+8,웨이브,나는 SOLO <나는 솔로>,https://static.kinolights.com/assets/images/poster_lazyload.png
+9,웨이브,귀멸의 칼날: 합동 강화 훈련편,https://file.kinolights.com/s/content_poster/202403/10/269b840d-d000-4c3c-9895-9b33c761cad5.webp
+10,웨이브,괴수 8호,https://file.kinolights.com/s/content_poster/202404/14/3be6e114-1f0d-4272-a76c-cca5eeec12a7.webp
+11,웨이브,스즈메의 문단속,https://file.kinolights.com/s/content_poster/202402/06/ce9af497-7813-48fa-906e-a80be2201fa3.webp
+12,웨이브,심야괴담회 시즌 4,https://file.kinolights.com/s/content_poster/202406/21/5b1afcc0-d4ac-4b00-8a87-a8027bd2e4a1.webp
+13,웨이브,돌싱글즈 5,https://file.kinolights.com/s/content_poster/202405/21/c715ba94-45ce-47c7-9264-4b34545b34ae.webp
+14,웨이브,매드 맥스: 분노의 도로,https://file.kinolights.com/s/content_poster/202307/12/4a5e6190-1744-46b0-9f32-830c96083c41.webp
+15,웨이브,조폭인 내가 고등학생이 되었습니다,https://file.kinolights.com/s/content_poster/202405/22/02b6faed-eb0c-4d5b-9362-fe7449a07e96.webp
+16,웨이브,해리 포터와 비밀의 방,https://file.kinolights.com/s/content_poster/202307/12/09e63615-cd3e-466c-90ee-9cdf9f008cdd.webp
+17,웨이브,나는 SOLO 그후, 사랑은 계속된다,https://file.kinolights.com/s/content_poster/202309/11/0115be6e-ef82-46f9-b31b-92b5e26c83cb.webp
+18,웨이브,나 혼자 산다,https://file.kinolights.com/s/content_poster/202307/12/649f95a7-6708-4c13-8f59-f2178c3a25ae.webp
+19,웨이브,이애위영,https://file.kinolights.com/s/content_poster/202311/08/b297a40e-5b31-429b-9f48-3d94c651c5ce.webp
+20,웨이브,용감한 시민,https://file.kinolights.com/s/content_poster/202309/20/9910db9d-b9ce-4a4f-8838-f98dcfc7247e.webp
+1,디즈니,인사이드 아웃,https://file.kinolights.com/s/content_poster/202307/12/c24815a6-e897-4775-94f7-f04046e9a93a.webp
+2,디즈니,My name is 가브리엘,https://file.kinolights.com/s/content_poster/202406/21/4cc95e12-59e9-485d-b2e6-4d7f3249eaa9.webp
+3,디즈니,괴수 8호,https://file.kinolights.com/s/content_poster/202404/14/3be6e114-1f0d-4272-a76c-cca5eeec12a7.webp
+4,디즈니,더 퍼스트 슬램덩크,https://file.kinolights.com/s/content_poster/202307/12/2c7919dc-d5c3-4274-aad7-0404df98f994.webp
+5,디즈니,화인가 스캔들,https://file.kinolights.com/s/content_poster/202406/03/4b4dd801-d930-47d9-991e-317419a7087b.webp
+6,디즈니,범죄도시 3,https://file.kinolights.com/s/content_poster/202307/12/7df625a0-ae95-41ee-afdf-379aa269388c.webp
+7,디즈니,삼식이 삼촌,https://file.kinolights.com/s/content_poster/202404/02/4d6ca5c0-4834-42e2-ad3e-d252f80a2870.webp
+8,디즈니,애콜라이트,https://file.kinolights.com/s/content_poster/202405/05/0c31de19-a9dc-4eb6-9b8e-1984387a6b1b.webp
+9,디즈니,프리즌 브레이크 시즌 1,https://file.kinolights.com/s/content_poster/202307/12/602c37f5-23d4-4603-be44-3eeac97a0156.webp
+10,디즈니,아는 형님,https://file.kinolights.com/s/content_poster/202307/12/08845c6e-65c0-4b9c-abc2-bbe76f5b8e9a.webp
+11,디즈니,범죄도시,https://file.kinolights.com/s/content_poster/202307/12/c477ff16-4021-4de1-903e-9c6ee1f75bbc.webp
+12,디즈니,밀수,https://file.kinolights.com/s/content_poster/202307/12/47d84165-02eb-4f13-8be6-53beea92dc6c.webp
+13,디즈니,곡성,https://file.kinolights.com/s/content_poster/202307/12/5521dc17-2c6c-403c-b7da-1d6b101ac0a6.webp
+14,디즈니,범죄도시 2,https://file.kinolights.com/s/content_poster/202307/12/540472cc-d333-4ed7-b7e7-cc2637eeee4e.webp
+15,디즈니,크래시,https://file.kinolights.com/s/content_poster/202405/14/88eaeabf-6023-45e4-9432-4da808b39bde.webp
+16,디즈니,록키 호러 픽쳐 쇼,https://file.kinolights.com/s/content_poster/202307/12/2203e72d-0c37-4338-9368-e8f936f66c3b.webp
+17,디즈니,가여운 것들,https://file.kinolights.com/s/content_poster/202401/30/b46ed856-551c-4bfb-a23e-1be464cb6060.webp
+18,디즈니,악귀,https://file.kinolights.com/s/content_poster/202307/12/6a006d4a-033e-4aa9-8bca-b97b8a8c3fb9.webp
+19,디즈니,30일,https://file.kinolights.com/s/content_poster/202310/04/01624d0e-6950-419c-847f-861efb0bd381.webp
+20,디즈니,칠석의 나라,https://file.kinolights.com/s/content_poster/202407/02/2540acb0-9a84-4c05-97b2-ca16b7d5a992.webp
+1,와챠,오디션,https://file.kinolights.com/s/content_poster/202307/12/793245bb-72ea-4299-bccf-0a0d27c3cf3d.webp
+2,와챠,마터스: 천국을 보는 눈,https://file.kinolights.com/s/content_poster/202307/12/46d53b20-8b95-41fb-a256-9819011fc0c9.webp
+3,와챠,나이트 플라이어,https://file.kinolights.com/s/content_poster/202307/12/d410be95-852d-46e7-8dd9-b2921f540820.webp
+4,와챠,【최애의 아이】 2기,https://file.kinolights.com/s/content_poster/202406/24/464897a3-bb53-4c14-95db-0bfdc05140c2.webp
+5,와챠,나는 SOLO <나는 솔로>,https://static.kinolights.com/assets/images/poster_lazyload.png
+6,와챠,귀멸의 칼날: 합동 강화 훈련편,https://file.kinolights.com/s/content_poster/202403/10/269b840d-d000-4c3c-9895-9b33c761cad5.webp
+7,와챠,괴수 8호,https://file.kinolights.com/s/content_poster/202404/14/3be6e114-1f0d-4272-a76c-cca5eeec12a7.webp
+8,와챠,돌싱글즈 5,https://file.kinolights.com/s/content_poster/202405/21/c715ba94-45ce-47c7-9264-4b34545b34ae.webp
+9,와챠,조폭인 내가 고등학생이 되었습니다,https://file.kinolights.com/s/content_poster/202405/22/02b6faed-eb0c-4d5b-9362-fe7449a07e96.webp
+10,와챠,나는 SOLO 그후, 사랑은 계속된다,https://file.kinolights.com/s/content_poster/202309/11/0115be6e-ef82-46f9-b31b-92b5e26c83cb.webp
+11,와챠,나 혼자 산다,https://file.kinolights.com/s/content_poster/202307/12/649f95a7-6708-4c13-8f59-f2178c3a25ae.webp
+12,와챠,이애위영,https://file.kinolights.com/s/content_poster/202311/08/b297a40e-5b31-429b-9f48-3d94c651c5ce.webp
+13,와챠,릴리 슈슈의 모든 것,https://file.kinolights.com/s/content_poster/202307/12/ec9af30e-fe2e-43c0-82f2-aef530253eef.webp
+14,와챠,여봉행,https://file.kinolights.com/s/content_poster/202404/19/ad913e3d-e276-42ad-8775-49106481b601.webp
+15,와챠,놀면 뭐하니?,https://file.kinolights.com/s/content_poster/202307/12/6d90739b-9c19-4a28-905a-373cd3363349.webp
+16,와챠,전지적 참견 시점,https://file.kinolights.com/s/content_poster/202307/12/8dac8c7b-7e31-4154-a534-a41f2645939d.webp
+17,와챠,에브리씽 에브리웨어 올 앳 원스,https://file.kinolights.com/s/content_poster/202307/12/a8e1d94f-d84a-4d38-b3b4-aebb6c7d5d3d.webp
+18,와챠,사조영웅전 2024,https://file.kinolights.com/s/content_poster/202406/12/a8d3c946-a90f-4ed1-8a56-5aa907fe4a60.webp
+19,와챠,1986 그 여름, 그리고 고등어통조림,https://file.kinolights.com/s/content_poster/202307/12/207840c9-4ed1-41f2-b388-efd42812605f.webp
+20,와챠,아내를 죽였다,https://file.kinolights.com/s/content_poster/202307/12/1a3f37b2-9a6a-424e-9223-dab72b2aa29e.webp
+1,박스오피스,인사이드 아웃 2,https://file.kinolights.com/s/content_poster/202405/21/0b8aeda0-42cd-4095-999f-1a69e68cc902.webp
+2,박스오피스,탈주,https://file.kinolights.com/s/content_poster/202406/24/e5a074bb-79e5-4c55-ae76-21d4d6d77cf8.webp
+3,박스오피스,핸섬가이즈,https://file.kinolights.com/s/content_poster/202407/02/91d4f173-d2a1-4de1-9728-f381a7874f5e.webp
+4,박스오피스,하이재킹,https://file.kinolights.com/s/content_poster/202405/27/23f078e2-8b14-42d0-9597-ab92e60a9ee4.webp
+5,박스오피스,콰이어트 플레이스: 첫째 날,https://file.kinolights.com/s/content_poster/202405/27/347331e9-82ca-492b-9c71-f5a48b7d07d7.webp
+6,박스오피스,극장판 하이큐!! 쓰레기장의 결전,https://file.kinolights.com/s/content_poster/202404/18/cf648fab-370f-4bc4-9e4a-50e9b6d69e68.webp
+7,박스오피스,퍼펙트 데이즈,https://file.kinolights.com/s/content_poster/202406/03/d9abf077-3beb-485d-92b4-7a24bc646abd.webp
+8,박스오피스,듄,https://file.kinolights.com/s/content_poster/202307/12/6b7c2bff-59c3-4695-b4d1-66615fb5d31d.webp
+9,박스오피스,존 오브 인터레스트,https://file.kinolights.com/s/content_poster/202405/14/eb74ed6b-373f-41a9-9d19-8f5df2899427.webp
+10,박스오피스,듄: 파트2,https://file.kinolights.com/s/content_poster/202401/26/efd407ef-a130-42b9-9f8a-ccb64a0e2f2e.webp
+11,박스오피스,우마무스메 프리티 더비 새로운 시대의 문,https://file.kinolights.com/s/content_poster/202407/01/1fb85240-326e-42c3-8bef-68d771a68073.webp
+12,박스오피스,언더더씨: 마법 산호초를 찾아서,https://file.kinolights.com/s/content_poster/202406/05/e3b6a11e-9d46-40d6-a872-dc7603cd5e19.webp
+13,박스오피스,만천과해,https://file.kinolights.com/s/content_poster/202406/05/e26ab0f4-3224-4c21-a575-ca3dd13c7764.webp
+14,박스오피스,프렌치 수프,https://file.kinolights.com/s/content_poster/202405/22/0c925e77-cb10-41f8-8b25-78db0c247f56.webp
+15,박스오피스,키타로 탄생: 게게게의 수수께끼,https://file.kinolights.com/s/content_poster/202405/21/ef6fd2da-79b0-4a3e-8ae3-fcf3ed2186f4.webp
+16,박스오피스,기동전사 건담 시드 프리덤,https://file.kinolights.com/s/content_poster/202406/25/bd02e277-60b7-43cd-a1af-a8c107b03e5b.webp
+17,박스오피스,퓨리오사: 매드맥스 사가,https://file.kinolights.com/s/content_poster/202404/12/1c827066-2472-4d90-a4df-59242e07c9d5.webp
+18,박스오피스,태풍 클럽,https://file.kinolights.com/s/content_poster/202406/09/f1fc741c-b0b6-4d6c-bd01-ce8a6fef8d97.webp
+19,박스오피스,극장판 도라에몽: 진구의 지구 교향곡,https://file.kinolights.com/s/content_poster/202406/17/d7cd04cd-cfd5-42c9-a217-e62cadd154ee.webp
+20,박스오피스,다큐 황은정: 스마트폰이 뭐길래,https://file.kinolights.com/s/content_poster/202406/24/5868252d-fff3-44e0-b0b1-077724fc03b3.webp
