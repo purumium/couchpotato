@@ -48,6 +48,7 @@ public class MovieService {
                     movie.setMediatype(node.path("media_type").asText());
                     movie.setName(node.path("name").asText());
                     movie.setId(node.path("id").asInt());
+                    movie.setPosterpath(node.path("poster_path").asText());
                     movies.add(movie);
                 }
 

@@ -4,6 +4,7 @@
 <%@ page import="com.kosa.dto.MovieDTO"%>
 <%@ page import="com.kosa.dto.MovieRanking" %>
 
+<!DOCTYPE html>
 <html>
 <head>
 <title>Movies Search Results</title>
@@ -91,11 +92,43 @@ body {
 	vertical-align: middle;
 }
 
-.table-container {
+/* 모달 창 스타일링 */
+.modal {
 	display: none;
-	margin-top: 20px;
-	margin-left: 400px;
-	margin-right: 400px;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+	background-color: #fefefe;
+	margin: 5% auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 60%;
+	max-width: 600px;
+	max-height: 70%;
+	overflow-y: auto;
+	border-radius: 5px;
+}
+
+.close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
 }
 
 table {
@@ -117,83 +150,68 @@ th {
 }
 </style>
 <script>
+const rankings = ${m_array};
 
-const rankings = ${m_array}
-
-
-
-function toggleTable(event) {
+function toggleModal(event) {
     const clickedItem = event.currentTarget;
-    const tableContainer = document.querySelector('.table-container');
+    const modal = document.getElementById('myModal');
     const infoValue = clickedItem.querySelector('.info-value').innerText;
 
     // Remove existing h1 if present
-    const existingH1 = document.querySelector('.table-container h1');
+    const existingH1 = modal.querySelector('h1');
     if (existingH1) {
         existingH1.remove();
     }
 
-    // Toggle the display style of the table container
-    const displayStyle = tableContainer.style.display;
+    // Create and insert new h1
+    const newH1 = document.createElement('h1');
+    newH1.innerText = infoValue;
+    newH1.style.display = 'none';
+    modal.querySelector('.modal-content').insertBefore(newH1, modal.querySelector('.modal-content').firstChild);
 
-    if (displayStyle === 'block' && existingH1 && existingH1.innerText === infoValue) {
-        tableContainer.style.display = 'none';
-    } else {
-        tableContainer.style.display = 'block';
-
-        // Create and insert new h1
-        const newH1 = document.createElement('h1');
-        newH1.innerText = infoValue;
-        newH1.style.display='none'
-        tableContainer.insertBefore(newH1, tableContainer.firstChild);
-
-        generateTable(infoValue);
-    }
+    generateTable(infoValue);
+    modal.style.display = 'block';
 }
 
 function generateTable(infoValue) {
-	// JSP에서 자바스크립트로 rankings 데이터를 전달합니다.
-
+    const modalContent = document.querySelector('.modal-content');
     
-    const tableContainer = document.querySelector('.table-container');
-    
-    // 기존 테이블이 있다면 제거
-    const existingTable = tableContainer.querySelector('table');
+    // Remove existing table if present
+    const existingTable = modalContent.querySelector('table');
     if (existingTable) {
         existingTable.remove();
     }
-    console.log("변수의 값은:", infoValue);
-    console.log("변수의 값은:", rankings);
-    // infoValue에 따라 데이터를 필터링
+
+    // Filter data based on infoValue
     const filteredData = rankings.filter(item => item.site === infoValue);
 
-    // 테이블 생성
+    // Create table
     const table = document.createElement('table');
     
-    // 테이블 헤더 생성 (필요에 따라 수정)
+    // Create table header
     const thead = document.createElement('thead');
     const headerRow = document.createElement('tr');
     const headerCell1 = document.createElement('th');
-    headerCell1.innerText = 'img';
+    headerCell1.innerText = 'Img';
     const headerCell2 = document.createElement('th');
-    headerCell2.innerText = 'rank';
+    headerCell2.innerText = 'Rank';
     const headerCell3 = document.createElement('th');
-    headerCell3.innerText = 'titie';
+    headerCell3.innerText = 'Title';
     headerRow.appendChild(headerCell1);
     headerRow.appendChild(headerCell2);
     headerRow.appendChild(headerCell3);
     thead.appendChild(headerRow);
     table.appendChild(thead);
 
-    // 테이블 바디 생성
+    // Create table body
     const tbody = document.createElement('tbody');
     filteredData.forEach(item => {
         const row = document.createElement('tr');
         const cell1 = document.createElement('td');
         const img = document.createElement('img');
         img.src = item.imageUrl;
-        img.width = 100; // 너비를 100픽셀로 설정
-        img.height = 150; // 높이를 100픽셀로 설정
+        img.width = 100; // Set width to 100 pixels
+        img.height = 150; // Set height to 150 pixels
         cell1.appendChild(img);
         const cell2 = document.createElement('td');
         cell2.innerText = item.id;
@@ -206,15 +224,33 @@ function generateTable(infoValue) {
     });
     table.appendChild(tbody);
 
-    // 테이블 컨테이너에 테이블 추가
-    tableContainer.appendChild(table);
+    // Append table to modal content
+    modalContent.appendChild(table);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     const infoItems = document.querySelectorAll('.info-item');
     infoItems.forEach(item => {
-        item.addEventListener('click', toggleTable);
+        item.addEventListener('click', toggleModal);
     });
+
+    // Get the modal
+    const modal = document.getElementById('myModal');
+
+    // Get the <span> element that closes the modal
+    const span = document.getElementsByClassName('close')[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = 'none';
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
 });
 </script>
 </head>
@@ -266,22 +302,14 @@ document.addEventListener('DOMContentLoaded', () => {
 				alt="Label Image"> <span class="info-value">박스오피스</span>
 		</div>
 	</div>
-	
 
-    
-	<div class="table-container">
-		<table>
-			<thead>
-				<tr>
-					<th style="width:10%"></th>
-					<th style="width:10%">rank</th>
-					<th>title</th>
-				</tr>
-			</thead>
-			<tbody id="table-body">
-				<!-- Rows will be added here dynamically -->
-			</tbody>
-		</table>
+	<!-- The Modal -->
+	<div id="myModal" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<!-- Table will be added here dynamically -->
+		</div>
 	</div>
+
 </body>
 </html>
