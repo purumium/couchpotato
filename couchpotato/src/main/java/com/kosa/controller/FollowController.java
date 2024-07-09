@@ -24,7 +24,7 @@ public class FollowController {
 	@Autowired
 	FollowService service;
 
-//	인간들 리스트 
+//	검색했을 때 인간들 리스트 
 	@GetMapping(value = "/user_list")
 	public String user_list(Model model, @RequestParam int user_number) throws Exception {
 
@@ -101,8 +101,6 @@ public class FollowController {
 	}
 
 	// 해당 사용자에 대한 팔로우 실행
-//	@GetMapping(value = "/follow")
-	 // HTTP POST 요청을 처리하는 메서드를 정의함. URL 패턴은 "/follow"
 	@PostMapping(value = "/follow")
 	@ResponseBody
 	public String follow(@RequestParam int user_number, @RequestParam int following_id) throws Exception {
@@ -110,18 +108,19 @@ public class FollowController {
 	    ufdto.setFollower_id(user_number);
 	    ufdto.setFollowing_id(following_id);
 	    
+	    //맞팔확인
 	    int followStatus = service.checkFollowStatus(ufdto);
-	    if (followStatus > 0) {
-	        service.getunfollow(ufdto);
-	        return "unfollow";
+	    if (followStatus > 0) {//팔로우면
+	        service.getunfollow(ufdto);//언팔
+	        return "unfollow";//언팔반환
 	    } else {
-	        service.getfollow(ufdto);
-	        return "follow";
+	        service.getfollow(ufdto);//언팔상태면
+	        return "follow";//팔로우로 반환
 	    }
 	}
 
 
-	// 해당 사용자에 대한 팔로우 취소
+//	 해당 사용자에 대한 팔로우 취소
 	@GetMapping(value = "/unfollow")
 	public String unfollow(Model model) throws Exception {
 		UserFollowDTO fdto = new UserFollowDTO();
