@@ -163,6 +163,23 @@ h3 {
 }
 </style>
 <script>
+function refreshDiv(divId) {
+    fetch(window.location.href)
+        .then(response => response.text())
+        .then(data => {
+            var tempDiv = document.createElement('div');
+            tempDiv.innerHTML = data;
+            var newDiv = tempDiv.querySelector('#' + divId);
+            var targetDiv = document.getElementById(divId);
+            if (newDiv && targetDiv) {
+                targetDiv.innerHTML = newDiv.innerHTML;
+            } else {
+                console.error('Failed to refresh div');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+}
+
         document.addEventListener("DOMContentLoaded", function() {
             var modal = document.getElementById("myModal");
             var btn = document.getElementById("btnOpenModal");
@@ -215,6 +232,7 @@ h3 {
                     .then(response => response.text())
                     .then(data => {
                         if (data === "success") {
+                        	refreshDiv('reviewdiv');
                             alert("저장 성공")
                         } else if(data ==="already"){
                             alert("이미 리뷰를 작성하였습니다")
@@ -222,6 +240,11 @@ h3 {
                         	alert("저장 실패")
                         }
                         modal.style.display = "none";
+                        document.getElementById("review").value = "";
+                        var starRadios = document.querySelectorAll('input[name="rating"]');
+                        starRadios.forEach(radio => {
+                            radio.checked = false;
+                        });
                     })
                     .catch(error => console.error('Error:', error));
                 }
@@ -364,16 +387,19 @@ h3 {
 		}
 	%>
 	<br>
-	<div class="container">
-		<c:forEach var="review" items="${selectreviews}">
-			<div class="review-container">
-				<p>
-					userId: ${review.userId}<br> reviewContent:
-					${review.reviewContent}<br> rating: ${review.rating}<br>
-				</p>
-			</div>
-		</c:forEach>
-	</div>
+	<c:if test="${not empty selectreviews}">
+		<div class="container" id = "reviewdiv">
+			<c:forEach var="review" items="${selectreviews}">
+				<div class="review-container">
+					<p>
+						userId: ${review.userId}<br> reviewContent:
+						${review.reviewContent}<br> rating: ${review.rating}<br>
+					</p>
+				</div>
+			</c:forEach>
+		</div>
+	</c:if>
+
 
 
 

@@ -116,12 +116,6 @@ a:hover {
 }
 </style>
 <script>
-window.onpageshow = function (event){
-	if(event.persisted){
-		window.location.href = '${pageContext.request.contextPath}/';
-	}
-}
-
 	// 필터링 함수
 	function filterMediaType(type) {
 		var rows = document.querySelectorAll("tbody tr");
@@ -140,6 +134,7 @@ window.onpageshow = function (event){
 </script>
 </head>
 <body>
+
 	<div class="container">
 		<h2>Movies List</h2>
 
