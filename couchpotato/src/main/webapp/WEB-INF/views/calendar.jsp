@@ -78,10 +78,12 @@
  	        const events = [];
         	
         	<c:forEach var="review" items="${reviewsByDate}" varStatus="reviewStatus">
-				events.push( {  
-					title: '${review.REVIEW_TOTAL_COUNT}',
-					start: '${review.REVIEW_CREATE_AT}'
-				})
+				events.push( 
+					{  
+						title: '${review.REVIEW_TOTAL_COUNT}',
+						start: '${review.REVIEW_CREATE_AT}'
+					}
+				)
 			</c:forEach> 
         	
 
@@ -109,19 +111,20 @@
             
             
             // 모달창 닫기
-            var modal = document.getElementById("myModal");
-            var close_span = document.getElementsByClassName("close")[0];
-            
-            close_span.onclick = function(){
-            	modal.style.display = "none";
-            }
-            
-            window.onclick = function(event) {
-            	if(event.target == modal) {
-            		modal.style.display = "none";
-            	}
-            }
+            var close_span = document.getElementsByClassName("close");
  
+            for (var i = 0; i < close_span.length; i++) {
+				close_span[i].onclick = function() {
+					// this는 이벤트가 발생한 x버튼
+					// span태그의 가장 상위 부모 요소(조상 3명)의 style.display
+					this.parentElement.parentElement.parentElement.style.display = "none";
+					location.reload();
+				}
+			}
+            
+            // 리뷰 수정하기: 폼 제출 이벤트에 submitModifiedReview 함수 연결
+            $('#editForm').submit(submitModifiedReview)
+            
     }); // end document
         
         
@@ -132,36 +135,43 @@
             type: 'GET',  // 요청 방식
             data: { date: clickedDate },
             success: function(detailData) { 
-            	console.log(detailData); // detailData 출력
-            	
                 // JSON 데이터 파싱
                 var resultHtml = '';
                 
-                detailData.forEach(function(data) {  // 반복문
-                    resultHtml +=
-                        '<div class="review-item">' +
-                            '<img src="/resources/images/gamja_profile.png" alt="Movie Thumbnail" class="review-img">' +
-                            '<div class="review-contents">' +
-                                '<div class="review-title-rate">' + 
-                                    '<div class="review-title">' + data.content_name + '</div>' +
-                                    '<div class="review-rating">' + data.rating + '</div>' +
-                                '</div>'+
-                                '<div class="review-text">' + data.review_text + '</div>' +          
-                            '</div>' +
-                            '<div class="review-edit-time">' +
-                                '<div class="button-group">' +
-                                    '<button class="edit-btn" onclick="location.href=\'/modifyreview\'">수정</button>' +
-                                    '<button class="delete-btn" onclick="deleteReview(\'' + data.content_name + '\', \'' + data.review_create_at + '\')">삭제</button>' +
+                // 조건: 해당 날짜에 데이터가 있는 경우에는 모달에 출력해주고, 데이터가 없을 경우 모달 숨기기 
+                if (detailData.length > 0) {
+                    detailData.forEach(function(data) {  // 반복문
+                        resultHtml +=
+                            '<div class="review-item">' +
+                                '<img src="/resources/images/gamja_profile.png" alt="Movie Thumbnail" class="review-img">' +
+                                '<div class="review-contents">' +
+                                    '<div class="review-title-rate">' + 
+                                        '<div class="review-title">' + data.content_name + '</div>' +
+                                        '<div class="review-rating">' + data.rating + '</div>' +
+                                    '</div>'+
+                                    '<div class="review-text">' + data.review_text + '</div>' +          
                                 '</div>' +
-                                '<div class="review-time">' + data.review_create_at + '</div>' +
-                            '</div>' +
-                        '</div>';
-                });
-                
-                // 모달 바디에 결과 HTML 삽입
-                $('#modal-body').html(resultHtml);
-                // 모달 표시
-                $('#myModal').css('display', 'block');
+                                '<div class="review-edit-time">' +
+                                    '<div class="button-group">' +
+                                        ' <button class="edit-btn" onclick="openEditModal(\''
+                                            + data.content_name + '\', \'' +  data.review_create_at 
+                                            + '\', \'' + data.review_text + '\', \'' + data.rating + '\')">수정</button>' +
+                                        '<button class="delete-btn" onclick="deleteReview(\'' + data.content_name + '\', \'' + data.review_create_at + '\')">삭제</button>' +
+                                    '</div>' +
+                                    '<div class="review-time">' + data.review_create_at + '</div>' +
+                                '</div>' +
+                            '</div>';
+                    });
+
+                    // 모달 바디에 결과 HTML 삽입
+                    $('#modal-body').html(resultHtml);
+                    // 모달 표시
+                    $('#myModal').css('display', 'block');
+                } else {
+                	// 데이터가 없을 경우 모달 숨기기
+                    $('#myModal').css('display', 'none'); 
+                    location.reload(); // 화면 새로고침, calendar.jsp 화면을 다시 불러옴
+                }
             },
             error: function(xhr, status, error){
                 alert('영화 정보를 불러오는 데 실패했습니다.');
@@ -171,7 +181,6 @@
     
     
     function deleteReview(contentName, reviewCreateAt) {    
-    	
     	// JavaScript 객체
     	const obj = {  
 						content_name: contentName,
@@ -184,15 +193,68 @@
 			data: JSON.stringify(obj),   // 객체를 json 문자열로 반환
 			success: function(response) {
 				alert(response.message);  // 서버에서 받은 메시지 출력
-				if (response.redirectUrl) {
-				    window.location.href = response.redirectUrl;  // 리디렉션 URL로 이동
-				}
+			
+				// 삭제가 완료된 후에 리스트를 모달에 표시
+                contentsDetailsByDate(response.review_create_at);
 			},
     		error: function(xhr, status, error) {
     			alert('리뷰 삭제에 실패하였습니다');
     		}
     	})
     }
+    
+    
+    
+    function openEditModal(contentName, reviewCreateAt, reviewText, rating) {
+    	$('#edit_content_name').text(contentName);
+        $('#edit_review_text').val(reviewText);
+        $('#edit_review_create_at').val(reviewCreateAt);
+        $('#edit_rating').val(rating);
+        $('#editModal').css('display', 'block');
+    }
+    
+    
+    
+    function submitModifiedReview(event) {
+    	event.preventDefault(); // 기본 폼 제출 방지
+    	
+    	const contentName = $('#edit_content_name').text();
+    	const reviewText = $('#edit_review_text').val();
+    	const reviewCreateAt = $('#edit_review_create_at').val();
+    	const rating  = $('#edit_rating').val();
+    	
+    	// 폼 데이터를 담을 자바스크립트 객체 생성
+    	const modifiedData = {
+    			content_name: contentName,
+    			review_text: reviewText,
+    			review_create_at: reviewCreateAt,
+    			rating: rating
+    	};
+    	
+    	$.ajax({
+    		url: '/modifyreview',
+    		type: 'POST',
+    		contentType: 'application/json',
+    		data: JSON.stringify(modifiedData),
+    		success: function(response) {
+    			alert(response.message);
+    			// 현재 모달 창 닫기
+    			$('#editModal').css('display', 'none');
+    			
+    			// 수정된 데이터를 다시 가져와서 모달에 표시
+                contentsDetailsByDate(response.review_create_at);
+    		},
+    		error: function(xhr, status, error) {
+    			alert(status)
+    		}
+    	});
+    	
+    }
+    
+    
+    
+    
+    
     
     </script>
 </body>

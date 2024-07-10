@@ -84,12 +84,42 @@ public class CalendarController {
 		Map<String, String> response = new HashMap<>();
 	    if(count > 0) {
 	        response.put("message", "리뷰가 성공적으로 삭제 되었습니다.");
-	        response.put("redirectUrl", "/calendar");
+	        response.put("review_create_at", review.get("review_create_at"));
+	        
 	        return ResponseEntity.ok(response);
 		} else {
 	        response.put("message", "리뷰 삭제에 실패하였습니다!");
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 	    }
 	}
+	
+	
+	@PostMapping("/modifyreview")
+	@ResponseBody
+	public ResponseEntity<Map<String, String>> modifyReview(@RequestBody CalendarDTO calDto) {
+		// 영화 리뷰 수정하기
+		calDto.setUser_id(userId);
+		
+		System.out.println( "리뷰 수정하기 : " + calDto.getContent_name() + ", " + calDto.getReview_create_at()
+		+ ", " + calDto.getReview_text() + ", " + calDto.getRating() );
+		
+		int count = calendarService.modifyReview(calDto);
+		
+		Map<String, String> response = new HashMap<>();
+		if(count > 0) {
+	        response.put("message", "리뷰가 성공적으로 수정 되었습니다.");
+	        response.put("review_create_at", calDto.getReview_create_at());
+		
+	        return ResponseEntity.ok(response);
+		} else {
+			response.put("message", "리뷰 삭제에 실패하였습니다!");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+		}
+
+	}
+	
+	
+	
+	
 	
 }

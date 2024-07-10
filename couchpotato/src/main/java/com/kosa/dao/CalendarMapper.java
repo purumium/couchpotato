@@ -26,4 +26,7 @@ public interface CalendarMapper {
 	// deleteReview
 	public int deleteReview(Map<String, String> review);
 
+	// modifyReview
+	public int modifyReview(CalendarDTO calDto);
+
 }

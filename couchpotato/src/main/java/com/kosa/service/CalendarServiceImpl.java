@@ -20,8 +20,6 @@ public class CalendarServiceImpl implements CalendarService {
 	@Autowired
 	private CalendarMapper mapper;
 
-	@Autowired
-	private SqlSessionFactory sqlSessionFactory;
 
 	@Override
 	public  Map<String, Object> getTotalReviewsByUser(String userId) {
@@ -34,6 +32,7 @@ public class CalendarServiceImpl implements CalendarService {
 		return list;
 	}
 
+	
 	@Override
 	public List<Map<String, Object>> getReviewByDate(String userId) {
 		List<Map<String, Object>> list = null;
@@ -44,6 +43,7 @@ public class CalendarServiceImpl implements CalendarService {
 		}
 		return list;
 	}
+	
 
 	@Override
 	public List<CalendarDTO> getAllReviewList(String userId) {
@@ -74,6 +74,18 @@ public class CalendarServiceImpl implements CalendarService {
 		int count = 0;
 		try {
 			count = mapper.deleteReview(review);		
+		} catch (Exception e) {
+			log.info(e.getMessage());
+		}
+		return count;
+	}
+	
+
+	@Override
+	public int modifyReview(CalendarDTO calDto) {
+		int count = 0;
+		try {
+			count = mapper.modifyReview(calDto);		
 		} catch (Exception e) {
 			log.info(e.getMessage());
 		}
