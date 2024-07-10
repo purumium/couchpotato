@@ -10,5 +10,10 @@ public class HomeController {
     public String start() { 	
         return "home";
     }
+	
+	@GetMapping(value = "/follow")
+	public String follow() { 	
+		return "follow";
+	}
 
 }

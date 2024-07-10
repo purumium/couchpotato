@@ -20,7 +20,7 @@ public class FollowDTO {
 	private int following_id; //팔로잉(당한 유저)
 	private LocalDateTime createdAt;//jdbc에서 사용
 
-	private String user_number;//user_number를 가져와서 프로필사진,이름 가져 올 예정
+	private int user_number;//user_number를 가져와서 프로필사진,이름 가져 올 예정
 	private String username;
 	private String profile_picture_url;
 	
