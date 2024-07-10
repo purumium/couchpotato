@@ -1,6 +1,8 @@
 package com.kosa.service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import com.kosa.dto.FollowDTO;
 import com.kosa.dto.UserFollowDTO;
@@ -27,10 +29,11 @@ public interface FollowService {
 	public int checkFollowStatus(UserFollowDTO ufdto);
 
 	//특정사용자 팔로우 하기
-	public int getfollow(UserFollowDTO ufdto)throws Exception;
-
+	public int getfollow(UserFollowDTO ufdto) throws Exception;
+	
 	//특정사용자 언팔로우 
 	public int getunfollow(UserFollowDTO ufdto) throws Exception;
+
 
 
 	

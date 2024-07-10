@@ -1,12 +1,12 @@
 package com.kosa.dto;
 
 import java.time.LocalDateTime;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
 
 @Getter
 @Setter
@@ -17,6 +17,7 @@ public class UserFollowDTO {
 	
     private int user_number;
     private String user_id;
+    private String user_name; // 사용자 이름 필드 추가
     private String profile_picture_url;
     
 	private int follower_id; //팔로우(하는 유저)

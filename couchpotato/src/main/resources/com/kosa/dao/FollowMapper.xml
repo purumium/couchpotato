@@ -4,10 +4,8 @@
 <mapper namespace="com.kosa.dao.FollowMapper"> <!-- 연결할 mapper 클래스 설정: com.kosa.dao.매퍼클래스명 -->
 
 	<select id="user_list" resultType="UserFollowDTO">
-		select profile_picture_url,
-		user_id, user_number
-		from
-		users
+		select profile_picture_url,	user_id, user_number
+		from users
 		where user_number != #{user_number}
 	</select>
 
@@ -15,28 +13,21 @@
 	<!-- 내가 팔로우하는 사람들의 수 -->
 	<select id="getfollowings" resultType="int" parameterType="int">
 		SELECT count(*)
-		FROM
-		follows
+		FROM follows
 		WHERE follower_id = #{user_number}
 	</select>
 
 	<!-- 내가 팔로우하는 사람들의 리스트 following_id = u.user_number -->
-	<select id="getfollow_list" resultType="UserFollowDTO"
-		parameterType="int">
-		SELECT
-		u.profile_picture_url,u.user_id,f.follower_id,f.following_id
-		FROM
-		follows f
-		JOIN users u ON f.following_id = u.user_number
-		WHERE
-		f.follower_id =
-		#{user_number}
+	<select id="getfollow_list" resultType="UserFollowDTO" 	parameterType="int">
+		SELECT u.profile_picture_url,u.user_id,f.follower_id,f.following_id
+		FROM follows f JOIN users u 
+		ON f.following_id = u.user_number
+		WHERE f.follower_id =	#{user_number}
 	</select>
 
 	<!-- 나를 팔로잉하는 사람들의 수 -->
 	<select id="getfollowers" resultType="int" parameterType="int">
-		select
-		count(*)
+		select count(*)
 		from follows
 		where following_id = #{user_number}
 	</select>
@@ -44,35 +35,37 @@
 	<!-- 나를 팔로잉하는 사람들의 리스트 follower_id = user_number -->
 	<select id="getfollowing_list" resultType="UserFollowDTO"
 		parameterType="int">
-		select u.profile_picture_url,u.user_id,f.follower_id,
-		f.following_id
+		select u.profile_picture_url,u.user_id,f.follower_id, f.following_id
 		from follows f
-		join users u on u.user_number =
-		f.follower_id
+		join users u 
+		on u.user_number =	f.follower_id
 		where f.following_id = #{user_number}
 	</select>
 
+   <!-- 맞팔로우를 구하는 쿼리 -->
+    <select id="checkFollowStatus" parameterType="com.kosa.dto.UserFollowDTO" resultType="int">
+        SELECT CASE
+            WHEN EXISTS (
+                SELECT 1
+                FROM follows
+                WHERE follower_id = #{follower_id} AND following_id = #{following_id}
+            ) THEN 1
+            ELSE 0
+        END
+    </select>
 
-	<!-- 맞팔로우를 구하는 쿼리 -->
-	<select id="checkFollowStatus" parameterType="UserFollowDTO"
-		resultType="int">
-		SELECT count(*)
-		FROM follows
-		WHERE follower_id = #{user_number} AND following_id = #{following_id}
-	</select>
+ 	<!-- 팔로우하기 -->
+    <insert id="follow" parameterType="com.kosa.dto.UserFollowDTO">
+        insert into follows (follower_id, following_id)
+        values (#{follower_id}, #{following_id})
+    </insert>
 
 
-	<insert id="follow" parameterType="int">
-		insert into follows
-		(follower_id, following_id)
-		values ( #{follower_id}, #{following_id} )
-	</insert>
-
-	<delete id="unfollow">
-		delete from follows
-		where follower_id = #{follower_id}
-		and following_id = #{following_id}
-	</delete>
+ 	<!-- 언팔로우하기 -->
+  <delete id="unfollow" parameterType="com.kosa.dto.UserFollowDTO">
+        delete from follows
+        where follower_id = #{follower_id} and following_id = #{following_id}
+    </delete>
 
 
 
