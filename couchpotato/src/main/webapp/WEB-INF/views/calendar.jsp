@@ -109,18 +109,18 @@
                 }
             }); // end fullCalendar
             
+			
+			// 날짜별 상세 리뷰 보는 1번 모달창 닫기
+            $('#close').click(function() {
+                $('#myModal').css('display', 'none');
+                location.reload();
+            });
             
-            // 모달창 닫기
-            var close_span = document.getElementsByClassName("close");
- 
-            for (var i = 0; i < close_span.length; i++) {
-				close_span[i].onclick = function() {
-					// this는 이벤트가 발생한 x버튼
-					// span태그의 가장 상위 부모 요소(조상 3명)의 style.display
-					this.parentElement.parentElement.parentElement.style.display = "none";
-					location.reload();
-				}
-			}
+			// 수정하는 2번 모달창 닫기
+            $('#cancle-modify-btn').click(function() {
+                $('#editModal').css('display', 'none');
+            });
+            
             
             // 리뷰 수정하기: 폼 제출 이벤트에 submitModifiedReview 함수 연결
             $('#editForm').submit(submitModifiedReview)
@@ -137,10 +137,11 @@
             success: function(detailData) { 
                 // JSON 데이터 파싱
                 var resultHtml = '';
+                var review_date = ''; 
                 
                 // 조건: 해당 날짜에 데이터가 있는 경우에는 모달에 출력해주고, 데이터가 없을 경우 모달 숨기기 
                 if (detailData.length > 0) {
-                    detailData.forEach(function(data) {  // 반복문
+                    detailData.forEach(function(data) {  // 반복문                    
                         resultHtml +=
                             '<div class="review-item">' +
                                 '<img src="/resources/images/gamja_profile.png" alt="Movie Thumbnail" class="review-img">' +
@@ -162,6 +163,12 @@
                                 '</div>' +
                             '</div>';
                     });
+                    
+                    if (detailData.length > 2) {
+                        $('.modal-content').css('height', '370px');  
+                        $('.modal-content').css('margin', '11% auto');  
+                        $('.modal-body').css('overflow-y', 'auto');
+                    }
 
                     // 모달 바디에 결과 HTML 삽입
                     $('#modal-body').html(resultHtml);
