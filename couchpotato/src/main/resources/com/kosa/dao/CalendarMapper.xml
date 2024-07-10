@@ -65,6 +65,8 @@
 	        r.review_create_at = #{review_create_at}
 	</select>	
 	
+	
+	<!-- 리뷰 삭제하기 -->
 	<delete id="deleteReview" parameterType="map">
 		DELETE 
 		FROM 
@@ -83,5 +85,29 @@
 		AND
 			r.content_name = #{content_name}
 	</delete>
+	
+	
+	<!-- 리뷰 업데이트 -->
+	<update id="modifyReview" parameterType="CalendarDTO">
+		UPDATE 
+			reviews r
+		SET
+			r.review_text = #{review_text}, 
+			r.rating = #{rating}
+		WHERE EXISTS ( <!-- users 테이블과 조인, user_id를 특정하여 해당 레코드만 선택 -->
+			SELECT 1
+			FROM
+				users u
+			WHERE 
+				r.user_number = u.user_number
+			AND
+				u.user_id = #{user_id}
+		)
+		AND
+			r.content_name = #{content_name}
+		AND 
+			r.review_create_at = #{review_create_at}
+	</update>
+		
 	
 </mapper>

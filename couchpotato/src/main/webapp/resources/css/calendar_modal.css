@@ -16,9 +16,12 @@
 .modal-content {
     background-color: #fefefe;
     margin: 8% auto;
-    padding: 40px 28px 30px;
+    padding: 35px 28px 2px 30px;
     border: 1px solid #888;
-    width: 30%;
+    /* width: 30%; */
+    width: 400px;
+    height: 370px;
+    overflow-y: overlay;
 }
 
 .modal-header {
@@ -79,7 +82,7 @@
 }
 
 .review-contents {
-    width: 235px;
+    width: 220px;
 }
 
 .review-title-rate {
@@ -141,4 +144,85 @@
 
 .edit-btn:hover, .delete-btn:hover {
     background-color: #ddd;
+}
+
+
+#editModal .modal-content {
+    background-color: #fefefe;
+    margin: 8% auto;
+    padding: 40px 28px 37px;
+    border: 1px solid #888;
+    width: 400px; /* 고정 너비 */
+    height: 370px; /* 고정 높이 */
+}
+
+.edit-modal-container {
+background-color: #f5f5f5;
+    border-radius: 10px;
+    padding: 20px 25px 20px 30px;
+    margin-bottom: 20px;
+}
+
+.edit-modal-title {
+    font-size: 10px;
+    border: 1px solid #8080805c;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    width: 55px;
+    text-align: center;
+    padding: 3px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+}
+
+.edit-content-name {
+	margin: 4px 13px 20px 4px;
+    padding: 6px 5px;
+    border-bottom: 1px solid gray;
+    font-size: 12px;
+}
+
+.edit-modal-container input[type="number"] {
+    width: 17%;
+    padding: 5px 16px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 11px;
+}
+
+
+.edit-modal-container textarea {
+    width: 88%;
+    padding: 7px 15px 0px 15px;
+    margin: 3px 15px 18px 0px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 11px;
+    resize: none;
+    height: 20px;
+} 
+
+.editmodal-btn {
+    display: flex;
+    justify-content: end;
+    margin-right: 12px;
+}
+
+.editmodal-modify-btn:hover {
+    background-color: #bdc0bd4f;
+}
+
+.editmodal-modify-btn {
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    background-color: #f5f5f5;
+    border: 1px solid #c0bbbb;
+    padding: 2px 9px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 9px;
+    letter-spacing: -1px;
 }
