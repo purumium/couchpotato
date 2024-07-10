@@ -192,7 +192,7 @@ function generateTable(infoValue) {
     const thead = document.createElement('thead');
     const headerRow = document.createElement('tr');
     const headerCell1 = document.createElement('th');
-    headerCell1.innerText = 'Img';
+    headerCell1.innerText = '';
     const headerCell2 = document.createElement('th');
     headerCell2.innerText = 'Rank';
     const headerCell3 = document.createElement('th');
