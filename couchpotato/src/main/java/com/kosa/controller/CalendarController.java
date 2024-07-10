@@ -1,5 +1,6 @@
 package com.kosa.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kosa.dao.CalendarMapper;
 import com.kosa.dto.CalendarDTO;
 import com.kosa.service.CalendarService;
 
@@ -43,13 +45,14 @@ public class CalendarController {
 	}
 	
 	
-	// 전체 리뷰를 가지고 옴
-	@GetMapping("/myreviewlist")
-	public String getAllReviewList(Model model) {
-	    List<CalendarDTO> allReviewList = calendarService.getAllReviewList(userId);
+	// 월별로 전체 리뷰를 가지고 옴
+	@GetMapping("/myreviewlistbymonth")
+	public String getAllReviewbymonth(Model model) {
+		Map<String, List<CalendarDTO>> reviewsByMonth = calendarService.getAllReviewListByMonth(userId);
+
+	    model.addAttribute("reviewsByMonth", reviewsByMonth);
 	    
-	    model.addAttribute("allReviewList", allReviewList);
-	    return "allReviewList"; // reviewlist.jsp를 반환
+	    return "allReviewList"; // allReviewList.jsp를 반환
 	}
 	
 	
@@ -66,12 +69,9 @@ public class CalendarController {
 		
 	    List<CalendarDTO> calendarlist = calendarService.getContentDetailByDate(calDto);
 	    
-	    for (CalendarDTO c : calendarlist) {
-			System.out.println(c.getContent_name() + ", " + c.getRating());
-		}
-	    
 	    return calendarlist; // JSON 형태로 반환됨
 	}
+	
 	
 	@PostMapping("/deletereview")
 	@ResponseBody
@@ -84,12 +84,39 @@ public class CalendarController {
 		Map<String, String> response = new HashMap<>();
 	    if(count > 0) {
 	        response.put("message", "리뷰가 성공적으로 삭제 되었습니다.");
-	        response.put("redirectUrl", "/calendar");
+	        response.put("review_create_at", review.get("review_create_at"));  // 삭제 후 다시 화면 업데이트
+	        
 	        return ResponseEntity.ok(response);
 		} else {
 	        response.put("message", "리뷰 삭제에 실패하였습니다!");
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 	    }
 	}
+	
+	
+	@PostMapping("/modifyreview")
+	@ResponseBody
+	public ResponseEntity<Map<String, String>> modifyReview(@RequestBody CalendarDTO calDto) {
+		// 영화 리뷰 수정하기
+		calDto.setUser_id(userId);
+
+		int count = calendarService.modifyReview(calDto);
+		
+		Map<String, String> response = new HashMap<>();
+		if(count > 0) {
+	        response.put("message", "리뷰가 성공적으로 수정 되었습니다.");
+	        response.put("review_create_at", calDto.getReview_create_at());  // 수정 후 다시 화면 업데이트
+		
+	        return ResponseEntity.ok(response);
+		} else {
+			response.put("message", "리뷰 삭제에 실패하였습니다!");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+		}
+
+	}
+	
+	
+	
+	
 	
 }

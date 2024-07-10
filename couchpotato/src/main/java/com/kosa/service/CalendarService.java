@@ -12,15 +12,18 @@ public interface CalendarService {
 	
 	// getReviewByDate
 	public List<Map<String, Object>> getReviewByDate(String userId);
-
-	// getAllReviewList
-	public List<CalendarDTO> getAllReviewList(String userId);
 	
 	// getContentDetailByDate
 	public List<CalendarDTO> getContentDetailByDate(CalendarDTO calDto);
 
 	// deleteReview
 	public int deleteReview(Map<String, String> review);
+
+	// modifyReview
+	public int modifyReview(CalendarDTO calDto);
+
+	// getAllReviewListByMonth
+	public Map<String, List<CalendarDTO>> getAllReviewListByMonth(String userId);
 
 	
 }

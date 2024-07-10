@@ -16,9 +16,9 @@ public interface CalendarMapper {
 	
 	// getReviewByDate
 	public List<Map<String, Object>> getReviewByDate(String userId);
-
-	// getAllReviewList
-	public List<CalendarDTO> getAllReviewList(String userId);
+	
+	// getAllReviewListByMonth
+	public List<CalendarDTO> getAllReviewListByMonth(String userId);
 	
 	// getReviewByDate
 	public List<CalendarDTO> getContentDetailByDate(CalendarDTO calDto);
@@ -26,4 +26,6 @@ public interface CalendarMapper {
 	// deleteReview
 	public int deleteReview(Map<String, String> review);
 
+	// modifyReview
+	public int modifyReview(CalendarDTO calDto);
 }

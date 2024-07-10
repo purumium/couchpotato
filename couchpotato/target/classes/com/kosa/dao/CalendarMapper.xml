@@ -34,23 +34,24 @@
 			r.review_create_at
 	</select>
 	
-	
-	<!-- 나의 리뷰 리스트 전체 목록 가지고 오기 -->
-	<select id="getAllReviewList" parameterType="String" resultType="CalendarDTO">
-			SELECT 
-				r.content_name, r.review_text, r.rating, r.content_image_url, r.review_create_at
-			FROM 
-			  reviews r JOIN users u
-			ON 
-			  r.user_number = u.user_number
-			WHERE 
-				u.user_id = #{userId}
-			ORDER BY 
-				r.review_create_at ASC
+	<!-- 월별로 전체 목록 가져오기 -->
+	<select id="getAllReviewListByMonth" parameterType="String" resultType="CalendarDTO">	    
+		SELECT 
+			to_char(r.review_create_at, 'YYYY-MM') AS review_month,
+			r.content_name, r.review_text, r.rating, r.content_image_url, 
+			TO_CHAR(r.review_create_at, 'YYYY-MM-DD') AS review_create_at
+		FROM 
+			reviews r JOIN users u
+		ON 
+			r.user_number = u.user_number
+		WHERE 
+			u.user_id = #{userId}
+		ORDER BY 
+			review_month desc, r.review_create_at asc
 	</select>
 	
 	
-	<!-- userid, reviewdate로 해당 날짜의 데이터 가지고 오기 -->
+	<!-- 날짜별로 영화 상세 리스트 -->
 	<select id="getContentDetailByDate" parameterType="CalendarDTO" resultType="CalendarDTO">
 	    SELECT
 	        r.content_name, r.review_text, r.rating, r.content_image_url, 
@@ -65,6 +66,8 @@
 	        r.review_create_at = #{review_create_at}
 	</select>	
 	
+	
+	<!-- 리뷰 삭제하기 -->
 	<delete id="deleteReview" parameterType="map">
 		DELETE 
 		FROM 
@@ -83,5 +86,29 @@
 		AND
 			r.content_name = #{content_name}
 	</delete>
+	
+	
+	<!-- 리뷰 업데이트 -->
+	<update id="modifyReview" parameterType="CalendarDTO">
+		UPDATE 
+			reviews r
+		SET
+			r.review_text = #{review_text}, 
+			r.rating = #{rating}
+		WHERE EXISTS ( <!-- users 테이블과 조인, user_id를 특정하여 해당 레코드만 선택 -->
+			SELECT 1
+			FROM
+				users u
+			WHERE 
+				r.user_number = u.user_number
+			AND
+				u.user_id = #{user_id}
+		)
+		AND
+			r.content_name = #{content_name}
+		AND 
+			r.review_create_at = #{review_create_at}
+	</update>
+		
 	
 </mapper>

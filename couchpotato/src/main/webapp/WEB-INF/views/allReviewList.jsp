@@ -4,20 +4,52 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>review list</title>
+	<title>total review list</title>
+	<link rel="stylesheet" href="/resources/css/reviewlist.css?v=1.0" />
 	<script src='https://code.jquery.com/jquery-3.5.1.min.js'></script>
 </head>
 <body>
+	<!-- 헤더 -->
     <%@ include file="common/header.jsp" %>
     
-    <h2>My Review List</h2>
-    <ul>
-        <c:forEach var="review" items="${allReviewList}">
-            <li>${review.content_name} - ${review.review_text} - ${review.rating} 
-                -${review.review_create_at} - ${review.content_image_url}
-            </li>
-        </c:forEach>
-    </ul>
- 
+    <!-- body -->
+    <div class="reviewlist-main-container">
+	 	<div class="myreviewlist-logo">
+	 		<img src="/resources/images/movie_roll.png" alt="myReviewList" class="myreviewlist-logo-img">
+	 		<span>COLLECTIONS OF MY CONTENT REVIEWS</span>
+ 		</div>
+	    
+	    <c:forEach var="month" items="${reviewsByMonth}">
+	        <div class="month-title">${month.key}</div> <!-- 월 (YYYY-MM) -->
+	        
+	        <div class="review-slider">
+	            <button class="prev-slide">&lt;</button>
+	            
+	            <div class="review-container">
+	                <div class="review-track">
+	                    <c:forEach var="review" items="${month.value}">
+	                        <div class="review-card">
+	                        	<div>
+	                            	<img src="/resources/images/cutepotato.png" alt="${review.content_name}">
+	                            </div>
+	                            <div class="review-info">
+	                                <div class="review-info-name">${review.content_name}</div>
+	                                <div class="review-info-text">${review.review_text}</div>
+	                                <div class="review-in-info">
+		                                <div>${review.rating}</div>
+		                                <div>${review.review_create_at}</div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </c:forEach>
+	                </div>
+	            </div>
+	            
+	            <button class="next-slide">&gt;</button>
+	        </div>
+	    </c:forEach>
+	</div>
+		
+    <script src="/resources/js/reviewlist.js"></script>
 </body>
 </html>
