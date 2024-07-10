@@ -1,0 +1,104 @@
+
+.reviewlist-main-container {
+    width: 70%;
+    margin: 0 auto 150px;
+}
+
+.month-title {
+    margin-bottom: 25px;
+    letter-spacing: 3px;
+    font-size: 15px;
+    font-weight: bold;
+    border-bottom: 1px solid #10050536;
+    padding: 10px;
+    color: #1005058a;
+}
+
+.myreviewlist-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 60px 0px 35px;
+}
+
+.myreviewlist-logo-img {
+    margin-right: 20px;
+    width: 35px;
+}
+
+.myreviewlist-logo span {
+	font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.review-slider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 60px;
+}
+
+.review-container {
+    overflow: hidden;
+    width: 80%;
+    padding: 0px 8px;
+}
+
+.review-track {
+    display: flex;
+    transition: transform 0.3s ease;
+}
+
+.review-card {
+    flex: 0 0 25%;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.review-card img {
+    width: 100%;
+    height: 100%;
+    min-height: 1px;
+}
+
+.review-info {
+    margin-top: 20px;
+}
+
+.review-info-name {
+    font-size: 11px;
+    color: black;
+}
+
+.review-info-text {
+	margin-top: 5px;
+    font-size: 11px;
+    color: #808080a3;
+}
+
+.review-in-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+    font-size: 10px;
+    color: #808080a3;
+}
+
+.prev-slide,
+.next-slide {
+	background-color: #aaa;
+    padding: 7px 13px 7px 13px;
+    cursor: pointer;
+    font-size: 18px;
+    color: white;
+    border-radius: 50px;
+    border: 1px solid #80808000;
+}
+
+.prev-slide:disabled,
+.next-slide:disabled {
+    background-color: white;
+    cursor: not-allowed;
+}
+
