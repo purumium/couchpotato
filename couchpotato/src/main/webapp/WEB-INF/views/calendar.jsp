@@ -52,7 +52,7 @@
 								
 								<!-- 4 -->
 								<div class="circle-btn" id="reviewlist-btn">
-									<a href="/myreviewlist"> ${totalReviews.TOTAL_REVIEWS} </a>
+									<a href="/myreviewlistbymonth"> ${totalReviews.TOTAL_REVIEWS} </a>
 					    			<span>리뷰 리스트</span>
 								</div>
 						</div>

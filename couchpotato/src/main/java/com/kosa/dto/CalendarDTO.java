@@ -27,6 +27,7 @@ public class CalendarDTO {
     private double rating;
     private String content_image_url;
     private String review_create_at;
+    private String review_month;
     
     private int calendar_number;
 }
