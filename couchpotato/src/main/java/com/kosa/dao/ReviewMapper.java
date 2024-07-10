@@ -8,7 +8,7 @@ import com.kosa.dto.ReviewDTO;
 
 @Mapper
 public interface ReviewMapper {
-	int countReviewsByUserId(int userId);
+	int countReviewsByUserIdAndContentId(ReviewDTO reviewDTO);
 	List<ReviewDTO> selectReviews(ReviewDTO reviewDTO);
     public void insertReview(ReviewDTO review);
 }

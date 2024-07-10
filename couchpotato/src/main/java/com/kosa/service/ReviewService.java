@@ -6,6 +6,6 @@ import com.kosa.dto.ReviewDTO;
 
 public interface ReviewService {
 	List<ReviewDTO> selectReviews(ReviewDTO reviewDTO);
-	public boolean checkReviewExists(int userId); 
+	public boolean checkReviewExists(ReviewDTO reviewDTO); 
     public void saveReview(ReviewDTO review);
 }

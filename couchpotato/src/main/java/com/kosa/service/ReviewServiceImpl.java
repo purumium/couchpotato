@@ -17,8 +17,8 @@ public class ReviewServiceImpl implements ReviewService {
     private ReviewMapper reviewMapper;
     
     @Override
-    public boolean checkReviewExists(int userId) {
-        int count = reviewMapper.countReviewsByUserId(userId);
+    public boolean checkReviewExists(ReviewDTO reviewDTO) {
+    	int count = reviewMapper.countReviewsByUserIdAndContentId(reviewDTO);
         return count > 0;
     }
     

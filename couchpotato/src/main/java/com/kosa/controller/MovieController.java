@@ -76,6 +76,7 @@ public class MovieController {
                     
                 }
             }
+            System.out.println(result);
             model.addAttribute("ott",result);
             
             //리뷰 불러오기

@@ -7,148 +7,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/home.css">
 <title>Movies Search Results</title>
-<style>
-body {
-	font-family: Arial, sans-serif;
-	background-color: #f2f2f2;
-	margin: 0;
-	padding: 0;
-}
-
-.container {
-	display: flex;
-	justify-content: center;
-	align-items: flex-start;
-	height: 20vh;
-}
-
-.search-form {
-	text-align: center;
-	background-color: #ffffff;
-	padding: 20px;
-	border: 1px solid #dddddd;
-	border-radius: 5px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	width: 100%;
-	max-width: 500px;
-	margin-top: 20px;
-}
-
-.search-input {
-	padding: 8px;
-	width: calc(100% - 120px);
-	margin-right: 8px;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-	font-size: 14px;
-}
-
-.search-button {
-	padding: 8px 16px;
-	background-color: #4CAF50;
-	color: white;
-	border: none;
-	border-radius: 3px;
-	cursor: pointer;
-	font-size: 14px;
-}
-
-.search-button:hover {
-	background-color: #45a049;
-}
-
-.info-container {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-}
-
-.info-item {
-	width: 250px;
-	margin: 10px;
-	padding: 10px;
-	background-color: #ffffff;
-	border: 1px solid #dddddd;
-	border-radius: 5px;
-	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-	flex: 1 0 30%;
-	min-width: 250px;
-	max-width: 350px;
-	cursor: pointer;
-}
-
-.info-label {
-	font-weight: bold;
-}
-
-.info-value {
-	margin-top: 5px;
-}
-
-.info-label img {
-	width: 20px;
-	height: 20px;
-	vertical-align: middle;
-}
-
-/* 모달 창 스타일링 */
-.modal {
-	display: none;
-	position: fixed;
-	z-index: 1;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	overflow: auto;
-	background-color: rgba(0, 0, 0, 0.5);
-}
-
-.modal-content {
-	background-color: #fefefe;
-	margin: 5% auto;
-	padding: 20px;
-	border: 1px solid #888;
-	width: 60%;
-	max-width: 600px;
-	max-height: 70%;
-	overflow-y: auto;
-	border-radius: 5px;
-}
-
-.close {
-	color: #aaa;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
-}
-
-.close:hover, .close:focus {
-	color: black;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-table {
-	width: 100%;
-	border-collapse: collapse;
-}
-
-table, th, td {
-	border: 1px solid #dddddd;
-}
-
-th, td {
-	padding: 8px;
-	text-align: left;
-}
-
-th {
-	background-color: #f2f2f2;
-}
-</style>
 <script>
+
 const rankings = ${m_array};
 
 function toggleModal(event) {
@@ -254,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </head>
 <body>
-	
+
 
 	<div class="container">
 		<form action="${pageContext.request.contextPath}/movies" method="get"

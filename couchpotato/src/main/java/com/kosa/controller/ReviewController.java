@@ -22,7 +22,11 @@ public class ReviewController {
     @PostMapping("/review/save")
     public String saveReview(@RequestBody ReviewDTO review) {
         try {
-        	boolean reviewExists = reviewService.checkReviewExists(review.getUserId());
+        	ReviewDTO reviewDTO = new ReviewDTO();
+            reviewDTO.setUserId(review.getUserId());
+            reviewDTO.setContentId(review.getContentId());
+        	boolean reviewExists = reviewService.checkReviewExists(reviewDTO);
+
         	if(reviewExists) {
         		return "already";
         	}else {
