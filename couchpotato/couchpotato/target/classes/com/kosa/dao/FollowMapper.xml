@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+       "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kosa.dao.FollowMapper"> <!-- 연결할 mapper 클래스 설정: com.kosa.dao.매퍼클래스명 -->
+
+	<select id="user_list" resultType="UserFollowDTO">
+		select profile_picture_url,
+		user_id, user_number
+		from
+		users
+		where user_number != #{user_number}
+	</select>
+
+
+	<!-- 내가 팔로우하는 사람들의 수 -->
+	<select id="getfollowings" resultType="int" parameterType="int">
+		SELECT count(*)
+		FROM
+		follows
+		WHERE follower_id = #{user_number}
+	</select>
+
+	<!-- 내가 팔로우하는 사람들의 리스트 following_id = u.user_number -->
+	<select id="getfollow_list" resultType="UserFollowDTO"
+		parameterType="int">
+		SELECT
+		u.profile_picture_url,u.user_id,f.follower_id,f.following_id
+		FROM
+		follows f
+		JOIN users u ON f.following_id = u.user_number
+		WHERE
+		f.follower_id =
+		#{user_number}
+	</select>
+
+	<!-- 나를 팔로잉하는 사람들의 수 -->
+	<select id="getfollowers" resultType="int" parameterType="int">
+		select
+		count(*)
+		from follows
+		where following_id = #{user_number}
+	</select>
+
+	<!-- 나를 팔로잉하는 사람들의 리스트 follower_id = user_number -->
+	<select id="getfollowing_list" resultType="UserFollowDTO"
+		parameterType="int">
+		select u.profile_picture_url,u.user_id,f.follower_id,
+		f.following_id
+		from follows f
+		join users u on u.user_number =
+		f.follower_id
+		where f.following_id = #{user_number}
+	</select>
+
+
+	<!-- 맞팔로우를 구하는 쿼리 -->
+	<select id="checkFollowStatus" parameterType="UserFollowDTO"
+		resultType="int">
+		SELECT count(*)
+		FROM follows
+		WHERE follower_id = #{user_number} AND following_id = #{following_id}
+	</select>
+
+
+	<insert id="follow" parameterType="int">
+		insert into follows
+		(follower_id, following_id)
+		values ( #{follower_id}, #{following_id} )
+	</insert>
+
+	<delete id="unfollow">
+		delete from follows
+		where follower_id = #{follower_id}
+		and following_id = #{following_id}
+	</delete>
+
+
+
+</mapper>
