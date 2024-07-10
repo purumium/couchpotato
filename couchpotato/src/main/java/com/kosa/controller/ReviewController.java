@@ -21,7 +21,6 @@ public class ReviewController {
 
     @PostMapping("/review/save")
     public String saveReview(@RequestBody ReviewDTO review) {
-    	System.out.println(review);
         try {
         	boolean reviewExists = reviewService.checkReviewExists(review.getUserId());
         	if(reviewExists) {

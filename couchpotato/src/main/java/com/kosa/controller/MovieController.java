@@ -82,9 +82,7 @@ public class MovieController {
             ReviewDTO reviewDTO = new ReviewDTO();
             reviewDTO.setContentId(id);
             reviewDTO.setContentType(mediatype);
-            System.out.println(reviewDTO);
             List<ReviewDTO> test = reviewService.selectReviews(reviewDTO);
-            System.out.println(test);
             model.addAttribute("selectreviews",test);
             
     	}catch (IOException e) {

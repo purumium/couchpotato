@@ -152,14 +152,33 @@ h3 {
 	margin-top: 0;
 }
 
+.container2 {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	max-width: 1000px;
+	margin: 0 auto;
+	background-color: #fff;
+	padding: 20px 10px; /* 줄인 패딩 */
+	border-radius: 8px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	display: flex;
+	flex-wrap: wrap; /* 요소가 넘칠 경우 줄바꿈 */
+	gap: 10px; /* 각 요소 사이의 간격 설정 */
+}
+
 .review-container {
-	margin-right: 20px;
+	width: calc(32% - 20px); /* 한 줄에 3개씩 정렬 */
 	padding: 10px;
 	border: 1px solid #ddd;
 	border-radius: 8px;
 	background-color: #f9f9f9;
 	margin-bottom: 10px;
-	width: 300px; /* 테두리 고정 크기 */
+}
+
+.review-container p {
+	margin: 0;
+	line-height: 1.6;
 }
 </style>
 <script>
@@ -219,7 +238,7 @@ function refreshDiv(divId) {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            userId: 1234,
+                            userId: 6666,
                             reviewContent: reviewContent,
                             contentId : ${id},
                             contentType : type,
@@ -388,12 +407,12 @@ function refreshDiv(divId) {
 	%>
 	<br>
 	<c:if test="${not empty selectreviews}">
-		<div class="container" id = "reviewdiv">
+		<div class="container2" id="reviewdiv">
 			<c:forEach var="review" items="${selectreviews}">
 				<div class="review-container">
 					<p>
-						userId: ${review.userId}<br> reviewContent:
-						${review.reviewContent}<br> rating: ${review.rating}<br>
+						userId: ${review.userId}<br> rating: ${review.rating}<br>
+						reviewContent: ${review.reviewContent}
 					</p>
 				</div>
 			</c:forEach>
