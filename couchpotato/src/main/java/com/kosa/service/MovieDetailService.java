@@ -24,8 +24,8 @@ public class MovieDetailService {
     
     private OkHttpClient client = new OkHttpClient();
 
-    public String getTVShowDetails(String tvType, Long tvShowId) throws IOException {
-        String url = API_URL + "/"+tvType+"/" + tvShowId.toString() + "?language=ko-KR";
+    public String getTVShowDetails(String tvType, int tvShowId) throws IOException {
+        String url = API_URL + "/"+tvType+"/" + tvShowId + "?language=ko-KR";
         Request request = new Request.Builder()
                 .url(url)
                 .get()

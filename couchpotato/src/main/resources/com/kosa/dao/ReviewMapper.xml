@@ -8,9 +8,19 @@
         VALUES (#{userId},#{contentName},#{rating},#{reviewContent}, #{imgurl}, sysdate)
     </insert> -->
 	
-    
+    <select id="countReviewsByUserId" parameterType="int" resultType="int">
+    SELECT COUNT(*) FROM reviews
+    WHERE USER_NUMBER = #{userId}
+</select>
+
+<select id="selectReviews" parameterType="com.kosa.dto.ReviewDTO" resultType="com.kosa.dto.ReviewDTO">
+	SELECT USER_NUMBER as userId, CONTENT_NAME as contentName, CONTENT_ID as contentId, CONTENT_TYPE as contentType, REVIEW_TEXT as reviewContent, RATING as rating
+    FROM reviews
+    WHERE CONTENT_ID = #{contentId} and CONTENT_TYPE = #{contentType}
+</select>
+
     <insert id="insertReview" parameterType="com.kosa.dto.ReviewDTO">
-        INSERT INTO reviews (USER_NUMBER, CONTENT_NAME, REVIEW_TEXT, RATING, CONTENT_IMAGE_URL,REVIEW_CREATE_AT)
-        VALUES (#{userId},#{contentName},#{reviewContent},#{rating},#{imgurl}, sysdate)
+        INSERT INTO reviews (USER_NUMBER, CONTENT_NAME,CONTENT_ID,CONTENT_TYPE, REVIEW_TEXT, RATING, CONTENT_IMAGE_URL,REVIEW_CREATE_AT)
+        VALUES (#{userId},#{contentName},#{contentId},#{contentType},#{reviewContent},#{rating},#{imgurl}, sysdate)
     </insert>
 </mapper>

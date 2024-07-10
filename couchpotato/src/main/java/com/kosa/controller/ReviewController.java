@@ -23,8 +23,14 @@ public class ReviewController {
     public String saveReview(@RequestBody ReviewDTO review) {
     	System.out.println(review);
         try {
-            reviewService.saveReview(review);
-            return "success";
+        	boolean reviewExists = reviewService.checkReviewExists(review.getUserId());
+        	if(reviewExists) {
+        		return "already";
+        	}else {
+        		reviewService.saveReview(review);
+                return "success";
+        	}
+            
         } catch (Exception e) {
             e.printStackTrace();
             return "fail";

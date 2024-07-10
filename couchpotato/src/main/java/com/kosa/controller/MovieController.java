@@ -1,13 +1,18 @@
 package com.kosa.controller;
 
 import com.kosa.dto.MovieDTO;
+import com.kosa.dto.ReviewDTO;
 import com.kosa.service.MovieDetailService;
 import com.kosa.service.MovieService;
+import com.kosa.service.ReviewService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import org.jsoup.Jsoup;
@@ -31,6 +36,8 @@ public class MovieController {
     private MovieService movieService;
     @Autowired
     private MovieDetailService movieDeatilService;
+    @Autowired
+    private ReviewService reviewService;
 
 
     @GetMapping("/movies")
@@ -42,7 +49,7 @@ public class MovieController {
     
     @GetMapping("/movie/detail/{mediatype}/{id}")
     public String showMovieDetail(@PathVariable String mediatype,
-                                  @PathVariable Long id,
+                                  @PathVariable int id,
                                   Model model) {
     	String result = "";
     	try {
@@ -50,6 +57,7 @@ public class MovieController {
             model.addAttribute("mediatype", mediatype);
             model.addAttribute("id", id);
             model.addAttribute("tvShowDetails", tvShowDetails);
+            model.addAttribute("mediatype", mediatype);
             
             //크롤링
          // URL에 있는 HTML 내용을 가져옵니다.
@@ -68,14 +76,22 @@ public class MovieController {
                     
                 }
             }
-            System.out.println(result);
+            model.addAttribute("ott",result);
+            
+            //리뷰 불러오기
+            ReviewDTO reviewDTO = new ReviewDTO();
+            reviewDTO.setContentId(id);
+            reviewDTO.setContentType(mediatype);
+            System.out.println(reviewDTO);
+            List<ReviewDTO> test = reviewService.selectReviews(reviewDTO);
+            System.out.println(test);
+            model.addAttribute("selectreviews",test);
+            
     	}catch (IOException e) {
             e.printStackTrace(); // 예외 처리
             // 예외 처리 로직 추가
         }
-    	model.addAttribute("ott",result);
-        model.addAttribute("mediatype", mediatype);
-        model.addAttribute("id", id);
+    	
         
         return "detail"; // detail.jsp로 이동하는 경로
     }

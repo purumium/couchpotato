@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.kosa.dto.MovieDTO"%>
-<%@ page import="com.kosa.dto.MovieRanking" %>
+<%@ page import="com.kosa.dto.MovieRanking"%>
 
 <!DOCTYPE html>
 <html>
@@ -124,8 +124,7 @@ body {
 	font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
+.close:hover, .close:focus {
 	color: black;
 	text-decoration: none;
 	cursor: pointer;
@@ -255,6 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </head>
 <body>
+	
 
 	<div class="container">
 		<form action="${pageContext.request.contextPath}/movies" method="get"
@@ -270,26 +270,31 @@ document.addEventListener('DOMContentLoaded', () => {
 				alt="Label Image"></span> <span class="info-value">통합</span>
 		</div>
 		<div class="info-item">
-			<span class="info-label"><img src="/resources/images/netflix.jpg"
-				alt="Label Image"> <span class="info-value">넷플릭스</span>
+			<span class="info-label"><img
+				src="/resources/images/netflix.jpg" alt="Label Image"> <span
+				class="info-value">넷플릭스</span>
 		</div>
 		<div class="info-item">
-			<span class="info-label"><img src="/resources/images/disney.jpg"
-				alt="Label Image"> <span class="info-value">디즈니</span>
+			<span class="info-label"><img
+				src="/resources/images/disney.jpg" alt="Label Image"> <span
+				class="info-value">디즈니</span>
 		</div>
 	</div>
 	<div class="info-container">
 		<div class="info-item">
-			<span class="info-label"><img src="/resources/images/coupang.jpg"
-				alt="Label Image"> <span class="info-value">쿠팡</span>
+			<span class="info-label"><img
+				src="/resources/images/coupang.jpg" alt="Label Image"> <span
+				class="info-value">쿠팡</span>
 		</div>
 		<div class="info-item">
-			<span class="info-label"><img src="/resources/images/watcha.jpg"
-				alt="Label Image"> <span class="info-value">와챠</span>
+			<span class="info-label"><img
+				src="/resources/images/watcha.jpg" alt="Label Image"> <span
+				class="info-value">와챠</span>
 		</div>
 		<div class="info-item">
-			<span class="info-label"><img src="/resources/images/tving.jpg"
-				alt="Label Image"> <span class="info-value">티빙</span>
+			<span class="info-label"><img
+				src="/resources/images/tving.jpg" alt="Label Image"> <span
+				class="info-value">티빙</span>
 		</div>
 	</div>
 	<div class="info-container">
@@ -298,8 +303,9 @@ document.addEventListener('DOMContentLoaded', () => {
 				alt="Label Image"> <span class="info-value">웨이브</span>
 		</div>
 		<div class="info-item">
-			<span class="info-label"><img src="/resources/images/movie.jpg"
-				alt="Label Image"> <span class="info-value">박스오피스</span>
+			<span class="info-label"><img
+				src="/resources/images/movie.jpg" alt="Label Image"> <span
+				class="info-value">박스오피스</span>
 		</div>
 	</div>
 
