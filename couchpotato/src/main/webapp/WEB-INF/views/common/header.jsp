@@ -9,9 +9,11 @@
 	    </div>
 	    
 	    <div class="search-bar">
+	    <form action="${pageContext.request.contextPath}/movies" method="get">
 	        <img src="/resources/images/search.svg" alt="search" class="search-icon">
-	        <input type="text" placeholder="검색">
-	        <button type="button" class="search-clear-btn">x</button>
+	        <input type="text" placeholder="검색" name="query" value="${param.query}">
+	        <button type="submit" class="search-clear-btn">x</button>
+	        </form>
 	    </div>
 	    
 	    <div class="auth-buttons">
