@@ -68,7 +68,8 @@ function refreshDiv(divId) {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            userId: 1,
+                        	userNumber: 2, 
+                            userId: "user1",
                             reviewContent: reviewContent,
                             contentId : ${id},
                             contentType : type,
@@ -76,7 +77,6 @@ function refreshDiv(divId) {
                             imgurl: posterPath,
                             contentName: contentname
                         })
-
                     })
                     .then(response => response.text())
                     .then(data => {
