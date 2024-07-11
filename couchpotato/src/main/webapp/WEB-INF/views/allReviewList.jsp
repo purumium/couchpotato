@@ -30,7 +30,7 @@
 	                    <c:forEach var="review" items="${month.value}">
 	                        <div class="review-card">
 	                        	<div>
-	                            	<img src="/resources/images/cutepotato.png" alt="${review.content_name}">
+	                            	<img src="https://image.tmdb.org/t/p/w300${review.content_image_url}"  alt="${review.content_name}">
 	                            </div>
 	                            <div class="review-info">
 	                                <div class="review-info-name">${review.content_name}</div>

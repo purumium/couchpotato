@@ -144,7 +144,7 @@
                     detailData.forEach(function(data) {  // 반복문                    
                         resultHtml +=
                             '<div class="review-item">' +
-                                '<img src="/resources/images/gamja_profile.png" alt="Movie Thumbnail" class="review-img">' +
+                                '<img src="https://image.tmdb.org/t/p/w300/' + data.content_image_url +  ' alt="Movie Thumbnail" class="review-img">' +
                                 '<div class="review-contents">' +
                                     '<div class="review-title-rate">' + 
                                         '<div class="review-title">' + data.content_name + '</div>' +

@@ -8,146 +8,7 @@
 <html>
 <head>
 <title>Movies Search Results</title>
-<style>
-body {
-	font-family: Arial, sans-serif;
-	background-color: #f2f2f2;
-	margin: 0;
-	padding: 0;
-}
-
-.container {
-	display: flex;
-	justify-content: center;
-	align-items: flex-start;
-	height: 20vh;
-}
-
-.search-form {
-	text-align: center;
-	background-color: #ffffff;
-	padding: 20px;
-	border: 1px solid #dddddd;
-	border-radius: 5px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	width: 100%;
-	max-width: 500px;
-	margin-top: 20px;
-}
-
-.search-input {
-	padding: 8px;
-	width: calc(100% - 120px);
-	margin-right: 8px;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-	font-size: 14px;
-}
-
-.search-button {
-	padding: 8px 16px;
-	background-color: #4CAF50;
-	color: white;
-	border: none;
-	border-radius: 3px;
-	cursor: pointer;
-	font-size: 14px;
-}
-
-.search-button:hover {
-	background-color: #45a049;
-}
-
-.info-container {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-}
-
-.info-item {
-	width: 250px;
-	margin: 10px;
-	padding: 10px;
-	background-color: #ffffff;
-	border: 1px solid #dddddd;
-	border-radius: 5px;
-	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-	flex: 1 0 30%;
-	min-width: 250px;
-	max-width: 350px;
-	cursor: pointer;
-}
-
-.info-label {
-	font-weight: bold;
-}
-
-.info-value {
-	margin-top: 5px;
-}
-
-.info-label img {
-	width: 20px;
-	height: 20px;
-	vertical-align: middle;
-}
-
-/* 모달 창 스타일링 */
-.modal {
-	display: none;
-	position: fixed;
-	z-index: 1;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	overflow: auto;
-	background-color: rgba(0, 0, 0, 0.5);
-}
-
-.modal-content {
-	background-color: #fefefe;
-	margin: 5% auto;
-	padding: 20px;
-	border: 1px solid #888;
-	width: 60%;
-	max-width: 600px;
-	max-height: 70%;
-	overflow-y: auto;
-	border-radius: 5px;
-}
-
-.close {
-	color: #aaa;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
-}
-
-.close:hover, .close:focus {
-	color: black;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-table {
-	width: 100%;
-	border-collapse: collapse;
-}
-
-table, th, td {
-	border: 1px solid #dddddd;
-}
-
-th, td {
-	padding: 8px;
-	text-align: left;
-}
-
-th {
-	background-color: #f2f2f2;
-}
-</style>
+<link rel="stylesheet" href="/resources/css/home.css?v=1.0" />
 <script>
 const rankings = ${m_array};
 
@@ -254,58 +115,76 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </head>
 <body>
-	
+    <%@ include file="common/homeheader.jsp" %>
 
-	<div class="container">
-		<form action="${pageContext.request.contextPath}/movies" method="get"
-			class="search-form">
-			<input type="text" name="query" class="search-input"
-				value="${param.query}" placeholder="Enter movie title...">
-			<button type="submit" class="search-button">Search</button>
-		</form>
-	</div>
-	<div class="info-container">
-		<div class="info-item">
-			<span class="info-label"><img src="/resources/images/kino.jpg"
-				alt="Label Image"></span> <span class="info-value">통합</span>
+	<div class="home-container">
+		<div class="logo-header">
+			<div class="home-logo">
+		        <img src="${pageContext.request.contextPath}/resources/images/logo_wild.png" alt="logo">
+		        <img src="${pageContext.request.contextPath}/resources/images/logo_font.png" alt="logo">
+		    </div>
 		</div>
-		<div class="info-item">
-			<span class="info-label"><img
-				src="/resources/images/netflix.jpg" alt="Label Image"> <span
-				class="info-value">넷플릭스</span>
+	
+		<div class="container">
+			<form action="${pageContext.request.contextPath}/movies" method="get" class="search-form">
+				<img src="/resources/images/search.svg" alt="search" class="search-icon">
+		        <input type="text" placeholder="검색" name="query" value="${param.query}">
+		        <button type="submit" class="search-button">x</button>
+			</form>
 		</div>
-		<div class="info-item">
-			<span class="info-label"><img
-				src="/resources/images/disney.jpg" alt="Label Image"> <span
-				class="info-value">디즈니</span>
-		</div>
-	</div>
-	<div class="info-container">
-		<div class="info-item">
-			<span class="info-label"><img
-				src="/resources/images/coupang.jpg" alt="Label Image"> <span
-				class="info-value">쿠팡</span>
-		</div>
-		<div class="info-item">
-			<span class="info-label"><img
-				src="/resources/images/watcha.jpg" alt="Label Image"> <span
-				class="info-value">와챠</span>
-		</div>
-		<div class="info-item">
-			<span class="info-label"><img
-				src="/resources/images/tving.jpg" alt="Label Image"> <span
-				class="info-value">티빙</span>
-		</div>
-	</div>
-	<div class="info-container">
-		<div class="info-item">
-			<span class="info-label"><img src="/resources/images/wave.jpg"
-				alt="Label Image"> <span class="info-value">웨이브</span>
-		</div>
-		<div class="info-item">
-			<span class="info-label"><img
-				src="/resources/images/movie.jpg" alt="Label Image"> <span
-				class="info-value">박스오피스</span>
+		<div class="info-total-container">
+			<div class="info-container">
+				<div class="info-item">
+					<div class="info-label">
+						<img src="/resources/images/kino.jpg" alt="Label Image"></div> 
+					<div class="info-value">통합</div>
+				</div>
+				<div class="info-item">
+					<div class="info-label">
+						<img src="/resources/images/netflix.jpg" alt="Label Image"> 
+					</div>
+					<div class="info-value">넷플릭스</div>
+				</div>
+				<div class="info-item">
+					<div class="info-label">
+						<img src="/resources/images/disney.jpg" alt="Label Image"> 
+					</div>
+					<div class="info-value">디즈니</div>
+				</div>
+				<div class="info-item">
+					<div class="info-label">
+						<img src="/resources/images/coupang.jpg" alt="Label Image"> 
+					</div>
+					<div class="info-value">쿠팡</div>
+				</div>
+			</div>
+			
+			<div class="info-container">
+				<div class="info-item">
+					<div class="info-label">
+						<img src="/resources/images/watcha.jpg" alt="Label Image"> 
+					</div>
+					<div class="info-value">와챠</div>
+				</div>
+				<div class="info-item">
+					<div class="info-label">
+						<img src="/resources/images/tving.jpg" alt="Label Image"> 
+					</div>
+					<div class="info-value">티빙</div>
+				</div>
+				<div class="info-item">
+					<div class="info-label">
+						<img src="/resources/images/wave.jpg"alt="Label Image"> 
+					</div>
+					<div class="info-value">웨이브</div>
+				</div>
+				<div class="info-item">
+					<div class="info-label">
+						<img src="/resources/images/movie.png" alt="Label Image" id="exception-img"> 
+					</div>
+					<div class="info-value">박스오피스</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
