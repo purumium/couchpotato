@@ -59,5 +59,10 @@ public class HomeController {
 	public String follow() { 	
 		return "follow";
 	}
+	
+	@GetMapping(value = "/test")
+	public String test() { 	
+		return "test";
+	}
 
 }
