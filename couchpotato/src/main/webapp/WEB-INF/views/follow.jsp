@@ -29,7 +29,7 @@
 
 <script>
     // 전역 변수로 선언 (현재 로그인한 사용자의 user_number)
-    const userNumber = 2;
+    const userNumber = 21;
     let userList = [];
     let followList = [];
     let followingList = [];
@@ -104,7 +104,7 @@
                     followerHtml += '<div class="follower-item">';
                     followerHtml += '<div class="follower-name">' + follower.profile_picture_url + ' (' + follower.user_id + ')</div>';
                     if (isMutualFollow) { // 맞팔 여부에 따라 버튼 설정
-                        followerHtml += '<button class="mutual-follow-btn" onclick="unfollowUser(' + follower.user_number + ')">팔로우 취소</button>';
+                        followerHtml += '<button class="mutual-follow-btn" onclick="unfollowUser(' + follower.user_id + ')">팔로우 취소</button>';
                     } else {
                         followerHtml += '<button class="follow-btn" onclick="followUser(' + follower.user_number + ')">팔로우</button>';
                     }

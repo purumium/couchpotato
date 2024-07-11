@@ -68,7 +68,7 @@ function refreshDiv(divId) {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            userId: 6666,
+                            userId: 1,
                             reviewContent: reviewContent,
                             contentId : ${id},
                             contentType : type,

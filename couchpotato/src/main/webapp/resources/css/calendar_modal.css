@@ -92,10 +92,10 @@
 }
 
 .review-img {
-    width: 55px;
+	width: 50px;
     height: 55px;
-    border-radius: 25px;
-    margin-left: 8px;
+    border-radius: 9px;
+    margin-left: 7px;
 }
 
 .review-contents {
@@ -109,7 +109,7 @@
 }
 
 .review-title {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
 }
 
@@ -130,7 +130,7 @@
 }
 
 .review-text {
-    font-size: 12px;
+    font-size: 11px;
     color: #777;
     margin-top: 5px;
 }
