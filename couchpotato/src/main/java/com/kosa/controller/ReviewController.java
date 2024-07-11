@@ -23,7 +23,7 @@ public class ReviewController {
     public String saveReview(@RequestBody ReviewDTO review) {
         try {
         	ReviewDTO reviewDTO = new ReviewDTO();
-            reviewDTO.setUserId(review.getUserId());
+            reviewDTO.setUserNumber(review.getUserNumber());
             reviewDTO.setContentId(review.getContentId());
         	boolean reviewExists = reviewService.checkReviewExists(reviewDTO);
 

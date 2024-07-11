@@ -41,9 +41,13 @@ public class MovieController {
 
 
     @GetMapping("/movies")
-    public String showMoviesPage(@RequestParam(name = "query", required = false, defaultValue = "") String query, Model model) {
-        List<MovieDTO> movies = movieService.fetchMovies(query);
+    public String showMoviesPage(@RequestParam(name = "query", required = false, defaultValue = "") String query,
+    		@RequestParam(name = "page", required = false, defaultValue = "1") int page, Model model) {
+        List<MovieDTO> movies = movieService.fetchMovies(query, page);
+        int totalpage = movieService.fetchMovies2(query);
         model.addAttribute("movies", movies);
+        model.addAttribute("totalpage",totalpage);
+        model.addAttribute("query","query");
         return "movies"; // "movies.jsp" 또는 "movies.html" 파일을 의미
     }
     
