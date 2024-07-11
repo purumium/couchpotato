@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class ReviewDTO {
+    private int userNumber;
     private String userId;
     private String contentName;
     private int contentId;
