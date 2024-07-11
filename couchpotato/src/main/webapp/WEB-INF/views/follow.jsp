@@ -26,10 +26,9 @@
             </div> <!-- 전체 사용자 리스트 섹션 -->
         </div>
     </div>
-
 <script>
     // 전역 변수로 선언 (현재 로그인한 사용자의 user_number)
-    const userNumber = 21;
+    const userNumber = 8;
     let userList = [];
     let followList = [];
     let followingList = [];
@@ -40,6 +39,76 @@
         $('#' + sectionId).show(); // 선택한 섹션만 보이기
     }
 
+    // 문서가 준비되면 실행
+    $(document).ready(function() {
+        // 초기 섹션 설정 (팔로워 섹션 보이기)
+        showSection('follower-section');
+
+        // 팔로워 리스트와 팔로잉 리스트를 가져옴
+        loadFollowLists();
+    });
+
+    function loadFollowLists() {
+        $.ajax({
+            url: '/follow_list_json', // 팔로워 리스트와 팔로잉 리스트를 가져오는 요청 (서버에 요청)
+            type: 'GET',
+            data: { user_number: userNumber }, // 요청 데이터에 user_number 포함
+            success: function(response) { // 요청이 성공하면 실행
+                followList = response.follow_list; // 응답에서 팔로워 리스트 가져오기
+                followingList = response.following_list; // 응답에서 나를 팔로잉한 리스트 가져오기
+                userList = response.user_list; // 응답에서 전체 사용자 리스트 가져오기
+
+                renderFollowLists(); // 팔로워 및 팔로잉 리스트 렌더링
+                displayUsers(userList); // 사용자 리스트 표시 함수 호출
+            },
+            error: function(xhr, status, error) { // 요청이 실패하면 실행
+                alert('팔로워 리스트와 팔로잉 리스트를 가져오는 데 실패했습니다.');
+            }
+        });
+    }
+
+    // 팔로워 및 팔로잉 리스트 렌더링 함수
+    function renderFollowLists() {
+        let followerHtml = '';
+        let followingHtml = '';
+
+        // 팔로워 리스트 출력
+        followList.forEach(function(follower) {
+            let isMutualFollow = followingList.some(function(following) {
+                return following.user_number === follower.user_number;
+            });
+
+            followerHtml += '<div class="follower-item">';
+            followerHtml += '<div class="follower-name">' + follower.profile_picture_url + ' (' + follower.user_id + ')</div>';
+            if (isMutualFollow) {
+                followerHtml += '<button class="mutual-follow-btn" onclick="unfollowUser(' + follower.following_id + ', this)">팔로우 취소</button>';
+            } else {
+                followerHtml += '<button class="follow-btn" onclick="followUser(' + follower.following_id + ', this)">팔로우</button>';
+            }
+            followerHtml += '</div>';
+        });
+
+        $('#follower-section').html(followerHtml);
+
+        // 팔로잉 리스트 출력
+        followingList.forEach(function(following) {
+            let isMutualFollow = followList.some(function(follower) {
+                return following.user_number === follower.user_number;
+            });
+
+            followingHtml += '<div class="following-item">';
+            followingHtml += '<div class="following-name">' + following.profile_picture_url + ' (' + following.user_id + ')</div>';
+            if (isMutualFollow) {
+                followingHtml += '<button class="mutual-follow-btn" onclick="unfollowUser(' + following.follower_id + ', this)">팔로우 취소</button>';
+            } else {
+                followingHtml += '<button class="follow-btn" onclick="followUser(' + following.follower_id + ', this)">팔로우</button>';
+            }
+            followingHtml += '</div>';
+        });
+
+        $('#following-section').html(followingHtml);
+    }
+
     // 사용자 리스트 필터링 함수
     function filterUsers() {
         const searchTerm = $('#searchUser').val().toLowerCase();
@@ -47,143 +116,89 @@
         displayUsers(filteredUsers);
     }
 
-    // 사용자 리스트 표시 함수
+    // 전체사용자 리스트 표시 함수
     function displayUsers(users) {
         let userHtml = '';
         users.forEach(function(user) {
-            // 사용자가 팔로우 상태인지 확인
-            let isFollowing = followList.some(function(follow) {
+            let isFollowing = followingList.some(function(follow) {
                 return follow.user_number === user.user_number;
             });
-            // 사용자가 팔로워 상태인지 확인
-            let isFollower = followingList.some(function(following) {
+
+            let isFollower = followList.some(function(following) {
                 return following.user_number === user.user_number;
             });
 
-            // 전체 사용자 리스트 HTML 생성
             userHtml += '<div class="user-item">';
             userHtml += '<div class="user-name">' + user.profile_picture_url + ' (' + user.user_id + ')</div>';
-
             if (isFollowing) {
-                userHtml += '<button class="mutual-follow-btn" onclick="unfollowUser(' + user.user_number + ')">팔로우 취소</button>';
+                userHtml += '<button class="mutual-follow-btn" onclick="unfollowUser(' + user.user_number + ', this)">팔로우 취소</button>';
             } else {
-                userHtml += '<button class="follow-btn" onclick="followUser(' + user.user_number + ')">팔로우</button>';
+                userHtml += '<button class="follow-btn" onclick="followUser(' + user.user_number + ', this)">팔로우</button>';
             }
-
             userHtml += '</div>';
         });
 
-        $('#user-list').html(userHtml); // 전체 사용자 리스트 HTML을 DOM에 삽입
+        $('#user-list').html(userHtml);
     }
 
-    // 문서가 준비되면 실행
-    $(document).ready(function() {
-        // 초기 섹션 설정 (팔로워 섹션 보이기)
-        showSection('follower-section');
-
-        // 팔로워 리스트와 팔로잉 리스트를 가져옴
-        $.ajax({
-            url: '/follow_list_json', // 팔로워 리스트와 팔로잉 리스트를 가져오는 요청 (서버에 요청)
-            type: 'GET',
-            data: { user_number: userNumber }, // 요청 데이터에 user_number 포함
-            success: function(response) { // 요청이 성공하면 실행
-                let followerHtml = ''; // 팔로워 리스트 HTML을 저장할 변수
-                let followingHtml = ''; // 팔로잉 리스트 HTML을 저장할 변수
-                followList = response.follow_list; // 응답에서 팔로워 리스트 가져오기
-                followingList = response.following_list; // 응답에서 나를 팔로잉한 리스트 가져오기
-                userList = response.user_list; // 응답에서 전체 사용자 리스트 가져오기
-
-                // 팔로워 리스트 출력
-                followList.forEach(function(follower) {
-                    // 팔로워가 맞팔 상태인지 확인
-                    let isMutualFollow = followingList.some(function(following) {
-                        return following.user_number === follower.user_number;
-                    });
-
-                    // 팔로워 리스트 HTML 생성
-                    followerHtml += '<div class="follower-item">';
-                    followerHtml += '<div class="follower-name">' + follower.profile_picture_url + ' (' + follower.user_id + ')</div>';
-                    if (isMutualFollow) { // 맞팔 여부에 따라 버튼 설정
-                        followerHtml += '<button class="mutual-follow-btn" onclick="unfollowUser(' + follower.user_id + ')">팔로우 취소</button>';
-                    } else {
-                        followerHtml += '<button class="follow-btn" onclick="followUser(' + follower.user_number + ')">팔로우</button>';
-                    }
-                    followerHtml += '</div>';
-                });
-
-                $('#follower-section').html(followerHtml); // 팔로워 리스트 HTML을 DOM에 삽입
-
-                // 팔로잉 리스트 출력
-                followingList.forEach(function(following) {
-                    // 팔로잉이 맞팔 상태인지 확인
-                    let isMutualFollow = followList.some(function(follower) {
-                        return following.user_number === follower.user_number;
-                    });
-
-                    // 팔로잉 리스트 HTML 생성
-                    followingHtml += '<div class="following-item">';
-                    followingHtml += '<div class="following-name">' + following.profile_picture_url + ' (' + following.user_id + ')</div>';
-                    if (isMutualFollow) { // 맞팔 여부에 따라 버튼 설정
-                        followingHtml += '<button class="mutual-follow-btn" onclick="unfollowUser(' + following.user_number + ')">팔로우 취소</button>';
-                    } else {
-                        followingHtml += '<button class="follow-btn" onclick="followUser(' + following.user_number + ')">팔로우</button>';
-                    }
-                    followingHtml += '</div>';
-                });
-
-                $('#following-section').html(followingHtml); // 팔로잉 리스트 HTML을 DOM에 삽입
-
-                // 전체 사용자 리스트 출력
-                displayUsers(userList); // 사용자 리스트 표시 함수 호출
-            },
-            error: function(xhr, status, error) { // 요청이 실패하면 실행
-                alert('팔로워 리스트와 팔로잉 리스트를 가져오는 데 실패했습니다.');
-            }
-        });
-    });
-
     // 팔로우 취소 함수 (맞팔한 친구 - 팔로우 해제)
-    function unfollowUser(following_id) {
-        const obj = { 
-            user_number: userNumber, // 현재 사용자의 번호
-            follower_id: userNumber, // 팔로우를 취소할 사용자의 번호
-            following_id: following_id // 팔로우를 취소할 사용자의 번호
+    function unfollowUser(following_id, button) {
+        const obj = {
+            user_number: userNumber,
+            follower_id: userNumber,
+            following_id: following_id
         };
 
         $.ajax({
-            url: '/unfollow', // 팔로우 취소 요청 (서버에 요청)
+            url: '/unfollow',
             type: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify(obj), // 요청 데이터를 JSON 문자열로 변환
-            success: function(response) { // 요청이 성공하면 실행
-                alert('팔로우를 취소했습니다.'); // 성공 메시지
-                location.reload(); // 페이지 새로고침
+            data: JSON.stringify(obj),
+            success: function(response) {
+                alert('팔로우를 취소했습니다.');
+                $(button).text('팔로우');
+                $(button).removeClass('mutual-follow-btn').addClass('follow-btn');
+                $(button).attr('onclick', 'followUser(' + following_id + ', this)');
+                // 팔로워 리스트에서 제거
+                followList = followList.filter(follow => follow.following_id !== following_id);
+                renderFollowLists(); // 팔로워 리스트 다시 렌더링
+                loadFollowLists(); // 전체 리스트 다시 불러오기
             },
-            error: function(xhr, status, error) { // 요청이 실패하면 실행
+            error: function(xhr, status, error) {
                 alert('팔로우 취소에 실패했습니다.');
             }
         });
     }
 
     // 팔로우 함수
-    function followUser(following_id) {
-        const obj = { 
-            user_number: userNumber, // 현재 사용자의 번호
-            follower_id: userNumber, // 팔로우할 사용자의 번호
-            following_id: following_id // 팔로우할 사용자의 번호
+    function followUser(following_id, button) {
+        const obj = {
+            user_number: userNumber,
+            follower_id: userNumber,
+            following_id: following_id
         };
 
         $.ajax({
-            url: '/follow', // 팔로우 요청 (서버에 요청)
+            url: '/follow',
             type: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify(obj), // 요청 데이터를 JSON 문자열로 변환
-            success: function(response) { // 요청이 성공하면 실행
-                alert('팔로우했습니다.'); // 성공 메시지
-                location.reload(); // 페이지 새로고침
+            data: JSON.stringify(obj),
+            success: function(response) {
+                alert('팔로우했습니다.');
+                $(button).text('팔로우 취소');
+                $(button).removeClass('follow-btn').addClass('mutual-follow-btn');
+                $(button).attr('onclick', 'unfollowUser(' + following_id + ', this)');
+                // 팔로잉 리스트에 추가
+                followingList.push({ user_number: following_id });
+                renderFollowLists(); // 팔로잉 리스트 다시 렌더링
+                loadFollowLists(); // 전체 리스트 다시 불러오기
             },
-            error: function(xhr, status, error) { // 요청이 실패하면 실행
-                alert('팔로우에 실패했습니다.');
+            error: function(xhr, status, error) {
+            	 if (xhr.status === 409) { // 중복된 팔로우 요청의 상태 코드가 409라고 가정
+                     alert('이미 팔로우 한 사용자입니다.');
+                 } else {
+                     alert('팔로우에 실패했습니다.');
+                 }
             }
         });
     }

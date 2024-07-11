@@ -95,7 +95,7 @@ public class FollowController {
 
 		List<UserFollowDTO> follow_list = service.getfollow_list(user_number);
 		System.out.println("나의 고유번호" + user_number);
-		System.out.println("내가 팔로우 한 리스트 : " + follow_list);
+		System.out.println("내가 팔로우 한 리스트 follow_list : " + follow_list);
 		model.addAttribute("follow_list", follow_list);
 
 		return "follow";
@@ -119,7 +119,7 @@ public class FollowController {
 
 		List<UserFollowDTO> following_list = service.getfollowing_list(user_number);
 		System.out.println("나의 고유번호" + user_number);
-		System.out.println("나를 팔로잉 한 리스트 : " + following_list);
+		System.out.println("나를 팔로잉 한 리스트 following_list : " + following_list);
 		model.addAttribute("following_list", following_list);
 
 		return "follow";
