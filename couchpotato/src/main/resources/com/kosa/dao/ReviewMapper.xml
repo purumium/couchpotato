@@ -6,13 +6,13 @@
 	<select id="countReviewsByUserIdAndContentId"
 		parameterType="com.kosa.dto.ReviewDTO" resultType="int">
 		SELECT COUNT(*) FROM reviews
-		WHERE USER_NUMBER = #{userId} and CONTENT_ID = #{contentId}
+		WHERE USER_ID = #{userId} and CONTENT_ID = #{contentId}
 	</select>
 
 	<select id="selectReviews"
 		parameterType="com.kosa.dto.ReviewDTO"
 		resultType="com.kosa.dto.ReviewDTO">
-		SELECT USER_NUMBER as userId, CONTENT_NAME as contentName,
+		SELECT USER_ID as userId, CONTENT_NAME as contentName,
 		CONTENT_ID as
 		contentId, CONTENT_TYPE as contentType, REVIEW_TEXT as
 		reviewContent,
@@ -24,7 +24,7 @@
 
 	<insert id="insertReview" parameterType="com.kosa.dto.ReviewDTO">
 		INSERT INTO reviews
-		(USER_NUMBER, CONTENT_NAME,CONTENT_ID,CONTENT_TYPE,
+		(USER_ID, CONTENT_NAME,CONTENT_ID,CONTENT_TYPE,
 		REVIEW_TEXT,
 		RATING, CONTENT_IMAGE_URL,REVIEW_CREATE_AT)
 		VALUES
