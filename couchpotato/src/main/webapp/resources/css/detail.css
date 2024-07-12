@@ -104,22 +104,7 @@ body {
 	border: 1px solid #ddd;
 }
 
-.rating input {
-	display: none;
-}
 
-.rating label {
-	float: right;
-	padding: 10px;
-	font-size: 24px;
-	color: #ddd;
-	transition: all 0.3s;
-	cursor: pointer;
-}
-
-.rating input:checked ~ label, .rating input:hover ~ label {
-	color: #ffd700;
-}
 
 .btn-save, #btnOpenModal {
 	background-color: #4CAF50;
