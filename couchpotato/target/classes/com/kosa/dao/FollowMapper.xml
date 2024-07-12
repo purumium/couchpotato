@@ -19,10 +19,11 @@
 
 	<!-- 내가 팔로우하는 사람들의 리스트 following_id = u.user_number -->
 	<select id="getfollow_list" resultType="UserFollowDTO" 	parameterType="int">
-		SELECT u.profile_picture_url,u.user_id,f.follower_id,f.following_id
+		SELECT 
+			u.profile_picture_url, u.user_id, f.follower_id, f.following_id
 		FROM follows f JOIN users u 
 		ON f.following_id = u.user_number
-		WHERE f.follower_id =	#{user_number}
+		WHERE f.follower_id = #{user_number}
 	</select>
 
 	<!-- 나를 팔로잉하는 사람들의 수 -->
@@ -35,7 +36,7 @@
 	<!-- 나를 팔로잉하는 사람들의 리스트 follower_id = user_number -->
 	<select id="getfollowing_list" resultType="UserFollowDTO"
 		parameterType="int">
-		select u.profile_picture_url,u.user_id,f.follower_id, f.following_id
+		select u.profile_picture_url, u.user_id, f.follower_id, f.following_id
 		from follows f
 		join users u 
 		on u.user_number =	f.follower_id

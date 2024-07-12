@@ -12,23 +12,24 @@
 	<select id="selectReviews"
 		parameterType="com.kosa.dto.ReviewDTO"
 		resultType="com.kosa.dto.ReviewDTO">
-		SELECT user_number as userNumber, CONTENT_NAME as contentName,
-		CONTENT_ID as
-		contentId, CONTENT_TYPE as contentType, REVIEW_TEXT as
-		reviewContent,
-		RATING as rating, user_id as userId
-		FROM reviews
-		WHERE CONTENT_ID =
-		#{contentId} and CONTENT_TYPE = #{contentType}
+		
+		SELECT r.user_number as userNumber, r.CONTENT_NAME as contentName,
+		r.CONTENT_ID as contentId, r.CONTENT_TYPE as contentType, 
+		r.REVIEW_TEXT as reviewContent,
+		r.RATING as rating, u.user_id as userId
+		FROM  reviews r JOIN users u
+		ON  r.user_number = u.user_number
+		WHERE 
+			r.CONTENT_ID =
+			#{contentId} and r.CONTENT_TYPE = #{contentType}
 	</select>
 
 	<insert id="insertReview" parameterType="com.kosa.dto.ReviewDTO">
 		INSERT INTO reviews
-		(user_number, user_id,CONTENT_NAME,CONTENT_ID,CONTENT_TYPE,
+		(user_number, CONTENT_NAME, CONTENT_ID, CONTENT_TYPE,
 		REVIEW_TEXT,
-		RATING, CONTENT_IMAGE_URL,REVIEW_CREATE_AT)
+		RATING, CONTENT_IMAGE_URL)
 		VALUES
-		(#{userNumber},#{userId},#{contentName},#{contentId},#{contentType},#{reviewContent},#{rating},#{imgurl},
-		sysdate)
+		(#{userNumber}, #{contentName},#{contentId},#{contentType},#{reviewContent},#{rating}, #{imgurl} )
 	</insert>
 </mapper>

@@ -8,32 +8,6 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/movies.css">
 <title>Movies List</title>
-<style>
-        .pagination {
-            margin-top: 20px; /* 페이지네이션과 위쪽 간격 설정 */
-            text-align: center; /* 페이지네이션을 가운데 정렬 */
-        }
-
-        .pagination a, .pagination span {
-            display: inline-block;
-            padding: 5px 10px;
-            margin: 0 2px;
-            border: 1px solid #ddd;
-            color: #555;
-            text-decoration: none;
-        }
-
-        .pagination a:hover {
-            background-color: #f5f5f5;
-        }
-
-        .pagination .current {
-            font-weight: bold;
-            background-color: #007bff;
-            color: #fff;
-            border-color: #007bff;
-        }
-    </style>
 <script>
 	// 필터링 함수
 	function filterMediaType(type) {

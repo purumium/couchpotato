@@ -1,0 +1,139 @@
+
+.mypage-container {
+	margin-top: 60px;
+}
+
+.inline-container {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 20px;
+	gap: 25px;
+}
+
+.inline-container .section {
+	flex: 0 0 30%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: #f8f8f8c4;
+    padding: 25px 12px 20px 26px;
+}
+
+.section div {
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.profile-btn-area {
+	display: flex;
+	align-items: center;
+    justify-content: space-around;
+}
+
+.profile-btn-area img {
+	width: 80px;
+	height: 78px;
+	border-radius: 44px;
+}
+
+.button-row {
+	display: flex;
+	justify-content: space-around;
+}
+
+.circle-btn {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 5px;
+}
+
+.w3-input {
+	width: 96%;
+	padding: 4px 10px;
+	margin-bottom: 8px;
+	margin: 5px 0px;
+	box-sizing: border-box;
+	border-radius: 14px;
+	border: 1px solid #d7cfcf;
+}
+
+.w3-button {
+	width: 25%;
+	background-color: #ebebeb87;
+	border: 1px solid #c0bbbb;
+	padding: 5px 10px;
+	border-radius: 10px;
+	cursor: pointer;
+	font-size: 11px;
+	letter-spacing: -1px;
+}
+
+.button-row {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+}
+
+.button-row div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.circle-btn {
+	width: 53px;
+}
+
+.circle-btn a, .circle-btn div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	background-color: #f0f0f09c;
+	font-size: 12px;
+	text-decoration: none;
+	color: #5b5b5b;
+	margin-bottom: 7px;
+	border: 1px solid #8080803d;
+}
+
+.circle-btn span {
+	font-size: 10px;
+	letter-spacing: -1px;
+}
+
+.circle-btn a:hover, .circle-btn div:hover {
+	background-color: #ffec5857;
+	transform: scale(1.04); /* 크기를 1.05배로 키움 */
+	transition: transform 0.2s ease-in-out;
+	/* 변환 효과에 0.3초 동안의 전환을 주고 부드럽게 만듦 */
+}
+
+.register-btn {
+    background-color: #ffffffa6;
+    border: 1px solid #c0bbbb;
+    padding: 4px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-size: 10px;
+    letter-spacing: -1px;
+    width: 63px;
+}
+
+.file-register {
+	justify-content: center;
+	display: flex;
+	align-items: center;
+}
+
+#pwForm p>label, #deleteForm p>label {
+	font-size: 12px;
+	margin: 5px 0px 5px 3px;
+	font-weight: 200;
+	color: #808080c4;
+}

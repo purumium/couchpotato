@@ -119,6 +119,10 @@
     // 전체사용자 리스트 표시 함수
     function displayUsers(users) {
         let userHtml = '';
+        
+        console.log("------ 전체 사용자 리스트 ------- ")
+        console.log(users);
+        
         users.forEach(function(user) {
             let isFollowing = followingList.some(function(follow) {
                 return follow.user_number === user.user_number;
