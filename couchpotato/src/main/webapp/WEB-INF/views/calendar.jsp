@@ -139,6 +139,9 @@
                 var resultHtml = '';
                 var review_date = ''; 
                 
+                console.log("가져온 데이터");
+                console.log(detailData);
+                
                 // 조건: 해당 날짜에 데이터가 있는 경우에는 모달에 출력해주고, 데이터가 없을 경우 모달 숨기기 
                 if (detailData.length > 0) {
                     detailData.forEach(function(data) {  // 반복문                    
@@ -163,6 +166,8 @@
                                 '</div>' +
                             '</div>';
                     });
+                    
+                    
                     
                     if (detailData.length > 2) {
                         $('.modal-content').css('height', '370px');  

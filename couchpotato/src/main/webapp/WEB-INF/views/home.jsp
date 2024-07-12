@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 		<div class="container">
 			<form action="${pageContext.request.contextPath}/movies" method="get" class="search-form">
-				<img src="/resources/images/search.svg" alt="search" class="search-icon">
+				<img src="/resources/images/search_icon.png" alt="search" class="search-icon">
 		        <input type="text" placeholder="검색" name="query" value="${param.query}">
 		        <button type="submit" class="search-button">x</button>
 			</form>

@@ -1,6 +1,11 @@
 @charset "UTF-8";
 
 .header-container {
+    padding: 30px 0px 30px 0px;
+    border-bottom: 1px solid #8080807a;
+}
+
+.home-header-container {
     padding: 30px 0px 0px;
 }
 
@@ -12,12 +17,19 @@
     margin: 0 16%; /* 좌우 여백 설정 */
 }
 
+.header-icon {
+	border-bottom: 2px solid #8080809e;
+    padding-bottom: 10px;
+    margin-right: 13px;
+    display: flex;
+    gap: 7px;
+}
+
 .home-header {
     display: flex;
     justify-content: end;
     align-items: center;
-    padding: 18px 0;
-    margin: 0px 4%;
+    margin: 0.7% 4%;
 }
 
 .logo {
@@ -29,10 +41,12 @@
     height: 65px;
 }
 
-.logo span {
-    font-size: 20px;
-    font-weight: bold;
-    color: #333;
+.header :hover{
+	cursor: pointer;
+}
+
+.logo img:nth-of-type(2) {
+    margin-left: -10px;
 }
 
 .search-bar form {
@@ -52,10 +66,10 @@
 
 .search-bar input[type="text"] {
     width: 250px;
-    padding: 10px 8px 8px 40px;  /* 왼쪽 패딩을 아이콘 크기 + 패딩으로 설정 */
-    border: 1px solid #ddd;
+    padding: 11px 10px 9px 41px;
+    border: 2px solid #ddd;
     border-radius: 35px;
-    font-size: 11px;
+    font-size: 12px;
     color: #493535;
 }
 
@@ -86,22 +100,19 @@
 }
 
 .auth-button img {
-	width: 20px;
-    margin-bottom: 5px; /* 이미지와 텍스트 간의 간격 설정 */
+    width: 30px;
+    margin-bottom: 9px;
 }
 
 #auth-button-logout img{
-    height: 21px;
-}
-
-.auth-button span {
-	font-size: 9px;
-    letter-spacing: -1px;
+    height: 30px;
+    width: 39px;
+    margin-bottom: 8px;
 }
 
 .auth-button div {
-	font-size: 9px;
-    letter-spacing: -2px;
+    font-size: 9px;
+    letter-spacing: 0px;
 }
 
 .auth-button:hover {

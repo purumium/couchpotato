@@ -135,8 +135,8 @@ public class FollowController {
         List<UserFollowDTO> following_list = service.getfollowing_list(user_number);
         List<UserFollowDTO> user_list = service.user_list(user_number);
 
-        response.put("follow_list", follow_list);
-        response.put("following_list", following_list);
+        response.put("follow_list", follow_list); // 내가 팔로우 하는 사람
+        response.put("following_list", following_list);  // 내가 팔로우를 당함
         response.put("user_list", user_list);
 
         return ResponseEntity.ok(response);

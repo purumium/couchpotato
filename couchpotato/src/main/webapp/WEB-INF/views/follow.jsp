@@ -50,6 +50,10 @@
     // 사용자 리스트 표시 함수
     function displayUsers(users) {
         let userHtml = '';
+        
+        console.log("------ 전체 사용자 리스트 ------- ")
+        console.log(users);
+        
         users.forEach(function(user) {
             // 사용자가 팔로우 상태인지 확인
             let isFollowing = followList.some(function(follow) {
@@ -99,17 +103,29 @@
                     let isMutualFollow = followingList.some(function(following) {
                         return following.user_number === follower.user_number;
                     });
+                    
+                    console.log("---내가 팔로우하는 리스트 보기---");
+                    console.log(followList);
+                    
+                    console.log("---내가 팔로우 당한 리스트 보기---");
+                    console.log(followingList);
+                    
+                    console.log("---전체 리스트 보기---");
+                    console.log(userList);
 
                     // 팔로워 리스트 HTML 생성
                     followerHtml += '<div class="follower-item">';
-                    followerHtml += '<div class="follower-name">' + follower.profile_picture_url + ' (' + follower.user_id + ')</div>';
+                    followerHtml += '<div class="follower-name">' + follower.profile_picture_url + ' (' + follower.following_id + ')</div>';
                     if (isMutualFollow) { // 맞팔 여부에 따라 버튼 설정
-                        followerHtml += '<button class="mutual-follow-btn" onclick="unfollowUser(' + follower.user_id + ')">팔로우 취소</button>';
+                        followerHtml += '<button class="mutual-follow-btn" onclick="unfollowUser(' + follower.following_id + ')">팔로우 취소</button>';
                     } else {
-                        followerHtml += '<button class="follow-btn" onclick="followUser(' + follower.user_number + ')">팔로우</button>';
+                        followerHtml += '<button class="follow-btn" onclick="followUser(' + follower.following_id + ')">팔로우</button>';
                     }
                     followerHtml += '</div>';
                 });
+                
+                console.log('---- 팔로우 중!=-----')
+                console.log(followerHtml);
 
                 $('#follower-section').html(followerHtml); // 팔로워 리스트 HTML을 DOM에 삽입
 

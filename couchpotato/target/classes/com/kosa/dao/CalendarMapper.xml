@@ -31,8 +31,9 @@
 		WHERE 
 			u.user_id = #{userId}
 		GROUP BY 
-			r.review_create_at
+			TO_CHAR(r.review_create_at, 'YYYY-MM-DD')
 	</select>
+	
 	
 	<!-- 월별로 전체 목록 가져오기 -->
 	<select id="getAllReviewListByMonth" parameterType="String" resultType="CalendarDTO">	    
@@ -63,7 +64,7 @@
 	    WHERE 
 	        u.user_id = #{user_id}
 	    AND
-	        r.review_create_at = #{review_create_at}
+	        TO_CHAR(r.review_create_at, 'YYYY-MM-DD') = #{review_create_at}
 	</select>	
 	
 	

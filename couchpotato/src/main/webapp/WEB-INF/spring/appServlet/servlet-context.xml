@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:beans="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
-		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:security="http://www.springframework.org/schema/security"
+    xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.0.xsd
+        http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- @Controller, @RequestMapping 등의 어노테이션을 활성화 -->
     <annotation-driven />
@@ -21,6 +24,26 @@
 
     <!-- com.kosa.controller 패키지에서 스프링 컨트롤러를 스캔하여 등록 -->
     <context:component-scan base-package="com.kosa.controller" />
+    
+    
+    
+    <!--  호영 추가 -->
+    <!-- 정적 파일 경로 설정 -->
+    <mvc:resources mapping="/upload/**" location="file:///C:/Users/KOSA/Desktop/project_2/upload/" />
+    
+    <!-- BCryptPasswordEncoder 빈 정의 -->
+    <beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
+    <!-- Interceptors 설정 추가 -->
+    <mvc:interceptors>
+        <beans:bean class="com.kosa.interceptor.CacheControlInterceptor" />
+    </mvc:interceptors>
+
+    <!-- Multipart Resolver 설정 추가 -->
+    <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <beans:property name="maxUploadSize" value="10485760" /> <!-- 10MB -->
+    </beans:bean>
+
 </beans:beans>
-	
-	
+
+

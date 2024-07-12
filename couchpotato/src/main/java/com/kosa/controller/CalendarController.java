@@ -69,6 +69,11 @@ public class CalendarController {
 		
 	    List<CalendarDTO> calendarlist = calendarService.getContentDetailByDate(calDto);
 	    
+	    for (CalendarDTO c : calendarlist) {
+			System.out.println("가져온 날짜별 상세 정보 -----");
+			System.out.println(c.getContent_name()+ ", " + c.getRating());
+		}
+	    
 	    return calendarlist; // JSON 형태로 반환됨
 	}
 	

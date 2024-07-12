@@ -16,7 +16,7 @@
     <div class="reviewlist-main-container">
 	 	<div class="myreviewlist-logo">
 	 		<img src="/resources/images/movie_roll.png" alt="myReviewList" class="myreviewlist-logo-img">
-	 		<span>COLLECTIONS OF MY CONTENT REVIEWS</span>
+	 		<span>나의 리뷰 전체 보기</span>
  		</div>
 	    
 	    <c:forEach var="month" items="${reviewsByMonth}">
