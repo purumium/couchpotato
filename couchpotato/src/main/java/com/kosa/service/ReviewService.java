@@ -8,4 +8,5 @@ public interface ReviewService {
 	List<ReviewDTO> selectReviews(ReviewDTO reviewDTO);
 	public boolean checkReviewExists(ReviewDTO reviewDTO); 
     public void saveReview(ReviewDTO review);
+    public int selectUserNumber(String userId);
 }

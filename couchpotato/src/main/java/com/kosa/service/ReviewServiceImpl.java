@@ -33,4 +33,9 @@ public class ReviewServiceImpl implements ReviewService {
     public void saveReview(ReviewDTO review) {
         reviewMapper.insertReview(review);
     }
+    
+    @Override
+    public int selectUserNumber(String userId) {
+        return reviewMapper.selectUserNumber(userId);
+    }
 }
