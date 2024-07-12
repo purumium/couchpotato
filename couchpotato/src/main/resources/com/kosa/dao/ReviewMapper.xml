@@ -33,6 +33,12 @@
 		
 		
 	</select>
+	
+	<select id="selectUserNumber" parameterType="String" resultType="int">
+		SELECT USER_NUMBER from users
+		where USER_ID = #{userId}
+	</select>
+	
 
 	<insert id="insertReview" parameterType="com.kosa.dto.ReviewDTO">
 		INSERT INTO reviews
