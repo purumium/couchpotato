@@ -1,5 +1,6 @@
 package com.kosa.controller;
 
+import com.kosa.dto.MemberDTO;
 import com.kosa.dto.MovieDTO;
 import com.kosa.dto.ReviewDTO;
 import com.kosa.service.MovieDetailService;
@@ -29,6 +30,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class MovieController {
 
@@ -54,7 +57,22 @@ public class MovieController {
     @GetMapping("/movie/detail/{mediatype}/{id}")
     public String showMovieDetail(@PathVariable String mediatype,
                                   @PathVariable int id,
-                                  Model model) {
+                                  Model model,
+                                  HttpSession session) {
+    	MemberDTO loginMember = (MemberDTO) session.getAttribute("member");
+    	System.out.println(loginMember);
+    	
+    	
+    	if(loginMember!=null) {
+    		model.addAttribute("loginMemberId", loginMember.getUser_id().toString());
+    		int user_number = reviewService.selectUserNumber(loginMember.getUser_id().toString());
+    		model.addAttribute("user_number",user_number);
+    	}else {
+    		model.addAttribute("loginMemberId", "null");
+    		model.addAttribute("user_number",-1);
+    	}
+    	model.addAttribute("loginMember", loginMember);
+    	
     	String result = "";
     	try {
     		String tvShowDetails = movieDeatilService.getTVShowDetails(mediatype, id);
