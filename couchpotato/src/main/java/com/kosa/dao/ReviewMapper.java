@@ -11,4 +11,5 @@ public interface ReviewMapper {
 	int countReviewsByUserIdAndContentId(ReviewDTO reviewDTO);
 	List<ReviewDTO> selectReviews(ReviewDTO reviewDTO);
     public void insertReview(ReviewDTO review);
+    int selectUserNumber(String userId);
 }
