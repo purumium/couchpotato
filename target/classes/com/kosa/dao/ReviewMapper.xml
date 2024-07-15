@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kosa.dao.ReviewMapper">
+
+	<select id="countReviewsByUserIdAndContentId"
+		parameterType="com.kosa.dto.ReviewDTO" resultType="int">
+		SELECT COUNT(*) FROM reviews
+		WHERE user_number = #{userNumber} and CONTENT_ID = #{contentId}
+	</select>
+
+	<select id="selectReviews"
+		parameterType="com.kosa.dto.ReviewDTO"
+		resultType="com.kosa.dto.ReviewDTO">
+		SELECT r.user_number as userNumber, r.CONTENT_NAME as contentName,
+		r.CONTENT_ID as contentId, r.CONTENT_TYPE as contentType, 
+		r.REVIEW_TEXT as reviewContent,
+		r.RATING as rating, u.user_id as userId
+		FROM  reviews r JOIN users u
+		ON  r.user_number = u.user_number
+		WHERE 
+			r.CONTENT_ID =
+			#{contentId} and r.CONTENT_TYPE = #{contentType}
+		order by REVIEW_NUMBER desc
+	</select>
+	
+	<select id="selectUserNumber" parameterType="String" resultType="int">
+		SELECT USER_NUMBER from users
+		where USER_ID = #{userId}
+	</select>
+	
+
+	<insert id="insertReview" parameterType="com.kosa.dto.ReviewDTO">
+		INSERT INTO reviews
+		(user_number, CONTENT_NAME, CONTENT_ID, CONTENT_TYPE,
+		REVIEW_TEXT,
+		RATING, CONTENT_IMAGE_URL)
+		VALUES
+		(#{userNumber}, #{contentName},#{contentId},#{contentType},#{reviewContent},#{rating}, #{imgurl} )
+	</insert>
+</mapper>

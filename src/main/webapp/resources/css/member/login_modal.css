@@ -1,0 +1,128 @@
+/* 로그인 모달 배경 */
+.login-modal {
+    display: none; /* 초기에는 보이지 않도록 설정 */
+    position: fixed; /* 고정 위치 */
+    z-index: 1; /* 다른 요소들보다 위에 표시 */
+    left: 0;
+    top: 0;
+    width: 100%; /* 전체 너비 */
+    height: 100%; /* 전체 높이 */
+    overflow: auto; /* 스크롤이 필요할 경우 자동으로 생성 */
+    background-color: rgba(0, 0, 0, 0.4); /* 반투명 검정 배경 */
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+}
+
+/* 로그인 모달 컨텐츠 */
+.login-modal .modal-content {
+    background-color: #fefefe; /* 흰색 배경 */
+    padding: 20px; /* 내부 여백 */
+    border: 1px solid #888; /* 회색 테두리 */
+    width: 80%; /* 컨텐츠 너비를 80%로 설정 */
+    max-width: 500px; /* 최대 너비를 500px로 설정 */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* 그림자 효과 */
+    border-radius: 10px; /* 모서리를 둥글게 */
+    position: relative; /* 닫기 버튼을 절대 위치로 설정하기 위해 필요 */
+}
+
+/* 로그인 모달 닫기 버튼 */
+.login-modal .close {
+    color: #aaa; /* 회색 텍스트 */
+    font-size: 28px; /* 폰트 크기 */
+    font-weight: bold; /* 굵은 폰트 */
+    position: absolute; /* 절대 위치 */
+    top: 10px; /* 위에서 10px */
+    right: 20px; /* 오른쪽에서 20px */
+    cursor: pointer; /* 커서 변경 */
+}
+
+.login-modal .close:hover,
+.login-modal .close:focus {
+    color: black; /* 마우스 오버 또는 포커스 시 검정색 */
+    text-decoration: none; /* 밑줄 제거 */
+}
+
+/* 로그인 모달 래퍼 스타일 */
+.login-modal .wrapper {
+    display: flex; /* 플렉스 박스 사용 */
+    flex-direction: column; /* 세로 방향 정렬 */
+    align-items: center; /* 가로 중앙 정렬 */
+}
+
+/* 로그인 모달 랩 스타일 */
+.login-modal .wrap {
+    width: 100%; /* 너비를 100%로 설정 */
+}
+
+/* 로그인 모달 로고 래퍼 스타일 */
+.login-modal .logo_wrap {
+    text-align: center; /* 텍스트를 중앙 정렬 */
+    margin-bottom: 20px; /* 아래쪽 여백 20px */
+}
+
+/* 로그인 모달 로고 이미지 스타일 */
+.login-modal .logo_image {
+    width: 80%; /* 너비를 80%로 설정 */
+    max-width: 300px; /* 최대 너비를 300px로 설정 */
+}
+
+/* 로그인 모달 로그인 래퍼 스타일 */
+.login-modal .login_wrap {
+    width: 100%; /* 너비를 100%로 설정 */
+}
+
+/* 로그인 모달 아이디 랩과 비밀번호 랩 스타일 */
+.login-modal .id_wrap,
+.login-modal .pw_wrap {
+    margin-bottom: 15px; /* 아래쪽 여백 15px */
+    display: flex; /* 플렉스 박스 사용 */
+    justify-content: center; /* 가로 중앙 정렬 */
+}
+
+/* 로그인 모달 아이디 입력 박스와 비밀번호 입력 박스 스타일 */
+.login-modal .id_input_box,
+.login-modal .pw_input_box {
+    width: 80%; /* 너비를 80%로 설정 */
+}
+
+/* 로그인 모달 아이디 입력과 비밀번호 입력 스타일 */
+.login-modal .id_input,
+.login-modal .pw_input {
+    width: 100%; /* 너비를 100%로 설정 */
+    padding: 10px; /* 내부 여백 10px */
+    margin: 5px 0; /* 위아래 여백 5px */
+    box-sizing: border-box; /* 박스 크기 계산 방식을 설정 */
+    border: 1px solid #ccc; /* 테두리 색상을 설정 */
+    border-radius: 4px; /* 모서리를 둥글게 설정 */
+    background-color: #f0f2f5; /* 배경색 설정 */
+}
+
+/* 로그인 모달 로그인 버튼 래퍼 스타일 */
+.login-modal .login_button_wrap {
+    text-align: center; /* 텍스트를 중앙 정렬 */
+}
+
+/* 로그인 모달 로그인 버튼 스타일 */
+.login-modal .login_button {
+    padding: 10px 20px; /* 내부 여백 설정 */
+    margin-top: 10px; /* 위쪽 여백 설정 */
+    border: none; /* 테두리 제거 */
+    background-image: linear-gradient(45deg, #c49b66, #8f614e); /* 배경 그라디언트 설정 */
+    color: white; /* 텍스트 색상 설정 */
+    border-radius: 50px; /* 모서리를 둥글게 설정 */
+    cursor: pointer; /* 커서 변경 */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* 그림자 효과 설정 */
+    transition: all 0.3s ease; /* 모든 속성에 대한 전환 효과 설정 */
+    font-size: 16px; /* 폰트 크기 설정 */
+    font-weight: bold; /* 폰트 굵기 설정 */
+}
+
+.login-modal .login_button:hover {
+    background-image: linear-gradient(45deg, #8f614e, #c49b66); /* 호버 시 배경 그라디언트 변경 */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* 호버 시 그림자 효과 변경 */
+    transform: translateY(-3px); /* 호버 시 위치 변경 */
+}
+
+.login-modal .login_button:active {
+    transform: translateY(-1px); /* 클릭 시 위치 변경 */
+}
