@@ -13,14 +13,12 @@
     <%@ include file="common/header.jsp" %>
     
     <!-- body -->
-    <div class="reviewlist-main-container">
-	 	<div class="myreviewlist-logo">
-	 		<img src="/resources/images/movie_roll.png" alt="myReviewList" class="myreviewlist-logo-img">
-	 		<span>나의 리뷰 전체 보기</span>
- 		</div>
-	    
+    <div class="reviewlist-main-container">	    
 	    <c:forEach var="month" items="${reviewsByMonth}">
-	        <div class="month-title">${month.key}</div> <!-- 월 (YYYY-MM) -->
+	    	<div class="review-title">
+		   		<img src="/resources/images/check.png" width="18px">
+		        <div class="month-title">${month.key}</div> <!-- 월 (YYYY-MM) -->
+	        </div>
 	        
 	        <div class="review-slider">
 	            <button class="prev-slide">&lt;</button>

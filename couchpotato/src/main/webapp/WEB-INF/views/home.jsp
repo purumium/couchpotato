@@ -28,13 +28,23 @@ function toggleModal(event) {
     newH1.innerText = infoValue;
     newH1.style.display = 'none';
     modal.querySelector('.modal-content').insertBefore(newH1, modal.querySelector('.modal-content').firstChild);
-
+    
+	// Set the title
+    const titleElement = modal.querySelector('.title span');
+	titleElement.innerText = ' 오늘의 ' + infoValue + ' 랭킹';
+    
     generateTable(infoValue);
     modal.style.display = 'block';
 }
 
 function generateTable(infoValue) {
     const modalContent = document.querySelector('.modal-content');
+    
+    const modalBody = document.createElement('div');
+    modalBody.className = 'modal-body';
+    
+    const tableContainer = document.createElement('div');
+    tableContainer.className = 'table-container';
     
     // Remove existing table if present
     const existingTable = modalContent.querySelector('table');
@@ -54,9 +64,9 @@ function generateTable(infoValue) {
     const headerCell1 = document.createElement('th');
     headerCell1.innerText = '';
     const headerCell2 = document.createElement('th');
-    headerCell2.innerText = 'Rank';
+    headerCell2.innerText = '';
     const headerCell3 = document.createElement('th');
-    headerCell3.innerText = 'Title';
+    headerCell3.innerText = '';
     headerRow.appendChild(headerCell1);
     headerRow.appendChild(headerCell2);
     headerRow.appendChild(headerCell3);
@@ -67,16 +77,21 @@ function generateTable(infoValue) {
     const tbody = document.createElement('tbody');
     filteredData.forEach(item => {
         const row = document.createElement('tr');
+        
         const cell1 = document.createElement('td');
+        cell1.innerText = item.id;
+        
+        const cell2 = document.createElement('td');
         const img = document.createElement('img');
         img.src = item.imageUrl;
-        img.width = 100; // Set width to 100 pixels
-        img.height = 150; // Set height to 150 pixels
-        cell1.appendChild(img);
-        const cell2 = document.createElement('td');
-        cell2.innerText = item.id;
+        img.width = 40; // Set width to 100 pixels
+        img.height = 40; // Set height to 150 pixels
+        cell2.appendChild(img);
+        
+        
         const cell3 = document.createElement('td');
         cell3.innerText = item.title;
+        
         row.appendChild(cell1);
         row.appendChild(cell2);
         row.appendChild(cell3);
@@ -85,7 +100,9 @@ function generateTable(infoValue) {
     table.appendChild(tbody);
 
     // Append table to modal content
-    modalContent.appendChild(table);
+    tableContainer.appendChild(table);
+    modalBody.appendChild(tableContainer);
+    modalContent.appendChild(modalBody);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -191,7 +208,13 @@ document.addEventListener('DOMContentLoaded', () => {
 	<!-- The Modal -->
 	<div id="myModal" class="modal">
 		<div class="modal-content">
-			<span class="close">&times;</span>
+			<div class="modal-header">
+				<div class="title">
+					<img src="/resources/images/topten.png" width="50px">
+					<span></span>
+				</div>
+				<span class="close">&times;</span>
+			</div>
 			<!-- Table will be added here dynamically -->
 		</div>
 	</div>

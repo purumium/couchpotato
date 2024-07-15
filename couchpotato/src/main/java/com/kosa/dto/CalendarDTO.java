@@ -23,11 +23,14 @@ public class CalendarDTO {
     
     private int review_number;
     private String content_name;
+    private int content_id;
+    private String content_type;
     private String review_text;
     private double rating;
     private String content_image_url;
     private String review_create_at;
     private String review_month;
+    private int review_count_byname;
     
     private int calendar_number;
 }
