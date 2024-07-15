@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+
+    <!-- HikariCP 설정 -->
+    <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+        <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/> <!-- JDBC 드라이버 클래스 설정 (로그 출력을 위한 log4jdbc 사용) -->
+        <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521/xepdb1"/> <!-- JDBC URL 설정 (Oracle 데이터베이스 연결) -->
+        <property name="username" value="couchpotato"/> <!-- 데이터베이스 사용자 이름 설정 -->
+        <property name="password" value="couchpotato"/> <!-- 데이터베이스 비밀번호 설정 -->
+    </bean>
+   
+    <!-- HikariCP 데이터 소스 설정 -->
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+        <constructor-arg ref="hikariConfig"/> <!-- hikariConfig 빈을 데이터소스 생성자에 전달 -->
+    </bean>
+ 
+    
+    <!-- MyBatis SqlSessionFactory 설정 -->
+    <bean id="SqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>   <!-- 데이터소스를 MyBatis SqlSessionFactory에 전달 -->
+        <property name="typeAliasesPackage" value="com.kosa.dto"/>  <!-- com.kosa.dto 패키지의 모든 DTO 클래스에 대한 alias 설정 -->
+    </bean>
+
+
+    <!-- MyBatis DAO 인터페이스 스캔 -->
+    <mybatis-spring:scan base-package="com.kosa.dao"/>  <!-- com.kosa.dao 패키지 내의 MyBatis 매퍼 인터페이스를 스캔하여 빈으로 등록 -->
+
+    <!-- Spring 컴포넌트 스캔 -->
+	<context:component-scan base-package="com.kosa.service"/> <!-- com.kosa.service 패키지 내의 Spring 컴포넌트를 스캔하여 빈으로 등록 -->	
+		
+</beans>
