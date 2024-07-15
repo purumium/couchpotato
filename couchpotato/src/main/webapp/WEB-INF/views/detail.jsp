@@ -305,48 +305,7 @@ function refreshDiv(divId) {
 							width="14px"> <span>리뷰 작성</span>
 					</button>
 				</div>
-				<div class="season-container" style="display: none;">
-					<div class="season-content">
-						<ul id="seasonList">
-							<%
-								for (Map<String, Object> season : seasons) {
-							%>
-							<li class="season-item">
-								<%
-									String seasonPosterPath = (String) season.get("poster_path");
-												if (seasonPosterPath != null && !seasonPosterPath.isEmpty()) {
-								%> <img src="https://image.tmdb.org/t/p/w500/<%=seasonPosterPath%>"
-								alt="Poster"> <%
- 	} else {
- %> <img src="<%=request.getContextPath()%>/resources/images/noimg.png"
-								alt="Poster"> <%
- 	}
- %>
 
-								<div class="items">
-									<div class="item">
-										<span>시즌 이름</span> <span><%=season.get("name")%> </span>
-									</div>
-									<div class="item">
-										<span>방영일</span> <span><%=season.get("air_date") != null ? season.get("air_date") : "미정"%>
-										</span>
-									</div>
-									<div class="item">
-										<span>에피소드 수</span> <span><%=season.get("episode_count")%>
-										</span>
-									</div>
-									<div class="item">
-										<span>평균 평점</span> <span><%=season.get("vote_average")%>
-										</span>
-									</div>
-								</div>
-							</li>
-							<%
-								}
-							%>
-						</ul>
-					</div>
-				</div>
 				<%
 					} else {
 				%>
@@ -360,44 +319,90 @@ function refreshDiv(divId) {
 			</div>
 		</div>
 	</div>
+	<%
+		if (seasons != null) {
+	%>
+	<div class="season-container" style="display: none;">
+		<div class="season-content">
+			<ul id="seasonList">
+				<%
+					for (Map<String, Object> season : seasons) {
+				%>
+				<li class="season-item">
+					<%
+						String seasonPosterPath = (String) season.get("poster_path");
+									if (seasonPosterPath != null && !seasonPosterPath.isEmpty()) {
+					%> <img src="https://image.tmdb.org/t/p/w500/<%=seasonPosterPath%>"
+					alt="Poster"> <%
+ 	} else {
+ %> <img src="<%=request.getContextPath()%>/resources/images/noimg.png"
+					alt="Poster"> <%
+ 	}
+ %>
 
-
-<div id="refresh">
-<c:if test="${not empty selectreviews}">
-	<div class="total-container" >
-		<c:if test="${loginMemberId != 'null'}">
-			<div class="container2">
-				<button id="reset-button" class="default-btn reviewFilter "
-					style="width: 100px">전체 리뷰</button>
-				<button id="filter-button" class="filter-btn  reviewFilter"
-					style="width: 100px">내 리뷰</button>
-			</div>
-
-		</c:if>
-
-		<div >
-			
-				<div class="container2">
-					<c:forEach var="review" items="${selectreviews}">
-						<div id="modal-body" class="modal-body">
-							<div class="review-item">
-								<div class="review-contents"
-									style="height: 100px; overflow-y: auto;">
-									<div class="review-title-rate">
-										<div class="review-title user-id" style="font-size: 16px">${review.userId}</div>
-										<div class="review-rating">${review.rating}</div>
-									</div>
-									<div class="review-text" style="font-size: 14px">${review.reviewContent}</div>
-								</div>
-							</div>
+					<div class="items">
+						<div class="item">
+							<span>시즌 이름</span> <span><%=season.get("name")%> </span>
 						</div>
-					</c:forEach>
-				</div>
-			
+						<div class="item">
+							<span>방영일</span> <span><%=season.get("air_date") != null ? season.get("air_date") : "미정"%>
+							</span>
+						</div>
+						<div class="item">
+							<span>에피소드 수</span> <span><%=season.get("episode_count")%>
+							</span>
+						</div>
+						<div class="item">
+							<span>평균 평점</span> <span><%=season.get("vote_average")%> </span>
+						</div>
+					</div>
+				</li>
+				<%
+					}
+				%>
+			</ul>
 		</div>
 	</div>
-</c:if>
-</div>
+	<%
+		}
+	%>
+
+	<div id="refresh">
+		<c:if test="${not empty selectreviews}">
+			<div class="total-container">
+				<c:if test="${loginMemberId != 'null'}">
+					<div class="container2">
+						<button id="reset-button" class="default-btn reviewFilter "
+							style="width: 100px">전체 리뷰</button>
+						<button id="filter-button" class="filter-btn  reviewFilter"
+							style="width: 100px">내 리뷰</button>
+					</div>
+
+				</c:if>
+
+				<div>
+
+					<div class="container2">
+						<c:forEach var="review" items="${selectreviews}">
+							<div id="modal-body" class="modal-body">
+								<div class="review-item">
+									<div class="review-contents"
+										style="height: 100px; overflow-y: auto;">
+										<div class="review-title-rate">
+											<div class="review-title user-id" style="font-size: 16px">${review.userId}</div>
+											<div class="review-rating">${review.rating}</div>
+										</div>
+										<div class="review-text" style="font-size: 14px">${review.reviewContent}</div>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+
+				</div>
+			</div>
+		</c:if>
+	</div>
 
 	<div id="myModal" class="modal">
 		<div class="modal-content">
