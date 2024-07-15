@@ -12,7 +12,6 @@
 	<select id="selectReviews"
 		parameterType="com.kosa.dto.ReviewDTO"
 		resultType="com.kosa.dto.ReviewDTO">
-		
 		SELECT r.user_number as userNumber, r.CONTENT_NAME as contentName,
 		r.CONTENT_ID as contentId, r.CONTENT_TYPE as contentType, 
 		r.REVIEW_TEXT as reviewContent,
@@ -22,7 +21,14 @@
 		WHERE 
 			r.CONTENT_ID =
 			#{contentId} and r.CONTENT_TYPE = #{contentType}
+		order by REVIEW_NUMBER desc
 	</select>
+	
+	<select id="selectUserNumber" parameterType="String" resultType="int">
+		SELECT USER_NUMBER from users
+		where USER_ID = #{userId}
+	</select>
+	
 
 	<insert id="insertReview" parameterType="com.kosa.dto.ReviewDTO">
 		INSERT INTO reviews
