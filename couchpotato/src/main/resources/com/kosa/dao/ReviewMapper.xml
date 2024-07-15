@@ -30,6 +30,7 @@
 		WHERE 
 			r.CONTENT_ID =
 			#{contentId} and r.CONTENT_TYPE = #{contentType}
+		order by REVIEW_NUMBER desc
 		
 		
 	</select>
