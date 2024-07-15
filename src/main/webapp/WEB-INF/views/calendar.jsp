@@ -24,7 +24,7 @@
 	<meta http-equiv="Expires" content="0" />
 </head>
 <body>
-	<%@ include file="common/header.jsp"%>
+	<%@ include file="common/calendar_header.jsp"%>
 
 	<div class="calendar-container">
 
