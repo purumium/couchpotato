@@ -43,15 +43,14 @@
 				<div class="buttons-section">
 					<div class="button-row">
 						<div class="circle-btn">
-							<a href="/follwer">0</a> <span>팔로워</span>
+							<a href="/follwer"> 0000 </a> <span>팔로워</span>
 						</div>
 
 						<div class="circle-btn">
-							<a href="/following">0</a> <span>팔로잉</span>
+							<a href="/following"> </a> <span>팔로잉</span>
 						</div>
 
-						<div class="circle-btn" onclick="location.href='/usersearch'"
-							id="user-btn">
+						<div class="circle-btn" id="user-search-btn">
 							<div>
 								<img src="/resources/images/usersearch.png" width="25px"
 									alt="user-search">
@@ -145,6 +144,44 @@
 	    });
 	});
 	</script>
+
+
+
+	<!-- follow modal -->
+	<script>
+	$(document).ready(function() {
+		// Event listener for the "사용자 검색" button
+		document.getElementById('user-search-btn').addEventListener('click', openModal);
+
+		// Event listener for the close button
+		document.querySelector('#follow-close').addEventListener('click', closeModal);
+
+		// Initialize the first section to be visible
+		document.addEventListener('DOMContentLoaded', function() {
+		    showSection('follower-section'); // Default section to show
+		});
+	    
+	});
+	
+	function openModal() {
+	    document.getElementById('followModal').style.display = 'block';
+	}
+
+	// Function to close the modal
+	function closeModal() {
+	    document.getElementById('followModal').style.display = 'none';
+	}
+
+	// Function to show a specific section
+	function showSection(sectionId) {
+	    var sections = document.getElementsByClassName('content-section');
+	    for (var i = 0; i < sections.length; i++) {
+	        sections[i].style.display = 'none';
+	    }
+	    document.getElementById(sectionId).style.display = 'block';
+	}
+	</script>
+
 
 </body>
 </html>

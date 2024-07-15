@@ -20,110 +20,110 @@ import com.kosa.service.FollowService;
 @Controller
 public class FollowController {
 
-	@Autowired
-	FollowService service;
+   @Autowired
+   FollowService service;
 
-////	리스트 (통합)
-//	@GetMapping(value = "/follow_lists")
-//	public String follow_lists(Model model, @RequestParam int user_number) throws Exception {
-//		model.addAttribute("user_number", user_number); // 현재 사용자의 user_number를 모델에 추가
+////   리스트 (통합)
+//   @GetMapping(value = "/follow_lists")
+//   public String follow_lists(Model model, @RequestParam int user_number) throws Exception {
+//      model.addAttribute("user_number", user_number); // 현재 사용자의 user_number를 모델에 추가
 //
-////		user_list
-//		List<UserFollowDTO> user_list = service.user_list(user_number);
-//		System.out.println("user_list 나의 고유번호" + user_number);
-//		System.out.println("user_list 나를 제외한 리스트 : " + user_list);
-//		model.addAttribute("user_list", user_list);
+////      user_list
+//      List<UserFollowDTO> user_list = service.user_list(user_number);
+//      System.out.println("user_list 나의 고유번호" + user_number);
+//      System.out.println("user_list 나를 제외한 리스트 : " + user_list);
+//      model.addAttribute("user_list", user_list);
 //
-////		follow_list
-//		List<UserFollowDTO> follow_list = service.getfollow_list(user_number);
-//		System.out.println("나의 고유번호" + user_number);
-//		System.out.println("내가 팔로우 한 리스트 : " + follow_list);
-//		model.addAttribute("follow_list", follow_list);
+////      follow_list
+//      List<UserFollowDTO> follow_list = service.getfollow_list(user_number);
+//      System.out.println("나의 고유번호" + user_number);
+//      System.out.println("내가 팔로우 한 리스트 : " + follow_list);
+//      model.addAttribute("follow_list", follow_list);
 //
-////		following_list
-//		List<UserFollowDTO> following_list = service.getfollowing_list(user_number);
-//		System.out.println("나의 고유번호" + user_number);
-//		System.out.println("나를 팔로잉 한 리스트 : " + following_list);
-//		model.addAttribute("following_list", following_list);
+////      following_list
+//      List<UserFollowDTO> following_list = service.getfollowing_list(user_number);
+//      System.out.println("나의 고유번호" + user_number);
+//      System.out.println("나를 팔로잉 한 리스트 : " + following_list);
+//      model.addAttribute("following_list", following_list);
 //
-//		return "follow";
-//	}
+//      return "follow";
+//   }
 
-	// 특정 사용자를 제외한 전체 리스트 가져오기
-	@GetMapping(value = "/user_list")
-	public String user_list(Model model, @RequestParam int user_number) throws Exception {
-	    // 전체 사용자 리스트 가져오기
-	    List<UserFollowDTO> user_list = service.user_list(user_number);
-	    System.out.println("user_list 나의 고유번호" + user_number);
-	    System.out.println("user_list 나를 제외한 리스트 : " + user_list);
-	    model.addAttribute("user_list", user_list);
+   // 특정 사용자를 제외한 전체 리스트 가져오기
+   @GetMapping(value = "/user_list")
+   public String user_list(Model model, @RequestParam int user_number) throws Exception {
+       // 전체 사용자 리스트 가져오기
+       List<UserFollowDTO> user_list = service.user_list(user_number);
+       System.out.println("user_list 나의 고유번호" + user_number);
+       System.out.println("user_list 나를 제외한 리스트 : " + user_list);
+       model.addAttribute("user_list", user_list);
 
-	    // 맞팔 확인
-	    // Assuming you want to check follow status for each user in the list
-	    for (UserFollowDTO user : user_list) {
-	        UserFollowDTO ufdto = new UserFollowDTO();
-	        ufdto.setFollower_id(user_number);
-	        ufdto.setFollowing_id(user.getUser_number()); // Set following_id to each user in the list
+       // 맞팔 확인
+       // Assuming you want to check follow status for each user in the list
+       for (UserFollowDTO user : user_list) {
+           UserFollowDTO ufdto = new UserFollowDTO();
+           ufdto.setFollower_id(user_number);
+           ufdto.setFollowing_id(user.getUser_number()); // Set following_id to each user in the list
 
-	        int followStatus = service.checkFollowStatus(ufdto);
-	        if (followStatus == 1) {
-	            System.out.println("Already following user: " + user.getUser_number());
-	        } else {
-	            System.out.println("Not following user: " + user.getUser_number());
-	        }
-	    }
-	    return "follow";
-	}
+           int followStatus = service.checkFollowStatus(ufdto);
+           if (followStatus == 1) {
+               System.out.println("Already following user: " + user.getUser_number());
+           } else {
+               System.out.println("Not following user: " + user.getUser_number());
+           }
+       }
+       return "follow";
+   }
 
 
 
-	// 내가 팔로우한 사람의 수
-	@GetMapping(value = "/follow_count")
-	public String following_count(Model model, @RequestParam int user_number) throws Exception {
-		// user_number 파라미터를 받아 해당 사용자가 팔로우하는 사람의 수를 가져옴
-		int follow_count = service.getfollowings(user_number);
-		System.out.println(user_number + "가 팔로우 하는사람 몇 명? : " + follow_count);
+   // 내가 팔로우한 사람의 수
+   @GetMapping(value = "/follow_count")
+   public String following_count(Model model, @RequestParam int user_number) throws Exception {
+      // user_number 파라미터를 받아 해당 사용자가 팔로우하는 사람의 수를 가져옴
+      int follow_count = service.getfollowings(user_number);
+      System.out.println(user_number + "가 팔로우 하는사람 몇 명? : " + follow_count);
 
-		model.addAttribute("follow_count", follow_count);
+      model.addAttribute("follow_count", follow_count);
 
-		return "follow";// 결과를 follow 페이지에 전달
-	}
+      return "follow";// 결과를 follow 페이지에 전달
+   }
 
-//	내가 팔로우 한 리스트 
-	@GetMapping(value = "/follow_list")
-	public String follow_list(Model model, @RequestParam int user_number) throws Exception {
+//   내가 팔로우 한 리스트 
+   @GetMapping(value = "/follow_list")
+   public String follow_list(Model model, @RequestParam int user_number) throws Exception {
 
-		List<UserFollowDTO> follow_list = service.getfollow_list(user_number);
-		System.out.println("나의 고유번호" + user_number);
-		System.out.println("내가 팔로우 한 리스트 : " + follow_list);
-		model.addAttribute("follow_list", follow_list);
+      List<UserFollowDTO> follow_list = service.getfollow_list(user_number);
+      System.out.println("나의 고유번호" + user_number);
+      System.out.println("내가 팔로우 한 리스트 follow_list : " + follow_list);
+      model.addAttribute("follow_list", follow_list);
 
-		return "follow";
-	}
+      return "follow";
+   }
 
-	// 나를 팔로잉한 사람의 수
-	@GetMapping(value = "/following_count")
-	private String follow_count(Model model, @RequestParam int user_number) throws Exception {
-		int following_count = service.getfollowers(user_number);
-		System.out.println(user_number + "를 팔로우 하는사람 몇 명? : " + following_count);
+   // 나를 팔로잉한 사람의 수
+   @GetMapping(value = "/following_count")
+   private String follow_count(Model model, @RequestParam int user_number) throws Exception {
+      int following_count = service.getfollowers(user_number);
+      System.out.println(user_number + "를 팔로우 하는사람 몇 명? : " + following_count);
 
-		model.addAttribute("following_count", following_count);
+      model.addAttribute("following_count", following_count);
 
-		return "follow";
-	}
-	
+      return "follow";
+   }
+   
 
-//	나를 팔로잉 한 인간 리스트 
-	@GetMapping(value = "/following_list")
-	public String following_list(Model model, @RequestParam int user_number) throws Exception {
+//   나를 팔로잉 한 인간 리스트 
+   @GetMapping(value = "/following_list")
+   public String following_list(Model model, @RequestParam int user_number) throws Exception {
 
-		List<UserFollowDTO> following_list = service.getfollowing_list(user_number);
-		System.out.println("나의 고유번호" + user_number);
-		System.out.println("나를 팔로잉 한 리스트 : " + following_list);
-		model.addAttribute("following_list", following_list);
+      List<UserFollowDTO> following_list = service.getfollowing_list(user_number);
+      System.out.println("나의 고유번호" + user_number);
+      System.out.println("나를 팔로잉 한 리스트 following_list : " + following_list);
+      model.addAttribute("following_list", following_list);
 
-		return "follow";
-	}
+      return "follow";
+   }
 
     // JSON 데이터 반환
     @GetMapping(value = "/follow_list_json")

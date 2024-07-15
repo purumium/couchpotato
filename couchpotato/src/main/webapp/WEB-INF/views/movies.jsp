@@ -24,20 +24,27 @@
 					}
 				});
 	}
+	
+	document.addEventListener("DOMContentLoaded", function() {
+	    var overviews = document.querySelectorAll('.overview');
+	    overviews.forEach(function(overview) {
+	        var fullText = overview.innerText;
+	        var maxLength = 250; // 최대 텍스트 길이
+
+	        if (fullText.length > maxLength) {
+	            var truncatedText = fullText.substring(0, maxLength);
+	            overview.innerText = truncatedText + '...';
+	        }
+	    });
+	});
+	
+	
 </script>
 </head>
 <body>
+	<%@ include file="common/header.jsp" %>
+	
 	<div class="container">
-		<h2>Movies List</h2>
-
-		<form action="${pageContext.request.contextPath}/movies" method="get"
-			class="search-form">
-			<input type="text" name="query" class="search-input"
-				value="${param.query}" placeholder="Enter movie title..."> <input
-				type="hidden" name="page" value="1">
-			<!-- hidden input field for page number -->
-			<button type="submit" class="search-button">Search</button>
-		</form>
 
 		<!-- Filter buttons -->
 		<div class="filter-buttons">
@@ -52,24 +59,39 @@
 		<table>
 			<thead>
 				<tr>
-					<th></th>
-					<th>Title</th>
-					<th>Type</th>
-					<th>Overview</th>
+					<th>포스터</th>
+					<th>콘텐츠명</th>
+					<th>유형</th>
+					<th>줄거리</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${movies}" var="mm">
 					<c:if test="${not mm.mediatype.equals('person')}">
 						<tr>
-							<td><img
-								src="https://image.tmdb.org/t/p/w200/${mm.posterpath}"
-								style="height: 150px;" alt="Poster"></td>
-							<td><a
-								href="${pageContext.request.contextPath}/movie/detail/${mm.mediatype}/${mm.id}">
-									${mm.mediatype.equals('tv') ? mm.name : mm.title} </a></td>
+							<td>
+							<c:choose>
+	                            <c:when test="${mm.posterpath != null && not empty mm.posterpath}">
+	                                    <img src="https://image.tmdb.org/t/p/w200/${mm.posterpath}" style="height: 150px;" alt="Poster">
+	                                </c:when>
+	                                <c:otherwise>
+	                                    <img src="${pageContext.request.contextPath}/resources/images/noimg.png" style="height: 150px;" alt="Poster">
+	                                </c:otherwise>
+	                            </c:choose>
+							
+							
+<!-- 								<img -->
+<%-- 									src="https://image.tmdb.org/t/p/w200/${mm.posterpath}" --%>
+<!-- 									style="height: 140px;" alt="Poster"> -->
+							</td>
+							<td>
+								<a
+									href="${pageContext.request.contextPath}/movie/detail/${mm.mediatype}/${mm.id}">
+									${mm.mediatype.equals('tv') ? mm.name : mm.title} </a>
+								<span class="type">${mm.mediatype}</span>
+							</td>
 							<td>${mm.mediatype}</td>
-							<td>${mm.overview}</td>
+							<td class="overview">${mm.overview}</td>
 						</tr>
 					</c:if>
 				</c:forEach>

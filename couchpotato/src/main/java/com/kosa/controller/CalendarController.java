@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosa.dao.CalendarMapper;
 import com.kosa.dto.CalendarDTO;
+import com.kosa.dto.MemberDTO;
 import com.kosa.service.CalendarService;
 
 @Controller
@@ -31,7 +35,7 @@ public class CalendarController {
 	
 	// 캘린더를 띄웠을 때의 첫 화면: 리뷰 총 개수, 이름, 날짜별로 작성한 리뷰 개수 
 	@GetMapping("/calendar")
-	public String viewCalendar(Model model) {
+	public String viewCalendar(HttpServletRequest request, MemberDTO member, Model model) {		
 		// 1. 내가 review를 작성한 것이 총 몇 개인지와 유저 이름에 대한 정보
 		Map<String, Object> totalReviews = calendarService.getTotalReviewsByUser(userId);
 		
@@ -69,8 +73,8 @@ public class CalendarController {
 		
 	    List<CalendarDTO> calendarlist = calendarService.getContentDetailByDate(calDto);
 	    
+		System.out.println("------- 가져온 날짜별 상세 정보 -----");
 	    for (CalendarDTO c : calendarlist) {
-			System.out.println("가져온 날짜별 상세 정보 -----");
 			System.out.println(c.getContent_name()+ ", " + c.getRating());
 		}
 	    

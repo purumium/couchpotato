@@ -1,10 +1,12 @@
 package com.kosa.service;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.kosa.dao.FollowMapper;
 import com.kosa.dto.UserFollowDTO;
@@ -110,10 +112,14 @@ public class FollowServiceImpl implements FollowService {
             follow = mapper.follow(ufdto);
         } catch (Exception e) {
             log.info(e.getMessage());
-            throw e;
+            if (e.getCause() instanceof SQLIntegrityConstraintViolationException) {
+                throw new ResponseStatusException(HttpStatus.CONFLICT, "이미 팔로우 한 사용자입니다.");
+            }
+            throw e; // 다른 예외는 그대로 던짐
         }
         return follow;
     }
+    
 
     // 언팔로우
     @Override

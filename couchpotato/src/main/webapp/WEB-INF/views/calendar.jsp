@@ -20,7 +20,8 @@
     <div class="calendar-container">
     
     		<!-- 왼쪽 -->
-    		<div class="left-calendar"> 
+    		<div class="left-content">
+	    		<div class="left-calendar"> 
 	    			<!-- 이름, 이미지 -->
 	    			<div class="profile-section">
 	    					<img src="/resources/images/gamja_profile.png" alt="profile image" class="profile-img">
@@ -29,34 +30,12 @@
 	    		
 	    			<!-- 각종 클릭 버튼 -->
 				    <div class="buttons-section">	
-				    	 <div class="button-row">
-					    		<!--  1 -->
-					    		<div class="circle-btn">
-					    			<a href="/follwer">0</a>
-					    			<span>팔로워</span>
-					    		</div>
-								
-								<!-- 2 -->
-								<div class="circle-btn">
-									<a href="/following">0</a>
-					    			<span>팔로잉</span>
-								</div>
-		
-					    		<!-- 3 -->
-					    		<div class="circle-btn" onclick="location.href='/usersearch'" id="user-btn">
-					    			<div>
-					    				<img src="/resources/images/usersearch.png" width="25px" alt="user-search">
-					    			</div>
-					    			<span>사용자 검색</span>
-					    		</div>
-								
-								<!-- 4 -->
-								<div class="circle-btn" id="reviewlist-btn">
-									<a href="/myreviewlistbymonth"> ${totalReviews.TOTAL_REVIEWS} </a>
-					    			<span>리뷰 리스트</span>
-								</div>
+			    		<div class="circle-btn" id="reviewlist-btn">
+							<a href="/myreviewlistbymonth"> ${totalReviews.TOTAL_REVIEWS} </a>
+			    			<span>REVIEWLIST</span>
 						</div>
 				    </div>
+			    </div>
 		    </div>
 		    
 		    
@@ -139,19 +118,23 @@
                 var resultHtml = '';
                 var review_date = ''; 
                 
-                console.log("가져온 데이터");
-                console.log(detailData);
                 
                 // 조건: 해당 날짜에 데이터가 있는 경우에는 모달에 출력해주고, 데이터가 없을 경우 모달 숨기기 
                 if (detailData.length > 0) {
-                    detailData.forEach(function(data) {  // 반복문                    
+                    detailData.forEach(function(data) {  // 반복문          
+                    	var reviewCountView = data.review_count_byname >= 2 ? '' : 'style="display: none;"';
+                    	
                         resultHtml +=
                             '<div class="review-item">' +
                                 '<img src="https://image.tmdb.org/t/p/w300/' + data.content_image_url +  ' alt="Movie Thumbnail" class="review-img">' +
                                 '<div class="review-contents">' +
                                     '<div class="review-title-rate">' + 
                                         '<div class="review-title">' + data.content_name + '</div>' +
-                                        '<div class="review-rating">' + data.rating + '</div>' +
+                                        '<div class="review-rating"> <img src="resources/images/rating_star.png" width="8px;">' 
+	                                        + data.rating + 
+                                        '</div>' +
+                                        '<div class="review-count"' + reviewCountView + '> <img src="/resources/images/glass.png">' 
+                                        	+  data.review_count_byname + '회차 </div>' +
                                     '</div>'+
                                     '<div class="review-text">' + data.review_text + '</div>' +          
                                 '</div>' +
@@ -159,8 +142,13 @@
                                     '<div class="button-group">' +
                                         ' <button class="edit-btn" onclick="openEditModal(\''
                                             + data.content_name + '\', \'' +  data.review_create_at 
-                                            + '\', \'' + data.review_text + '\', \'' + data.rating + '\')">수정</button>' +
-                                        '<button class="delete-btn" onclick="deleteReview(\'' + data.content_name + '\', \'' + data.review_create_at + '\')">삭제</button>' +
+                                            + '\', \'' + data.review_text + '\', \'' + data.rating 
+                                            + '\', \'' + data.content_id + '\', \'' + data.content_type
+                                            + '\')">수정</button>' +
+                                        '<button class="delete-btn" onclick="deleteReview(\'' 
+                                        	+ data.content_id + '\', \'' + data.content_type
+                                        	+ '\', \'' + data.review_create_at 
+                                        	+ '\')">삭제</button>' +
                                     '</div>' +
                                     '<div class="review-time">' + data.review_create_at + '</div>' +
                                 '</div>' +
@@ -192,12 +180,16 @@
     }
     
     
-    function deleteReview(contentName, reviewCreateAt) {    
+    function deleteReview(contentId, contentType, reviewCreateAt) {    
     	// JavaScript 객체
     	const obj = {  
-						content_name: contentName,
+						content_id: contentId,
+						content_type: contentType,
 						review_create_at: reviewCreateAt
 					}
+    	
+    	console.log(obj)
+    	
     	$.ajax({
     		url: '/deletereview',  // 삭제 요청을 보낼 url
     		type: 'POST',  // 요청 방식
@@ -216,12 +208,14 @@
     }
     
     
-    
-    function openEditModal(contentName, reviewCreateAt, reviewText, rating) {
+    function openEditModal(contentName, reviewCreateAt, reviewText, rating, contentId, contentType) {
+    	$('#edit_content_id').val(contentId);
+    	$('#edit_content_type').val(contentType);
+        $('#edit_review_create_at').text(reviewCreateAt);
     	$('#edit_content_name').text(contentName);
         $('#edit_review_text').val(reviewText);
-        $('#edit_review_create_at').val(reviewCreateAt);
         $('#edit_rating').val(rating);
+        
         $('#editModal').css('display', 'block');
     }
     
@@ -230,18 +224,23 @@
     function submitModifiedReview(event) {
     	event.preventDefault(); // 기본 폼 제출 방지
     	
-    	const contentName = $('#edit_content_name').text();
+    	const contentId = $('#edit_content_id').val();
+    	const contentType = $('#edit_content_type').val();
     	const reviewText = $('#edit_review_text').val();
-    	const reviewCreateAt = $('#edit_review_create_at').val();
-    	const rating  = $('#edit_rating').val();
+    	const reviewCreateAt = $('#edit_review_create_at').text();
+    	const rating = $('#edit_rating').val();   	
     	
     	// 폼 데이터를 담을 자바스크립트 객체 생성
     	const modifiedData = {
-    			content_name: contentName,
+    			content_id: contentId,
+    			content_type: contentType,
     			review_text: reviewText,
     			review_create_at: reviewCreateAt,
     			rating: rating
     	};
+    	
+    	console.log("제출하는 중 --- ");
+    	console.log(modifiedData);
     	
     	$.ajax({
     		url: '/modifyreview',
