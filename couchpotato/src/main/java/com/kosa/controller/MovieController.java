@@ -60,7 +60,6 @@ public class MovieController {
                                   Model model,
                                   HttpSession session) {
     	MemberDTO loginMember = (MemberDTO) session.getAttribute("member");
-    	System.out.println(loginMember);
     	
     	
     	if(loginMember!=null) {
@@ -71,7 +70,7 @@ public class MovieController {
     		model.addAttribute("loginMemberId", "null");
     		model.addAttribute("user_number",-1);
     	}
-    	model.addAttribute("loginMember", loginMember);
+    	model.addAttribute("member", loginMember);
     	
     	String result = "";
     	try {
@@ -87,19 +86,23 @@ public class MovieController {
 
             
 
-            Elements divs = doc.select("div.text"); // class가 'text'인 모든 div 요소를 선택
+            Elements divs = doc.select("div.ott_offer"); // class가 'text'인 모든 div 요소를 선택
 //            String stringToRemove = "Now Streaming on ";
             String stringToRemove = "의 지금 스트리밍 중";
             
-            for (Element div : divs) {
-                Elements links = div.select("a"); // div 내부의 모든 a 태그를 선택
-                for (Element link : links) {
-                    String title = link.attr("title"); // a 태그의 title 속성을 가져옴
-                    result = title.replace(stringToRemove, "");
-                    
+            if (divs.isEmpty()) {
+            	result = "";
+            } else {
+            	for (Element div : divs) {
+                    Elements links = div.select("a"); // div 내부의 모든 a 태그를 선택
+                    for (Element link : links) {
+                        String title = link.attr("title"); // a 태그의 title 속성을 가져옴
+                        result = title.replace(stringToRemove, "");
+                        
+                    }
                 }
             }
-            System.out.println(result);
+            
             model.addAttribute("ott",result);
             
             //리뷰 불러오기
