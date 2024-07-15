@@ -28,6 +28,7 @@
 .hidden {
 	display: none;
 }
+
 .reviewFilter {
 	text-align: center;
 	background-color: #f9f9f9fa;
@@ -41,10 +42,10 @@
 	transition: background-color 0.3s;
 	padding: 10px 4px;
 }
-.reviewFilter:hover{
-background-color: #d8d6cabd;
-}
 
+.reviewFilter:hover {
+	background-color: #d8d6cabd;
+}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -304,6 +305,48 @@ function refreshDiv(divId) {
 							width="14px"> <span>리뷰 작성</span>
 					</button>
 				</div>
+				<div class="season-container" style="display: none;">
+					<div class="season-content">
+						<ul id="seasonList">
+							<%
+								for (Map<String, Object> season : seasons) {
+							%>
+							<li class="season-item">
+								<%
+									String seasonPosterPath = (String) season.get("poster_path");
+												if (seasonPosterPath != null && !seasonPosterPath.isEmpty()) {
+								%> <img src="https://image.tmdb.org/t/p/w500/<%=seasonPosterPath%>"
+								alt="Poster"> <%
+ 	} else {
+ %> <img src="<%=request.getContextPath()%>/resources/images/noimg.png"
+								alt="Poster"> <%
+ 	}
+ %>
+
+								<div class="items">
+									<div class="item">
+										<span>시즌 이름</span> <span><%=season.get("name")%> </span>
+									</div>
+									<div class="item">
+										<span>방영일</span> <span><%=season.get("air_date") != null ? season.get("air_date") : "미정"%>
+										</span>
+									</div>
+									<div class="item">
+										<span>에피소드 수</span> <span><%=season.get("episode_count")%>
+										</span>
+									</div>
+									<div class="item">
+										<span>평균 평점</span> <span><%=season.get("vote_average")%>
+										</span>
+									</div>
+								</div>
+							</li>
+							<%
+								}
+							%>
+						</ul>
+					</div>
+				</div>
 				<%
 					} else {
 				%>
@@ -319,63 +362,21 @@ function refreshDiv(divId) {
 	</div>
 
 
-	<div class="season-container" style="display: none;">
-		<div class="season-content">
-			<ul id="seasonList">
-				<%
-					for (Map<String, Object> season : seasons) {
-				%>
-				<li class="season-item">
-					<%
-						String seasonPosterPath = (String) season.get("poster_path");
-								if (seasonPosterPath != null && !seasonPosterPath.isEmpty()) {
-					%> <img src="https://image.tmdb.org/t/p/w500/<%=seasonPosterPath%>"
-					alt="Poster"> <%
- 	} else {
- %> <img src="<%=request.getContextPath()%>/resources/images/noimg.png"
-					alt="Poster"> <%
- 	}
- %>
-
-					<div class="items">
-						<div class="item">
-							<span>시즌 이름</span> <span><%=season.get("name")%> </span>
-						</div>
-						<div class="item">
-							<span>방영일</span> <span><%=season.get("air_date") != null ? season.get("air_date") : "미정"%>
-							</span>
-						</div>
-						<div class="item">
-							<span>에피소드 수</span> <span><%=season.get("episode_count")%>
-							</span>
-						</div>
-						<div class="item">
-							<span>평균 평점</span> <span><%=season.get("vote_average")%> </span>
-						</div>
-					</div>
-				</li>
-				<%
-					}
-				%>
-			</ul>
-		</div>
-	</div>
-
-	<div class="total-container">
+<div id="refresh">
+<c:if test="${not empty selectreviews}">
+	<div class="total-container" >
 		<c:if test="${loginMemberId != 'null'}">
-			<div class="container2"> 
-			<button id="reset-button"
-				class="default-btn reviewFilter "
-				style="width: 100px">전체 리뷰</button>
-			<button id="filter-button"
-				class="filter-btn  reviewFilter"
-				style="width: 100px">내 리뷰</button>
-</div>
+			<div class="container2">
+				<button id="reset-button" class="default-btn reviewFilter "
+					style="width: 100px">전체 리뷰</button>
+				<button id="filter-button" class="filter-btn  reviewFilter"
+					style="width: 100px">내 리뷰</button>
+			</div>
 
 		</c:if>
 
-		<div id="refresh">
-			<c:if test="${not empty selectreviews}">
+		<div >
+			
 				<div class="container2">
 					<c:forEach var="review" items="${selectreviews}">
 						<div id="modal-body" class="modal-body">
@@ -392,10 +393,11 @@ function refreshDiv(divId) {
 						</div>
 					</c:forEach>
 				</div>
-			</c:if>
+			
 		</div>
 	</div>
-
+</c:if>
+</div>
 
 	<div id="myModal" class="modal">
 		<div class="modal-content">
