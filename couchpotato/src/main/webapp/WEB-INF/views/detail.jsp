@@ -28,6 +28,23 @@
 .hidden {
 	display: none;
 }
+.reviewFilter {
+	text-align: center;
+	background-color: #f9f9f9fa;
+	border: 1px solid #c0bbbbad;
+	border-radius: 12px;
+	cursor: pointer;
+	letter-spacing: 0px;
+	font-size: 13px;
+	color: #211818;
+	font-weight: bold;
+	transition: background-color 0.3s;
+	padding: 10px 4px;
+}
+.reviewFilter:hover{
+background-color: #d8d6cabd;
+}
+
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -346,15 +363,15 @@ function refreshDiv(divId) {
 
 	<div class="total-container">
 		<c:if test="${loginMemberId != 'null'}">
-			<div class="container2">
-				<button id="reset-button"
-					class="default-btn filter-btn w3-button w3-block w3-black w3-ripple w3-margin-top w3-round"
-					style="width: 100px">전체 리뷰</button>
-				<button id="filter-button"
-					class="filter-btn w3-button w3-block w3-black w3-ripple w3-margin-top w3-round"
-					style="width: 100px">내 리뷰</button>
+			<div class="container2"> 
+			<button id="reset-button"
+				class="default-btn reviewFilter "
+				style="width: 100px">전체 리뷰</button>
+			<button id="filter-button"
+				class="filter-btn  reviewFilter"
+				style="width: 100px">내 리뷰</button>
+</div>
 
-			</div>
 		</c:if>
 
 		<div id="refresh">
