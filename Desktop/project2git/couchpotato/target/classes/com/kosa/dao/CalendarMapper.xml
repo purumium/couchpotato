@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+       "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kosa.dao.CalendarMapper"> 
+
+	<!-- 사용자의 리뷰 전체 리스트 개수 -->
+	<select id="getTotalReviewsByUser" parameterType="String" resultType="map">
+		SELECT 
+			u.username AS username, COUNT(*) AS total_reviews
+		FROM 
+			reviews r JOIN users u
+		ON 
+			r.user_number = u.user_number
+		WHERE 
+			u.user_id = #{userId}
+	    GROUP BY
+       		u.username
+	</select>
+
+
+	<!-- 각 날짜별 리뷰 개수, 리뷰 생성 날짜 -->
+	<select id="getReviewByDate" parameterType="String" resultType="map">
+		SELECT 
+			TO_CHAR(r.review_create_at, 'YYYY-MM-DD') AS review_create_at,
+			COUNT(*) AS review_total_count
+		FROM 
+			reviews r JOIN users u
+		ON 
+			r.user_number = u.user_number
+		WHERE 
+			u.user_id = #{userId}
+		GROUP BY 
+			TO_CHAR(r.review_create_at, 'YYYY-MM-DD')
+	</select>	
+	
+	<!-- 월별로 전체 목록 가져오기 -->
+	<select id="getAllReviewListByMonth" parameterType="String" resultType="CalendarDTO">	    
+		SELECT 
+			to_char(r.review_create_at, 'YYYY-MM') AS review_month,
+			r.content_name, 
+			r.review_text, 
+			r.rating, 
+			r.content_image_url, 
+			TO_CHAR(r.review_create_at, 'YYYY-MM-DD') AS review_create_at
+		FROM 
+			reviews r JOIN users u
+		ON 
+			r.user_number = u.user_number
+		WHERE 
+			u.user_id = #{userId}
+		ORDER BY 
+			review_month desc, r.review_create_at asc
+	</select>
+	
+	
+	<!-- 날짜별로 영화 상세 리스트 -->
+	<select id="getContentDetailByDateOld" parameterType="CalendarDTO" resultType="CalendarDTO">
+	    SELECT
+	        r.content_id, 
+	        r.content_name, 
+	        r.content_type, 
+	        r.review_text, 
+	        r.rating, 
+	        r.content_image_url, 
+	        TO_CHAR(r.review_create_at, 'YYYY-MM-DD') AS review_create_at
+	    FROM 
+	        reviews r JOIN users u
+	    ON 
+	        r.user_number = u.user_number
+	    WHERE 
+	        u.user_id = #{user_id}
+	    AND
+	        TO_CHAR(r.review_create_at, 'YYYY-MM-DD') = #{review_create_at}
+	</select>	
+	
+
+	<!--  날짜별로 영화 상세 리스트, 재관람 개수까지 확인함 -->
+	<select id="getContentDetailByDate" parameterType="CalendarDTO" resultType="CalendarDTO">
+		SELECT
+		    r.content_id,
+		    r.content_name,
+		    r.content_type,
+		    r.review_text,
+		    r.rating,
+		    r.content_image_url,
+		    TO_CHAR(r.review_create_at, 'YYYY-MM-DD') AS review_create_at,
+	        ( SELECT    
+	        	COUNT(*)
+	          FROM 
+	          	reviews r2
+	          WHERE 
+	            r2.content_name = r.content_name
+              AND
+                r2.user_number = r.user_number
+            ) AS review_count_byname
+		FROM 
+		    reviews r
+		JOIN 
+		    users u ON r.user_number = u.user_number
+		WHERE 
+		    u.user_id = #{user_id}
+		AND 
+		    TO_CHAR(r.review_create_at, 'YYYY-MM-DD') = #{review_create_at}
+	</select>
+	
+	
+	<!-- 리뷰 삭제하기 -->
+	<delete id="deleteReview" parameterType="map">
+		DELETE 
+		FROM 
+			reviews r 
+		WHERE EXISTS (
+			SELECT 1
+			FROM
+				users u
+			WHERE 
+				r.user_number = u.user_number
+			AND
+				u.user_id = #{user_id}
+		)	
+		AND 
+			r.content_id = #{content_id} 
+		AND 
+			r.content_type = #{content_type} 
+		AND
+        	TO_CHAR(r.review_create_at, 'YYYY-MM-DD') = #{review_create_at}
+	</delete>
+	
+	
+	<!-- 리뷰 업데이트 -->
+	<update id="modifyReview" parameterType="CalendarDTO">
+		UPDATE 
+			reviews r
+		SET
+			r.review_text = #{review_text}, 
+			r.rating = #{rating}
+		WHERE EXISTS ( <!-- users 테이블과 조인, user_id를 특정하여 해당 레코드만 선택 -->
+			SELECT 1
+			FROM
+				users u
+			WHERE 
+				r.user_number = u.user_number
+			AND
+				u.user_id = #{user_id}
+		)
+		AND 
+			r.content_id = #{content_id} 
+		AND 
+			r.content_type = #{content_type} 
+		AND
+        	TO_CHAR(r.review_create_at, 'YYYY-MM-DD') = #{review_create_at}
+	</update>
+		
+	
+</mapper>

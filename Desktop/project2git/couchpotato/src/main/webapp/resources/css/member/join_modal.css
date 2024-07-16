@@ -1,0 +1,184 @@
+/* 회원가입 모달 배경 */
+.join-modal {
+    display: none; /* 초기에는 보이지 않도록 설정 */
+    position: fixed; /* 고정 위치 */
+    z-index: 1; /* 다른 요소들보다 위에 표시 */
+    left: 0;
+    top: 0;
+    width: 100%; /* 전체 너비 */
+    height: 100%; /* 전체 높이 */
+    overflow: auto; /* 스크롤이 필요할 경우 자동으로 생성 */
+    background-color: rgba(0, 0, 0, 0.4); /* 반투명 검정 배경 */
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+}
+
+/* 회원가입 모달 컨텐츠 */
+.join-modal .modal-content {
+    background-color: #fefefe; /* 흰색 배경 */
+    padding: 30px 20px; /* 내부 여백 */
+    border: 1px solid #888; /* 회색 테두리 */
+    width: 74%; /* 컨텐츠 너비를 80%로 설정 */
+    max-width: 400px; /* 최대 너비를 500px로 설정 */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* 그림자 효과 */
+    border-radius: 10px; /* 모서리를 둥글게 */
+    position: relative; /* 닫기 버튼을 절대 위치로 설정하기 위해 필요 */
+    text-align: center; /* 텍스트를 중앙 정렬 */
+}
+
+/* 회원가입 모달 닫기 버튼 */
+.join-modal .close {
+    color: #aaa; /* 회색 텍스트 */
+    float: right;
+    font-size: 28px; /* 폰트 크기 */
+    font-weight: bold; /* 굵은 폰트 */
+}
+
+.join-modal .close:hover,
+.join-modal .close:focus {
+    color: black; /* 마우스 오버 또는 포커스 시 검정색 */
+    text-decoration: none; /* 밑줄 제거 */
+    cursor: pointer; /* 커서 변경 */
+}
+
+/* 회원가입 모달 입력 유효성 검사 문구 */
+.join-modal .id_input_re_1,
+.join-modal .id_input_re_2,
+.join-modal .email_input_re_1,
+.join-modal .email_input_re_2,
+.join-modal .final_id_ck,
+.join-modal .final_pw_ck,
+.join-modal .final_pwck_ck,
+.join-modal .pwck_input_re_1,
+.join-modal .pwck_input_re_2,
+.join-modal .final_name_ck,
+.join-modal .final_mail_ck,
+.join-modal .final_birth_ck {
+    display: none;
+    margin-top: 5px; /* 위쪽 여백 */
+    font-size: 10px; /* 폰트 크기 */
+    text-align: center; /* 왼쪽 정렬 */
+}
+
+/* 중복 아이디가 없는 경우: 초록색 */
+.join-modal .id_input_re_1 {
+    color: green !important;
+}
+
+/* 중복 아이디가 있는 경우: 빨간색 */
+.join-modal .id_input_re_2 {
+    color: red !important;
+}
+
+/* 중복 이메일 없는 경우: 초록색 */
+.join-modal .email_input_re_1 {
+    color: green !important;
+}
+
+/* 중복 이메일 있는 경우: 빨간색 */
+.join-modal .email_input_re_2 {
+    color: red !important;
+}
+
+/* 비밀번호 확인 일치 유효성검사 */
+.join-modal .pwck_input_re_1 {
+    color: green !important;
+}
+
+.join-modal .pwck_input_re_2 {
+    color: red !important;
+}
+
+/* 회원가입 버튼 스타일 */
+.join-modal .join_button_wrap {
+    text-align: center; /* 텍스트를 중앙 정렬 */
+    margin: 13px 0 12px; /* 위쪽 여백 설정 */
+}
+
+.join-modal .join_button {
+    /* text-align: center; */
+    /* text-decoration: none; */
+    /* display: inline-block; */
+    /* background-color: #fffffffa; */
+    /* border: 1px solid #c0bbbb; */
+    /* padding: 5px 40px; */
+    /* border-radius: 9px; */
+    /* cursor: pointer; */
+    /* letter-spacing: -1px; */
+    /* font-size: 11px; */
+    /* padding: 7px 24px; */ /* 내부 여백 설정 */
+    /* border: none; */ /* 테두리 제거 */
+    /* background-image: linear-gradient(45deg, #c49b66, #8f614e); */ /* 배경 그라디언트 설정 */
+    /* color: white; */ /* 텍스트 색상 설정 */
+    /* border-radius: 50px; */ /* 모서리를 둥글게 설정 */
+    /* cursor: pointer; */ /* 커서 변경 */
+    /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); */ /* 그림자 효과 설정 */
+    /* transition: all 0.3s ease; */ /* 모든 속성에 대한 전환 효과 설정 */
+    /* font-size: 12px; */ /* 폰트 크기 설정 */
+    /* font-weight: bold; */ /* 폰트 굵기 설정 */
+    /* letter-spacing: 0px; */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    background-color: #f4f3f3;
+    border: 2px solid #c0bbbb;
+    padding: 5px 136px;
+    border-radius: 9px;
+    cursor: pointer;
+    letter-spacing: 0px;
+    font-size: 11px;
+}
+
+.join-modal .join_button:hover {
+    background-image: linear-gradient(45deg, #f8f7f7, #e5e0dab8); /* 호버 시 배경 그라디언트 변경 */
+    box-shadow: 0 8px 20px rgb(0 0 0 / 13%); /* 호버 시 그림자 효과 변경 */
+    transform: translateY(-3px); /* 호버 시 위치 변경 */
+}
+
+.join-modal .join_button:active {
+    transform: translateY(-1px); /* 클릭 시 위치 변경 */
+}
+
+/* 중앙 정렬을 위한 스타일 */
+.join-modal .join_id_input,
+.join-modal .join_pw_input,
+.join-modal .pwck_input,
+.join-modal .user_input,
+.join-modal .mail_input,
+.join-modal .birth_input {
+    width: 80%; /* 너비 설정 */
+    margin: 7px auto; /* 중앙 정렬 */
+    padding: 10px 15px; /* 내부 여백 */
+    border: 1px solid #ccc; /* 테두리 색상 */
+    border-radius: 13px; /* 모서리 둥글게 */
+    box-sizing: border-box; /* 박스 크기 설정 */
+    text-align: left; /* 텍스트를 좌측 정렬 */
+    font-size: 12px;
+}
+
+/* 아이디 입력 필드 중앙 정렬 */
+.join-modal .join_id_wrap {
+    width: 100%; /* 너비 설정 */
+    display: flex; /* Flexbox 사용 */
+    flex-direction: column; /* 세로 정렬 */
+    align-items: center; /* 중앙 정렬 */
+}
+
+.subject {
+    display: flex;
+    justify-content: center;
+    /* align-items: stretch; */
+    gap: -2px;
+    align-items: self-end;
+    margin: 19px 0px 25px;
+    border-bottom: 1px solid #b1a9a9;
+    font-weight: bold;
+    padding-bottom: 2px;
+}
+
+.subject span {
+	font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-left: 13px;
+}
