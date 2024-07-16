@@ -5,12 +5,15 @@
 <%@ page import="java.io.IOException"%>
 <%@ page import="com.fasterxml.jackson.core.type.TypeReference"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <!DOCTYPE html>
 <html>
 <head>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/detail.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/calendar_modal.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/calendar.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/member/mypage.css">
 <title>TV Show Details</title>
@@ -26,19 +29,17 @@
 }
 
 .reviewFilter {
-    text-align: center;
-    background-color: #f9f9f9fa;
-    border: 1px solid #c0bbbbad;
-    border-radius: 12px;
-    cursor: pointer;
-    letter-spacing: 0px;
-    font-size: 13px;
-    color: #211818;
-    font-weight: bold;
-    letter-spacing: 1px;
-    transition: background-color 0.3s;
-    padding: 9px 37px;
-    width: 150px;
+	text-align: center;
+	background-color: #f9f9f9fa;
+	border: 1px solid #c0bbbbad;
+	border-radius: 12px;
+	cursor: pointer;
+	letter-spacing: 0px;
+	font-size: 13px;
+	color: #211818;
+	font-weight: bold;
+	transition: background-color 0.3s;
+	padding: 10px 4px;
 }
 
 .reviewFilter:hover {
@@ -60,6 +61,24 @@ function refreshDiv(divId) {
             } else {
                 console.error('Failed to refresh div');
             }
+            $(document).ready(function() {
+                $('#filter-button').click(function() {
+                    $('.modal-body').each(function() {
+                    	var useridFromServer = document.getElementById('userIdContainer').getAttribute('data-userid');
+                        var userIdText = $(this).find('.user-id').text().trim();
+                        // 'userId: '를 제거하고 실제 userId 값만 추출
+                        var userId = userIdText.replace('userId: ', '').trim();
+                        if (userId !== useridFromServer) {
+                            $(this).addClass('hidden');
+                        } else {
+                            $(this).removeClass('hidden');
+                        }
+                    });
+                });
+                $('#reset-button').click(function() {
+                    $('.modal-body').removeClass('hidden');
+                });
+            });
         })
         .catch(error => console.error('Error:', error));
 }
@@ -152,6 +171,8 @@ function refreshDiv(divId) {
             }
         });
         
+     // JSP에서 followList를 JSON 문자열로 변환하여 JavaScript 변수로 전달
+        var followList = ${followListJson};
       //유저 아이디 필터링	
         $(document).ready(function() {
             $('#filter-button').click(function() {
@@ -170,7 +191,30 @@ function refreshDiv(divId) {
             $('#reset-button').click(function() {
                 $('.modal-body').removeClass('hidden');
             });
+            
+            $('#follow-button').click(function() {
+                // followlist에서 following_id를 배열로 추출
+                var followingIds = followList.map(function(follow) {
+                    return follow.user_id;
+                });
+
+                $('.modal-body').each(function() {
+                	var useridFromServer = document.getElementById('userIdContainer').getAttribute('data-userid');
+                    var userIdText = $(this).find('.user-id').text().trim();
+                    // 'userId: '를 제거하고 실제 userId 값만 추출
+                    var userId = userIdText.replace('userId: ', '').trim();
+                    // followingIds에 포함된 사용자 ID와 일치하는지 확인
+                    if (followingIds.includes(userId)) {
+                        $(this).removeClass('hidden');
+                    } else {
+                        $(this).addClass('hidden');
+                    }
+                });
+            });
+            
         });
+            
+            
         
         //버튼 클릭 처리
         document.addEventListener("DOMContentLoaded", function() {
@@ -188,12 +232,20 @@ function refreshDiv(divId) {
                 });
             });
         });
-       
     </script>
 <style>
 </style>
 </head>
 <body>
+
+
+
+<h1>test</h1>
+<p>${follow_list}</p>
+<c:forEach var="list" items="${follow_list}">
+<p>${list.user_id}
+</p>
+</c:forEach>
 	<%@ include file="common/header.jsp"%>
 
 	<div id="userIdContainer" data-userid="${loginMemberId}"
@@ -370,8 +422,12 @@ function refreshDiv(divId) {
 			<div class="total-container">
 				<c:if test="${loginMemberId != 'null'}">
 					<div class="container2">
-						<button id="reset-button" class="default-btn reviewFilter ">전체 리뷰</button>
-						<button id="filter-button" class="filter-btn  reviewFilter">내 리뷰</button>
+						<button id="reset-button" class="default-btn reviewFilter "
+							style="width: 100px">전체 리뷰</button>
+						<button id="filter-button" class="filter-btn  reviewFilter"
+							style="width: 100px">내 리뷰</button>
+						<button id="follow-button" class="follow-btn reviewFilter "
+							style="width: 100px">팔로워 리뷰</button>
 					</div>
 
 				</c:if>
@@ -388,7 +444,7 @@ function refreshDiv(divId) {
 											<div class="review-title user-id" style="font-size: 16px">${review.userId}</div>
 											<div class="review-rating">${review.rating}</div>
 										</div>
-										<div class="review-text">${review.reviewContent}</div>
+										<div class="review-text" style="font-size: 14px">${review.reviewContent}</div>
 									</div>
 								</div>
 							</div>
@@ -400,8 +456,8 @@ function refreshDiv(divId) {
 		</c:if>
 	</div>
 
-	<div id="myModal" class="detail-modal">
-		<div class="detail-modal-content">
+	<div id="myModal" class="modal">
+		<div class="modal-content">
 			<div class="title">
 				<img src="<%=request.getContextPath()%>/resources/images/modify.png"
 					width="25px;"> <span>REGISTER REVIEW</span>
@@ -430,10 +486,7 @@ function refreshDiv(divId) {
 						<textarea id="review4" name="review3" required><%=mediatype%></textarea>
 					</div>
 					<div class="form-group">
-						<label for="review"> <img
-							src="<%=request.getContextPath()%>/resources/images/reviewregister.png"
-							width="10px;"> 별점
-						</label>
+						<label>별점</label>
 						<div class="starpoint_wrap">
 							<div class="starpoint_box">
 								<label for="starpoint_1" class="label_star" title="0.5"><span
