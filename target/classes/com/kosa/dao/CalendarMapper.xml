@@ -90,13 +90,15 @@
 	          	reviews r2
 	          WHERE 
 	            r2.content_name = r.content_name
+              AND
+                r2.user_number = u.user_number
             ) AS review_count_byname
 		FROM 
 		    reviews r
 		JOIN 
 		    users u ON r.user_number = u.user_number
 		WHERE 
-		    u.user_id = #{user_id}
+		    r.user_id = #{user_id}
 		AND 
 		    TO_CHAR(r.review_create_at, 'YYYY-MM-DD') = #{review_create_at}
 	</select>

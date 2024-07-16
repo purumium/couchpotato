@@ -24,6 +24,5 @@ public interface CalendarService {
 
 	// getAllReviewListByMonth
 	public Map<String, List<CalendarDTO>> getAllReviewListByMonth(String userId);
-
 	
 }
