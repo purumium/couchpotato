@@ -1,8 +1,0 @@
--- 사용자 생성
-CREATE USER couchpotato IDENTIFIED BY couchpotato;
-
--- 테이블스페이스 할당 및 권한 부여
-ALTER USER couchpotato DEFAULT TABLESPACE users QUOTA UNLIMITED ON users;
-
--- 권한 부여
-GRANT RESOURCE, CONNECT, CREATE SESSION, CREATE TABLE TO couchpotato;
