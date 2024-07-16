@@ -237,15 +237,6 @@ function refreshDiv(divId) {
 </style>
 </head>
 <body>
-
-
-
-<h1>test</h1>
-<p>${follow_list}</p>
-<c:forEach var="list" items="${follow_list}">
-<p>${list.user_id}
-</p>
-</c:forEach>
 	<%@ include file="common/header.jsp"%>
 
 	<div id="userIdContainer" data-userid="${loginMemberId}"
