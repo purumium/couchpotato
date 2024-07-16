@@ -6,9 +6,9 @@
     <div class="modal-content">
         <span class="close">&times;</span>
         <div class="wrapper">
-            <form id="login_form" method="post">
+            <form id="login_form" method="post" style="margin-top: 35px;">
                 <div class="logo_wrap">
-                    <img src="${pageContext.request.contextPath}/resources/images/logo_font.png" alt="couchpotato 로그인" class="logo_image">
+                    <img src="${pageContext.request.contextPath}/resources/images/leanonlogo.png" alt="couchpotato 로그인" class="logo_image">
                 </div>
                 <div class="login_wrap">
                     <div class="id_wrap">

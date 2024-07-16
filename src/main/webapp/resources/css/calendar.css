@@ -1,37 +1,32 @@
 @charset "UTF-8";
 
 .calendar-container {
-	display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 30px 25px;
+	padding: 37px 25px;
 }
 
 .left-calendar {
     display: flex;
-    /* flex-direction: column; */
+    gap: 20px;
+    transform: translate(368%, -17%);
+    display: flex;
     align-items: center;
-    gap: 45px;
-    margin-right: 65px;
-    padding: 37px 10px 37px;
-    /* border: 1px solid #80808080; */
-    width: 210px;
-    height: 340px;
-    border-radius: 40px;
 }
 
+
+.left-content {
+    position: absolute;
+    z-index: 2;
+}
+
+
 .profile-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     text-align: center;
 }
 
 .profile-img {
     width: 100%;
-    max-width: 100px;
+    max-width: 63px;
     border-radius: 50%;
-    margin-bottom: 15px;
 }
 
 .prifile-name {
@@ -44,83 +39,87 @@
     text-align: center;
 }
 
+
+.img-name {
+    margin-left: 11px;
+}
+	
+
+
 .buttons-section {
-	/* margin-top: 35px; */
-}
-
-.button-row {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
-}
-
-.button-row div {
-    display: flex;
-    flex-direction: column;
     align-items: center;
 }
 
-.circle-btn a {
+.circle-btn {
+    position: relative;
     display: flex;
-    align-items: center;
     justify-content: center;
-    width: 98px;
-    height: 98px;
+    align-items: center;
+    width: 63px; /* 원의 크기 */
+    height: 63px; /* 원의 크기 */
     border-radius: 50%;
-    letter-spacing: 1px;
-    background-color: #f0f0f09c;
-    font-size: 30px;
-    text-decoration: none;
-    color: #5b5b5b;
-    margin-bottom: 14px;
-    border: 1px solid #8080803d;
+    background-color: #f0f0f0; /* 원의 배경색 */
+    text-align: center;
+    border: 1px solid #80808040;
+    cursor: pointer;
 }
 
-.circle-btn span {
-	/* font-size: 10px; */
-	/* letter-spacing: -1px; */
-	border: 2px solid #80808070;
-	padding: 6px 18px;
-	font-size: 11px;
-	letter-spacing: 1px;
-	border-radius: 16px;
-	width: 100px;
-	text-align: center;
-	/* margin-top: 11px; */
+.circle-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px; /* 글자 크기 */
+    color: #333; /* 글자 색 */
+    font-weight: 700;
+    text-decoration: none; /* 링크 밑줄 제거 */
+    z-index: 1;
 }
 
-.circle-btn a:hover, .circle-btn div:hover  {
-	background-color: #ffec5857;
-    transform: scale(1.04); /* 크기를 1.05배로 키움 */
-    transition: transform 0.2s ease-in-out; /* 변환 효과에 0.3초 동안의 전환을 주고 부드럽게 만듦 */
+.totalreview-count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-1%, -25%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 21px;
+    height: 21px;
+    border-radius: 50%;
+    background-color: #ff0000d4;
+    color: white;
+    font-size: 13px;
+    z-index: 2;
+    letter-spacing: -1px;
 }
 
 .right-calendar {
-    margin-left: 50px;
+   	margin-top: 0px;
+   	position: relative;
+   	z-index: 1;
 }
 
-.left-content {
-    margin-top: 75px;
-}
 
 
 
 #calendar {
-    max-width: 450px; /* 원하는 너비로 설정 */
+    max-width: 710px; /* 원하는 너비로 설정 */
     margin: 0 auto; /* 가운데 정렬 */
 }
 
 .fc-event {
     position: relative !important;
     display: block !important;
-    font-size: 0.8em !important;
-    line-height: 2.3 !important;
+    font-size: 1.3em !important;
+    line-height: 1.9 !important;
     border-radius: 40px !important;
     border: 1px solid #e6d12b !important;
     text-align: center !important;
     background-color: #ffec5857 !important;
-    width: 28px !important;
+    width: 40px !important;
+    /* height: 40px; */
     color: #534848 !important;
     font-weight: bold !important;
     margin: auto !important;
@@ -150,7 +149,7 @@
 }
 
 .fc-toolbar.fc-header-toolbar {
-    margin-bottom: -0.3em !important;
+    margin-bottom: -1.1em !important;
 }
 
 .fc-header-toolbar {
@@ -161,9 +160,9 @@
 }
 
 .fc-left {
-    flex: 1 !important;
+    /* flex: 1 !important; */
     font-size: 21px;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
 }
 
 .fc-right {
@@ -173,7 +172,7 @@
 }
 
 .fc button {
-    font-size: 0.8em !important;
+    font-size: 1.0em !important;
 }
 
 .fc-state-default {
@@ -189,4 +188,8 @@
     color: #333 ! important;
     text-shadow: none ! important;
     box-shadow: none ! important;
+}
+
+.fc-toolbar.fc-footer-toolbar {
+    margin-top: 0.1em !important;
 }

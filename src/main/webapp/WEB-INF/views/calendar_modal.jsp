@@ -17,7 +17,7 @@
 </div>
 
 <!-- 두번째 모달(수정하는 모달) -->
-<div id="editModal" class="modal">
+<div id="editModal" class="edit-modal">
 	<div class="edit-modal-content">
         <div class="editmodal-header">
 			<img src="resources/images/modify.png" width="25px;">        	

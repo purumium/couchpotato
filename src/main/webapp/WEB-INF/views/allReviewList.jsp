@@ -16,7 +16,7 @@
     <div class="reviewlist-main-container">	    
 	    <c:forEach var="month" items="${reviewsByMonth}">
 	    	<div class="review-title">
-		   		<img src="/resources/images/check.png" width="18px">
+		   		<img src="/resources/images/potato_icon.png" width="20px">
 		        <div class="month-title">${month.key}</div> <!-- 월 (YYYY-MM) -->
 	        </div>
 	        

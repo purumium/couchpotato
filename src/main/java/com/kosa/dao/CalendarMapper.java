@@ -13,7 +13,7 @@ public interface CalendarMapper {
 	
 	// getTotalReviewsByUser
 	public Map<String, Object> getTotalReviewsByUser(String userId);
-	
+
 	// getReviewByDate
 	public List<Map<String, Object>> getReviewByDate(String userId);
 	

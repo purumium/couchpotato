@@ -27,18 +27,15 @@ public class CalendarController {
 	@Autowired
 	private CalendarService calendarService;
 
-	
 	// 캘린더를 띄웠을 때의 첫 화면: 리뷰 총 개수, 이름, 날짜별로 작성한 리뷰 개수 
 	@GetMapping("/calendar")
 	public String viewCalendar(Model model, HttpSession session) {
 		MemberDTO loginMember = (MemberDTO)session.getAttribute("member");
-		if (loginMember == null) {
-		        // 세션에 member 속성이 없으면 로그인 페이지로 리다이렉트
+		if (loginMember == null) { // 세션에 member 속성이 없으면 로그인 페이지로 리다이렉트
 		        return "redirect:/";
 		    }
 		
-		String userId = loginMember.getUser_id();
-		
+		String userId = loginMember.getUser_id();		
 		
 		// 1. 내가 review를 작성한 것이 총 몇 개인지와 유저 이름에 대한 정보
 		Map<String, Object> totalReviews = calendarService.getTotalReviewsByUser(userId);
@@ -52,6 +49,7 @@ public class CalendarController {
         
 		return "calendar";  // calendar.jsp로 이동
 	}
+	
 	
 	// 월별로 전체 리뷰를 가지고 옴
 	@GetMapping("/myreviewlistbymonth")
@@ -81,7 +79,7 @@ public class CalendarController {
 	    System.out.println("유저 아이디 : " + userId);
 		System.out.println("------- 가져온 날짜별 상세 정보 -----");
 	    for (CalendarDTO c : calendarlist) {
-			System.out.println(c.getContent_name()+ ", " + c.getRating());
+			System.out.println(c.getContent_name() + ", " + c.getRating() + ", " + c.getReview_count_byname() );
 		}
 	    
 	    return calendarlist; // JSON 형태로 반환됨
