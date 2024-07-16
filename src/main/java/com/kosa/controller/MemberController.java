@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +22,7 @@ import com.kosa.service.MemberService;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/member")
@@ -61,6 +63,7 @@ public class MemberController {
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public void loginGET() {
         logger.info("로그인 페이지 진입");
+        
     }
 
     // 아이디 중복 검사
@@ -103,7 +106,7 @@ public class MemberController {
         String rawPw = member.getPassword();
         if (rawPw == null || rawPw.isEmpty()) {
             rttr.addFlashAttribute("msg", "비밀번호를 입력하세요.");
-            return "redirect:/";
+            return "redirect:/"; // 이전 페이지로 이동 
         }
         String encodePw = "";
 
@@ -116,7 +119,14 @@ public class MemberController {
                 loginVo.setPassword(encodePw); // 인코딩된 비밀번호 정보 저장
                 session.setAttribute("member", loginVo); // session에 사용자의 정보 저장
                 rttr.addFlashAttribute("msg", "환영합니다");
-                return "redirect:/"; // 메인페이지 이동
+                
+                String prevPage = (String) session.getAttribute("prevPage");
+                if (prevPage != null) {
+                	session.removeAttribute("prevPage");
+                	return "redirect:" + prevPage;
+                } else {
+                	return "redirect:/";  // 메인페이지 이동
+                } 
             } else {
                 rttr.addFlashAttribute("msg", "비밀번호가 일치하지 않습니다.");
                 return "redirect:/"; // 메인 페이지 이동
@@ -126,6 +136,17 @@ public class MemberController {
             return "redirect:/"; // 메인 페이지 이동
         }
     }
+    
+    
+    //로그인 할 때 세션에 현재 url 저장하는 메서드 
+    @PostMapping("/storeCurrentUrl")
+    @ResponseBody
+    public void storeCurrentUrl(HttpServletRequest request, @RequestBody Map<String, String> payload) {
+        String currentUrl = payload.get("currentUrl");
+        HttpSession session = request.getSession();
+        session.setAttribute("prevPage", currentUrl);
+    }
+    
 
     // 로그아웃
     @RequestMapping(value = "logout", method = RequestMethod.GET)

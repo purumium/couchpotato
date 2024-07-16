@@ -44,7 +44,16 @@
         var loginSpan = loginModal.getElementsByClassName("close")[0];
 
         loginBtn.onclick = function() {
-            loginModal.style.display = "flex";
+            // 현재 URL을 세션에 저장
+            fetch('/member/storeCurrentUrl', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({currentUrl: window.location.href})
+            }).then(() => {
+                loginModal.style.display = "flex";
+            });
         }
 
         // 로그인 모달 닫기
@@ -68,10 +77,3 @@
     });
 </script>
 
-<c:if test="${not empty msg}">
-    <script>
-        $(document).ready(function() {
-            alert('${msg}');
-        });
-    </script>
-</c:if>
