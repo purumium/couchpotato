@@ -65,6 +65,7 @@ public class MovieController {
 		// 회원 정보 가져오기
 		MemberDTO loginMember = (MemberDTO) session.getAttribute("member");
 		int user_number;
+		System.out.println(loginMember);
 		if (loginMember != null) {
 			model.addAttribute("loginMemberId", loginMember.getUser_id().toString());
 			user_number = reviewService.selectUserNumber(loginMember.getUser_id().toString());
@@ -77,17 +78,19 @@ public class MovieController {
 			// followList를 JSON 문자열로 변환
 	        ObjectMapper objectMapper = new ObjectMapper();
 	        String followListJson = "";
-	        try {
-	            followListJson = objectMapper.writeValueAsString(follow_list);
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
-	        
+	        followListJson = objectMapper.writeValueAsString(follow_list);
 			model.addAttribute("followListJson", followListJson);
+			System.out.println("로그인 한거");
 
-		} else {
+		}else {
+			ObjectMapper objectMapper = new ObjectMapper();
+			String followListJson = "";
+	        followListJson = objectMapper.writeValueAsString("");
+			model.addAttribute("followListJson", followListJson);
+			System.out.println("테스트"+followListJson);
 			model.addAttribute("loginMemberId", "null");
 			model.addAttribute("user_number", -1);
+			System.out.println("로그인 안한거	");
 		}
 		model.addAttribute("member", loginMember);
 
