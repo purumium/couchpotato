@@ -42,3 +42,11 @@
 
 <!-- 회원가입 모달 인클루드 -->
 <jsp:include page="/WEB-INF/views/member/join_modal.jsp"/>
+
+<c:if test="${not empty msg}">
+    <script>
+        $(document).ready(function() {
+            alert('${msg}');
+        });
+    </script>
+</c:if>
