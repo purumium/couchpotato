@@ -12,10 +12,6 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/detail.css">
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/calendar_modal.css">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/calendar.css">
-<link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/member/mypage.css">
 <title>TV Show Details</title>
 <style>
@@ -30,17 +26,19 @@
 }
 
 .reviewFilter {
-	text-align: center;
-	background-color: #f9f9f9fa;
-	border: 1px solid #c0bbbbad;
-	border-radius: 12px;
-	cursor: pointer;
-	letter-spacing: 0px;
-	font-size: 13px;
-	color: #211818;
-	font-weight: bold;
-	transition: background-color 0.3s;
-	padding: 10px 4px;
+    text-align: center;
+    background-color: #f9f9f9fa;
+    border: 1px solid #c0bbbbad;
+    border-radius: 12px;
+    cursor: pointer;
+    letter-spacing: 0px;
+    font-size: 13px;
+    color: #211818;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: background-color 0.3s;
+    padding: 9px 37px;
+    width: 150px;
 }
 
 .reviewFilter:hover {
@@ -372,10 +370,8 @@ function refreshDiv(divId) {
 			<div class="total-container">
 				<c:if test="${loginMemberId != 'null'}">
 					<div class="container2">
-						<button id="reset-button" class="default-btn reviewFilter "
-							style="width: 100px">전체 리뷰</button>
-						<button id="filter-button" class="filter-btn  reviewFilter"
-							style="width: 100px">내 리뷰</button>
+						<button id="reset-button" class="default-btn reviewFilter ">전체 리뷰</button>
+						<button id="filter-button" class="filter-btn  reviewFilter">내 리뷰</button>
 					</div>
 
 				</c:if>
@@ -392,7 +388,7 @@ function refreshDiv(divId) {
 											<div class="review-title user-id" style="font-size: 16px">${review.userId}</div>
 											<div class="review-rating">${review.rating}</div>
 										</div>
-										<div class="review-text" style="font-size: 14px">${review.reviewContent}</div>
+										<div class="review-text">${review.reviewContent}</div>
 									</div>
 								</div>
 							</div>
@@ -404,8 +400,8 @@ function refreshDiv(divId) {
 		</c:if>
 	</div>
 
-	<div id="myModal" class="modal">
-		<div class="modal-content">
+	<div id="myModal" class="detail-modal">
+		<div class="detail-modal-content">
 			<div class="title">
 				<img src="<%=request.getContextPath()%>/resources/images/modify.png"
 					width="25px;"> <span>REGISTER REVIEW</span>
@@ -434,7 +430,10 @@ function refreshDiv(divId) {
 						<textarea id="review4" name="review3" required><%=mediatype%></textarea>
 					</div>
 					<div class="form-group">
-						<label>별점</label>
+						<label for="review"> <img
+							src="<%=request.getContextPath()%>/resources/images/reviewregister.png"
+							width="10px;"> 별점
+						</label>
 						<div class="starpoint_wrap">
 							<div class="starpoint_box">
 								<label for="starpoint_1" class="label_star" title="0.5"><span

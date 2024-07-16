@@ -1,21 +1,21 @@
 
 .reviewlist-main-container {
 	width: 70%;
-    margin: 100px auto 150px;
+	margin: 84px auto 150px;
 }
 
 .review-title {
     display: flex;
     align-items: center;
-    margin: 3px 19px;
+    margin: 6px 13px;
 }
 
 .month-title {
-    letter-spacing: 2px;
-    font-size: 20px;
+    letter-spacing: -2px;
+    font-size: 23px;
     font-weight: bold;
-    padding: 8px 11px;
-    color: #000000ba;
+    padding: 0px 13px;
+    color: #000000c4;
 }
 
 .myreviewlist-logo {
@@ -39,10 +39,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 70px;
-    border-top: 1px solid #b4a9a957;
-    border-bottom: 1px solid #b4a9a957;
-    border-radius: 10px;
+    margin-bottom: 110px;
+    border-top: 1px solid #b4a9a954;
+    /* border: 2px solid #b4a9a929; */
+    /* border-radius: 12px; */
 }
 
 .review-container {

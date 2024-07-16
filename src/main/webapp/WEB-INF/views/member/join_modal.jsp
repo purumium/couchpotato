@@ -8,9 +8,10 @@
         <div class="wrapper">
             <form id="join_form" method="post">
                 <div class="wrap">
-                    <div class="subjecet">
-                        <span>회원가입</span>
-                    </div>
+                    <div class="subject">
+						<img src="${pageContext.request.contextPath}/resources/images/reviewregister.png" width="28px">
+						<span>MEMBER REGISTER</span>
+					</div>
                     <div class="join_id_wrap">
                         <input class="join_id_input" name="user_id" placeholder="아이디">
                         <span class="id_input_re_1">사용 가능한 아이디입니다.</span>

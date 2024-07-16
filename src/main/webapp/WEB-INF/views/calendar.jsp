@@ -5,20 +5,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>my information</title>
-<link rel="stylesheet" href="/resources/css/calendar.css?v=1.0" />
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
-<script src='https://code.jquery.com/jquery-3.5.1.min.js'></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/locale/ko.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
-	
-		<!-- 캐시 제어 설정 -->
+	<meta charset="UTF-8">
+	<title>my information</title>
+	<link rel="stylesheet" href="/resources/css/calendar.css?v=1.0" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+	<script src='https://code.jquery.com/jquery-3.5.1.min.js'></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/locale/ko.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>	
 	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 	<meta http-equiv="Pragma" content="no-cache" />
 	<meta http-equiv="Expires" content="0" />
@@ -33,25 +27,23 @@
 			<div class="left-calendar">
 				<!-- 이름, 이미지 -->
 				<div class="profile-section">
-					<img
-						src="<c:choose>
-                <c:when test="${not empty member.profile_picture_url}">
-                    ${member.profile_picture_url}
-                </c:when>
-                <c:otherwise>
-                    /resources/images/nullProfile.png
-                </c:otherwise>
-              </c:choose>"
-						alt="profile picture" class="profile-img">
-					<div class="profile-name">${member.user_id}</div>
+					<div>	
+						<img src="<c:choose>
+						                <c:when test="${not empty member.profile_picture_url}">
+						                    	${member.profile_picture_url}
+						                </c:when>
+						                <c:otherwise>
+												/resources/images/nullProfile.png
+		                				</c:otherwise>
+	              				  </c:choose>" alt="profile picture" class="profile-img">
+           			</div>
 				</div>
 
-				<!-- 각종 클릭 버튼 -->
 				<div class="buttons-section">
-					<div class="circle-btn" id="reviewlist-btn">
-						<a href="/myreviewlistbymonth"> ${totalReviews.TOTAL_REVIEWS}
-						</a> <span>REVIEWLIST</span>
-					</div>
+				    <div class="circle-btn" id="reviewlist-btn" onclick="location.href='/myreviewlistbymonth'">
+				        <span class="circle-text">REVIEWLIST</span> 
+				        <span class="totalreview-count">${totalReviews.TOTAL_REVIEWS}</span>
+				    </div>
 				</div>
 			</div>
 		</div>
@@ -133,64 +125,59 @@
 
 							// 조건: 해당 날짜에 데이터가 있는 경우에는 모달에 출력해주고, 데이터가 없을 경우 모달 숨기기 
 							if (detailData.length > 0) {
-								detailData
-										.forEach(function(data) { // 반복문          
-											var reviewCountView = data.review_count_byname >= 2 ? ''
-													: 'style="display: none;"';
+								detailData.forEach(function(data) { // 반복문          
+									var reviewCountView = data.review_count_byname >= 2 ? ''
+											: 'style="display: none;"';
 
-											resultHtml += '<div class="review-item">'
-													+ '<img src="https://image.tmdb.org/t/p/w300/' + data.content_image_url +  ' alt="Movie Thumbnail" class="review-img">'
-													+ '<div class="review-contents">'
-													+ '<div class="review-title-rate">'
-													+
-													//                                         '<div class="review-title"> ' + data.content_name + '</div>' +
-													'<div class="review-title"> '
-													+ '<a href="/movie/detail/' + data.content_type + '/' + data.content_id + '">'
-													+ data.content_name
-													+ '</a> </div>'
-													+ '<div class="review-rating"> <img src="resources/images/rating_star.png" width="8px;">'
-													+ data.rating
-													+ '</div>'
-													+ '<div class="review-count"' + reviewCountView + '> <img src="/resources/images/glass.png">'
-													+ data.review_count_byname
-													+ '회차 </div>'
-													+ '</div>'
-													+ '<div class="review-text">'
-													+ data.review_text
-													+ '</div>'
-													+ '</div>'
-													+ '<div class="review-edit-time">'
-													+ '<div class="button-group">'
-													+ ' <button class="edit-btn" onclick="openEditModal(\''
-													+ data.content_name
-													+ '\', \''
-													+ data.review_create_at
-													+ '\', \''
-													+ data.review_text
-													+ '\', \''
-													+ data.rating
-													+ '\', \''
-													+ data.content_id
-													+ '\', \''
-													+ data.content_type
-													+ '\')">수정</button>'
-													+ '<button class="delete-btn" onclick="deleteReview(\''
-													+ data.content_id
-													+ '\', \''
-													+ data.content_type
-													+ '\', \''
-													+ data.review_create_at
-													+ '\')">삭제</button>'
-													+ '</div>'
-													+ '<div class="review-time">'
-													+ data.review_create_at
-													+ '</div>'
-													+ '</div>'
-													+ '</div>';
-										});
-
-								console.log(" ----- resultHtml ------- ");
-								console.log(resultHtml);
+									resultHtml += '<div class="review-item">'
+											+ '<img src="https://image.tmdb.org/t/p/w300/' + data.content_image_url +  ' alt="Movie Thumbnail" class="review-img">'
+											+ '<div class="review-contents">'
+											+ '<div class="review-title-rate">'
+											+	
+											'<div class="review-title"> '
+											+ '<a href="/movie/detail/' + data.content_type + '/' + data.content_id + '">'
+											+ data.content_name
+											+ '</a> </div>'
+											+ '<div class="review-rating"> <img src="resources/images/rating_star.png" width="8px;">'
+											+ data.rating
+											+ '</div>'
+											+ '<div class="review-count"' + reviewCountView + '> <img src="/resources/images/glass.png">'
+											+ data.review_count_byname
+											+ '회차 </div>'
+											+ '</div>'
+											+ '<div class="review-text">'
+											+ data.review_text
+											+ '</div>'
+											+ '</div>'
+											+ '<div class="review-edit-time">'
+											+ '<div class="button-group">'
+											+ ' <button class="edit-btn" onclick="openEditModal(\''
+											+ data.content_name
+											+ '\', \''
+											+ data.review_create_at
+											+ '\', \''
+											+ data.review_text
+											+ '\', \''
+											+ data.rating
+											+ '\', \''
+											+ data.content_id
+											+ '\', \''
+											+ data.content_type
+											+ '\')">수정</button>'
+											+ '<button class="delete-btn" onclick="deleteReview(\''
+											+ data.content_id
+											+ '\', \''
+											+ data.content_type
+											+ '\', \''
+											+ data.review_create_at
+											+ '\')">삭제</button>'
+											+ '</div>'
+											+ '<div class="review-time">'
+											+ data.review_create_at
+											+ '</div>'
+											+ '</div>'
+											+ '</div>';
+								});
 
 								if (detailData.length > 2) {
 									$('.modal-content').css('height', '370px');
@@ -222,8 +209,6 @@
 				content_type : contentType,
 				review_create_at : reviewCreateAt
 			}
-
-			console.log(obj)
 
 			$.ajax({
 				url : '/deletereview', // 삭제 요청을 보낼 url
