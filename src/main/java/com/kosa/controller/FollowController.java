@@ -59,7 +59,6 @@ public class FollowController {
 	    model.addAttribute("user_list", user_list);
 
 	    // 맞팔 확인
-	    // Assuming you want to check follow status for each user in the list
 	    for (UserFollowDTO user : user_list) {
 	        UserFollowDTO ufdto = new UserFollowDTO();
 	        ufdto.setFollower_id(user_number);
@@ -102,8 +101,9 @@ public class FollowController {
 	}
 
 	// 나를 팔로잉한 사람의 수
-	@GetMapping(value = "/following_count")
+	@GetMapping(value = "/test")
 	private String follow_count(Model model, @RequestParam int user_number) throws Exception {
+		user_number = 15;
 		int following_count = service.getfollowers(user_number);
 		System.out.println(user_number + "를 팔로우 하는사람 몇 명? : " + following_count);
 
@@ -125,6 +125,7 @@ public class FollowController {
 		return "follow";
 	}
 
+	
     // JSON 데이터 반환
     @GetMapping(value = "/follow_list_json")
     @ResponseBody
@@ -161,6 +162,9 @@ public class FollowController {
 
         // 맞팔 확인
         int followStatus = service.checkFollowStatus(ufdto);
+        
+        System.out.println("ufdto"+ufdto);
+        
         if (followStatus == 1) {
             // 팔로우 상태면 언팔로우
             service.getunfollow(ufdto);

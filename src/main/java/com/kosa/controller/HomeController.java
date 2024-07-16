@@ -60,9 +60,9 @@ public class HomeController {
 		return "follow";
 	}
 	
-	@GetMapping(value = "/test")
-	public String test() { 	
-		return "test";
-	}
+//	@GetMapping(value = "/test")
+//	public String test() { 	
+//		return "test";
+//	}
 
 }
