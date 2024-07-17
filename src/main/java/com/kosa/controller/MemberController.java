@@ -2,7 +2,8 @@ package com.kosa.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
+
+//github.com/purumium/couchpotato.git
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +16,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,6 +42,7 @@ public class MemberController {
     @Autowired
 	private FollowService service;
 
+
     // 회원가입 페이지 이동
     @RequestMapping(value = "join", method = RequestMethod.GET)
     public void joinGET() {
@@ -62,14 +63,13 @@ public class MemberController {
         memberservice.memberJoin(member);
 
         rttr.addFlashAttribute("msg", "회원가입이 완료되었습니다.");
-        return "redirect:/";
+        return "redirect:/main";
     }
 
     // 로그인 페이지 이동
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public void loginGET() {
         logger.info("로그인 페이지 진입");
-        
     }
 
     // 아이디 중복 검사
@@ -87,23 +87,6 @@ public class MemberController {
             return "success"; // 중복 아이디 X
         }
     } // user_idChkPOST() 종료
-    
-    
-    // 이메일 중복 검사
-    @RequestMapping(value = "/emailChk", method = RequestMethod.POST)
-    @ResponseBody
-    public String emailChkPOST(@RequestParam ("email")String email) throws Exception {
-        logger.info("emailChk() 진입");
-
-        int result = memberservice.emailCheck(email);
-        logger.info("결과값 = " + result);
-
-        if (result != 0) {
-            return "fail"; // 중복 이메일 존재
-        } else {
-            return "success"; // 중복 이메일 X
-        }
-    } // emailPOST() 종료
 
     /* 로그인 */
     @RequestMapping(value = "login", method = RequestMethod.POST)
@@ -112,7 +95,7 @@ public class MemberController {
         String rawPw = member.getPassword();
         if (rawPw == null || rawPw.isEmpty()) {
             rttr.addFlashAttribute("msg", "비밀번호를 입력하세요.");
-            return "redirect:/"; // 이전 페이지로 이동 
+            return "redirect:/member/login";
         }
         String encodePw = "";
 
@@ -124,35 +107,17 @@ public class MemberController {
             if (pwEncoder.matches(rawPw, encodePw)) { // 비밀번호 일치여부 판단
                 loginVo.setPassword(encodePw); // 인코딩된 비밀번호 정보 저장
                 session.setAttribute("member", loginVo); // session에 사용자의 정보 저장
-                rttr.addFlashAttribute("msg", "환영합니다");
-                
-                String prevPage = (String) session.getAttribute("prevPage");
-                if (prevPage != null) {
-                	session.removeAttribute("prevPage");
-                	return "redirect:" + prevPage;
-                } else {
-                	return "redirect:/";  // 메인페이지 이동
-                } 
+                rttr.addFlashAttribute("msg", "로그인 성공");
+                return "redirect:/main"; // 메인페이지 이동
             } else {
                 rttr.addFlashAttribute("msg", "비밀번호가 일치하지 않습니다.");
-                return "redirect:/"; // 메인 페이지 이동
+                return "redirect:/member/login"; // 로그인 페이지 이동
             }
         } else { // 일치하는 아이디가 존재하지 않을 시 (로그인 실패)
             rttr.addFlashAttribute("msg", "아이디가 존재하지 않습니다.");
-            return "redirect:/"; // 메인 페이지 이동
+            return "redirect:/member/login"; // 로그인 페이지 이동
         }
     }
-    
-    
-    //로그인 할 때 세션에 현재 url 저장하는 메서드 
-    @PostMapping("/storeCurrentUrl")
-    @ResponseBody
-    public void storeCurrentUrl(HttpServletRequest request, @RequestBody Map<String, String> payload) {
-        String currentUrl = payload.get("currentUrl");
-        HttpSession session = request.getSession();
-        session.setAttribute("prevPage", currentUrl);
-    }
-    
 
     // 로그아웃
     @RequestMapping(value = "logout", method = RequestMethod.GET)
@@ -167,7 +132,7 @@ public class MemberController {
         response.setDateHeader("Expires", 0);
         
         rttr.addFlashAttribute("msg", "로그아웃되었습니다.");
-        return "redirect:/";
+        return "redirect:/main";
     }
 
     // 마이페이지 이동
@@ -211,7 +176,7 @@ public class MemberController {
         MemberDTO loginMember = (MemberDTO) session.getAttribute("member");
         if (loginMember == null) {
             rttr.addFlashAttribute("msg", "로그인이 필요합니다.");
-            return "redirect:/";
+            return "redirect:/member/login";
         }
 
         try {
@@ -234,6 +199,8 @@ public class MemberController {
             e.printStackTrace();
             rttr.addFlashAttribute("msg", "사진 등록에 실패했습니다.");
         }
+        
+        
 
         return "redirect:/member/mypage.do";
     }
@@ -255,7 +222,7 @@ public class MemberController {
         // 세션에 회원 정보가 존재하는지 확인
         if (sessionMember == null) {
             rttr.addFlashAttribute("msg", "로그인이 필요합니다.");
-            return "redirect:/";
+            return "redirect:/member/login";
         }
 
         String encodePw = sessionMember.getPassword();
@@ -303,23 +270,10 @@ public class MemberController {
             memberservice.memberDelete(sessionMember);
             session.invalidate(); // 회원 삭제 후 로그아웃
             rttr.addFlashAttribute("msg", "회원탈퇴 완료"); // 탈퇴 완료 메시지 추가
-            return "redirect:/";
+            return "redirect:/main";
         } else {
             rttr.addFlashAttribute("msg", "비밀번호가 일치하지 않습니다.");
             return "redirect:/member/mypage.do";
         }
     }
-    
-    
-//    @RequestMapping(value = "/calendar", method = RequestMethod.GET)
-//    public String calendar(HttpSession session, RedirectAttributes rttr) throws Exception {
-//        logger.info("캘린더 진입");
-//        
-//        MemberDTO loginMember = (MemberDTO) session.getAttribute("member");
-//        if (loginMember == null) {
-//            rttr.addFlashAttribute("msg", "로그인이 필요합니다.");
-//            return "redirect:/";
-//        }
-//		return null;
-
 }

@@ -1,8 +1,11 @@
 package com.kosa.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kosa.dto.MemberDTO;
 import com.kosa.dto.MovieDTO;
 import com.kosa.dto.ReviewDTO;
+import com.kosa.dto.UserFollowDTO;
+import com.kosa.service.FollowService;
 import com.kosa.service.MovieDetailService;
 import com.kosa.service.MovieService;
 import com.kosa.service.ReviewService;
@@ -35,90 +38,107 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class MovieController {
 
-    @Autowired
-    private MovieService movieService;
-    @Autowired
-    private MovieDetailService movieDeatilService;
-    @Autowired
-    private ReviewService reviewService;
+	@Autowired
+	private MovieService movieService;
+	@Autowired
+	private MovieDetailService movieDeatilService;
+	@Autowired
+	private ReviewService reviewService;
+	@Autowired
+	FollowService followservice;
 
+	@GetMapping("/movies")
+	public String showMoviesPage(@RequestParam(name = "query", required = false, defaultValue = "") String query,
+			@RequestParam(name = "page", required = false, defaultValue = "1") int page, Model model) {
+		List<MovieDTO> movies = movieService.fetchMovies(query, page);
+		int totalpage = movieService.fetchMovies2(query);
+		model.addAttribute("movies", movies);
+		model.addAttribute("totalpage", totalpage);
+		model.addAttribute("query", "query");
+		return "movies"; // "movies.jsp" 또는 "movies.html" 파일을 의미
+	}
 
-    @GetMapping("/movies")
-    public String showMoviesPage(@RequestParam(name = "query", required = false, defaultValue = "") String query,
-    		@RequestParam(name = "page", required = false, defaultValue = "1") int page, Model model) {
-        List<MovieDTO> movies = movieService.fetchMovies(query, page);
-        int totalpage = movieService.fetchMovies2(query);
-        model.addAttribute("movies", movies);
-        model.addAttribute("totalpage",totalpage);
-        model.addAttribute("query","query");
-        return "movies"; // "movies.jsp" 또는 "movies.html" 파일을 의미
-    }
-    
-    @GetMapping("/movie/detail/{mediatype}/{id}")
-    public String showMovieDetail(@PathVariable String mediatype,
-                                  @PathVariable int id,
-                                  Model model,
-                                  HttpSession session) {
-    	MemberDTO loginMember = (MemberDTO) session.getAttribute("member");
-    	
-    	
-    	if(loginMember!=null) {
-    		model.addAttribute("loginMemberId", loginMember.getUser_id().toString());
-    		int user_number = reviewService.selectUserNumber(loginMember.getUser_id().toString());
-    		model.addAttribute("user_number",user_number);
-    	}else {
-    		model.addAttribute("loginMemberId", "null");
-    		model.addAttribute("user_number",-1);
-    	}
-    	model.addAttribute("member", loginMember);
-    	
-    	String result = "";
-    	try {
-    		String tvShowDetails = movieDeatilService.getTVShowDetails(mediatype, id);
-            model.addAttribute("mediatype", mediatype);
-            model.addAttribute("id", id);
-            model.addAttribute("tvShowDetails", tvShowDetails);
-            model.addAttribute("mediatype", mediatype);
-            
-            //크롤링
-         // URL에 있는 HTML 내용을 가져옵니다.
-            Document doc = Jsoup.connect("https://www.themoviedb.org/"+mediatype+"/"+id).get();
+	@GetMapping("/movie/detail/{mediatype}/{id}")
+	public String showMovieDetail(@PathVariable String mediatype, @PathVariable int id, Model model,
+			HttpSession session) throws Exception {
 
-            
+		// 회원 정보 가져오기
+		MemberDTO loginMember = (MemberDTO) session.getAttribute("member");
+		int user_number;
+		System.out.println(loginMember);
+		if (loginMember != null) {
+			model.addAttribute("loginMemberId", loginMember.getUser_id().toString());
+			user_number = reviewService.selectUserNumber(loginMember.getUser_id().toString());
+			model.addAttribute("user_number", user_number);
 
-            Elements divs = doc.select("div.ott_offer"); // class가 'text'인 모든 div 요소를 선택
+			// 팔로워 가져오기
+			List<UserFollowDTO> follow_list;
+			follow_list = followservice.getfollow_list(user_number);
+			
+			// followList를 JSON 문자열로 변환
+	        ObjectMapper objectMapper = new ObjectMapper();
+	        String followListJson = "";
+	        followListJson = objectMapper.writeValueAsString(follow_list);
+			model.addAttribute("followListJson", followListJson);
+			System.out.println("로그인 한거");
+
+		}else {
+			ObjectMapper objectMapper = new ObjectMapper();
+			String followListJson = "";
+	        followListJson = objectMapper.writeValueAsString("");
+			model.addAttribute("followListJson", followListJson);
+			System.out.println("테스트"+followListJson);
+			model.addAttribute("loginMemberId", "null");
+			model.addAttribute("user_number", -1);
+			System.out.println("로그인 안한거	");
+		}
+		model.addAttribute("member", loginMember);
+
+		// 컨텐츠 상세정보 가져오기
+		String result = "";
+		try {
+			String tvShowDetails = movieDeatilService.getTVShowDetails(mediatype, id);
+			model.addAttribute("mediatype", mediatype);
+			model.addAttribute("id", id);
+			model.addAttribute("tvShowDetails", tvShowDetails);
+			model.addAttribute("mediatype", mediatype);
+
+			// 크롤링
+			// URL에 있는 HTML 내용을 가져옵니다.
+			Document doc = Jsoup.connect("https://www.themoviedb.org/" + mediatype + "/" + id).get();
+
+			Elements divs = doc.select("div.ott_offer"); // class가 'text'인 모든 div 요소를 선택
 //            String stringToRemove = "Now Streaming on ";
-            String stringToRemove = "의 지금 스트리밍 중";
-            
-            if (divs.isEmpty()) {
-            	result = "";
-            } else {
-            	for (Element div : divs) {
-                    Elements links = div.select("a"); // div 내부의 모든 a 태그를 선택
-                    for (Element link : links) {
-                        String title = link.attr("title"); // a 태그의 title 속성을 가져옴
-                        result = title.replace(stringToRemove, "");
-                        
-                    }
-                }
-            }
-            
-            model.addAttribute("ott",result);
-            
-            //리뷰 불러오기
-            ReviewDTO reviewDTO = new ReviewDTO();
-            reviewDTO.setContentId(id);
-            reviewDTO.setContentType(mediatype);
-            List<ReviewDTO> test = reviewService.selectReviews(reviewDTO);
-            model.addAttribute("selectreviews",test);
-            
-    	}catch (IOException e) {
-            e.printStackTrace(); // 예외 처리
-            // 예외 처리 로직 추가
-        }
-    	
-        
-        return "detail"; // detail.jsp로 이동하는 경로
-    }
-   
+			String stringToRemove = "의 지금 스트리밍 중";
+
+			if (divs.isEmpty()) {
+				result = "";
+			} else {
+				for (Element div : divs) {
+					Elements links = div.select("a"); // div 내부의 모든 a 태그를 선택
+					for (Element link : links) {
+						String title = link.attr("title"); // a 태그의 title 속성을 가져옴
+						result = title.replace(stringToRemove, "");
+
+					}
+				}
+			}
+
+			model.addAttribute("ott", result);
+
+			// 리뷰 불러오기
+			ReviewDTO reviewDTO = new ReviewDTO();
+			reviewDTO.setContentId(id);
+			reviewDTO.setContentType(mediatype);
+			List<ReviewDTO> test = reviewService.selectReviews(reviewDTO);
+			model.addAttribute("selectreviews", test);
+
+		} catch (IOException e) {
+			e.printStackTrace(); // 예외 처리
+			// 예외 처리 로직 추가
+		}
+
+		return "detail"; // detail.jsp로 이동하는 경로
+	}
+
 }

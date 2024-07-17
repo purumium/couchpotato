@@ -5,12 +5,15 @@
 <%@ page import="java.io.IOException"%>
 <%@ page import="com.fasterxml.jackson.core.type.TypeReference"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <!DOCTYPE html>
 <html>
 <head>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/detail.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/calendar_modal.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/calendar.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/member/mypage.css">
 <title>TV Show Details</title>
@@ -26,19 +29,17 @@
 }
 
 .reviewFilter {
-    text-align: center;
-    background-color: #f9f9f9fa;
-    border: 1px solid #c0bbbbad;
-    border-radius: 12px;
-    cursor: pointer;
-    letter-spacing: 0px;
-    font-size: 13px;
-    color: #211818;
-    font-weight: bold;
-    letter-spacing: 1px;
-    transition: background-color 0.3s;
-    padding: 9px 37px;
-    width: 150px;
+	text-align: center;
+	background-color: #f9f9f9fa;
+	border: 1px solid #c0bbbbad;
+	border-radius: 12px;
+	cursor: pointer;
+	letter-spacing: 0px;
+	font-size: 13px;
+	color: #211818;
+	font-weight: bold;
+	transition: background-color 0.3s;
+	padding: 10px 4px;
 }
 
 .reviewFilter:hover {
@@ -47,7 +48,10 @@
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+
+var followList = ${followListJson};
 function refreshDiv(divId) {
+	
     fetch(window.location.href)
         .then(response => response.text())
         .then(data => {
@@ -60,135 +64,142 @@ function refreshDiv(divId) {
             } else {
                 console.error('Failed to refresh div');
             }
+            initializeFilters(); // 필터 초기화
         })
         .catch(error => console.error('Error:', error));
 }
 
-        document.addEventListener("DOMContentLoaded", function() {
-            var modal = document.getElementById("myModal");
-            var btn = document.getElementById("btnOpenModal");
-            var span = document.getElementById("closespan");
-
-            btn.onclick = function() {
-            	if(${user_number}==-1){
-            		alert("로그인 해주세요");
-            	}else{
-            		modal.style.display = "block";
-            	}
-                
+function initializeFilters() {
+    $('#filter-button').click(function() {
+        var useridFromServer = document.getElementById('userIdContainer').getAttribute('data-userid');
+        $('.modal-body').each(function() {
+            var userIdText = $(this).find('.user-id').text().trim();
+            var userId = userIdText.replace('userId: ', '').trim();
+            if (userId !== useridFromServer) {
+                $(this).addClass('hidden');
+            } else {
+                $(this).removeClass('hidden');
             }
+        });
+    });
 
-            span.onclick = function() {
+    $('#reset-button').click(function() {
+        $('.modal-body').removeClass('hidden');
+    });
+
+    $('#follow-button').click(function() {
+        var followingIds = followList.map(function(follow) {
+            return follow.user_id;
+        });
+
+        $('.modal-body').each(function() {
+            var userIdText = $(this).find('.user-id').text().trim();
+            var userId = userIdText.replace('userId: ', '').trim();
+            if (followingIds.includes(userId)) {
+                $(this).removeClass('hidden');
+            } else {
+                $(this).addClass('hidden');
+            }
+        });
+    });
+}
+
+$(document).ready(function() {
+	
+	
+	
+    initializeFilters(); // 필터 초기화
+
+    var modal = document.getElementById("myModal");
+    var btn = document.getElementById("btnOpenModal");
+    var span = document.getElementById("closespan");
+
+    btn.onclick = function() {
+        if (${user_number} == -1) {
+            alert("로그인 해주세요");
+        } else {
+            modal.style.display = "block";
+        }
+    }
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    document.getElementById("reviewForm").onsubmit = function(event) {
+        event.preventDefault();
+        var reviewContent = document.getElementById("review").value;
+        var posterPath = document.getElementById("review2").value;
+        var contentname = document.getElementById("review3").value;
+        var type = document.getElementById("review4").value;
+
+        if (reviewContent === "" || reviewContent === null) {
+            alert("리뷰를 작성해주세요");
+        } else if (!document.querySelector('input[name="starpoint"]:checked')) {
+            alert("별점을 체크 해주세요");
+        } else {
+            var rating = parseFloat(document.querySelector('input[name="starpoint"]:checked').value, 10);
+            fetch('/review/save', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    userNumber: ${user_number},
+                    reviewContent: reviewContent,
+                    contentId: ${id},
+                    contentType: type,
+                    rating: rating,
+                    imgurl: posterPath,
+                    contentName: contentname
+                })
+            })
+            .then(response => response.text())
+            .then(data => {
+                if (data === "success") {
+                    refreshDiv('refresh');
+                    alert("저장 성공");
+                } else if (data === "already") {
+                    alert("이미 리뷰를 작성하였습니다");
+                } else {
+                    alert("저장 실패");
+                }
                 modal.style.display = "none";
-            }
-
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            }
-
-            document.getElementById("reviewForm").onsubmit = function(event) {
-                event.preventDefault();
-                var reviewContent = document.getElementById("review").value;
-
-                var posterPath = document.getElementById("review2").value;
-                var contentname = document.getElementById("review3").value;
-                var type = document.getElementById("review4").value;
-                
-                if (document.getElementById("review").value === "" || document.getElementById("review").value === null) {
-                    alert("리뷰를 작성해주세요");
-                } else if (!document.querySelector('input[name="starpoint"]:checked')) {
-                    alert("별점을 체크 해주세요");
-                } else {
-                    var rating = parseFloat(document.querySelector('input[name="starpoint"]:checked').value, 10);
-                    fetch('/review/save', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            userNumber: ${user_number},
-                            reviewContent: reviewContent,
-                            contentId : ${id},
-                            contentType : type,
-                            rating: rating,
-                            imgurl: posterPath,
-                            contentName: contentname
-                        })
-                    })
-                    .then(response => response.text())
-                    .then(data => {
-                        if (data === "success") {
-                        	refreshDiv('refresh');
-                            alert("저장 성공")
-                        } else if(data ==="already"){
-                            alert("이미 리뷰를 작성하였습니다")
-                        }else{
-                        	alert("저장 실패")
-                        }
-                        modal.style.display = "none";
-                        document.getElementById("review").value = "";
-                        var starRadios = document.querySelectorAll('input[name="rating"]');
-                        starRadios.forEach(radio => {
-                            radio.checked = false;
-                        });
-                    })
-                    .catch(error => console.error('Error:', error));
-                }
-            }
-        });
-        
-        document.addEventListener("DOMContentLoaded", function() {
-            var seasonsToggle = document.getElementById("toggleSeasons");
-            var seasonContainer = document.querySelector(".season-container");
-
-            seasonsToggle.onclick = function() {
-                if (seasonContainer.style.display === "none" || seasonContainer.style.display === "") {
-                    seasonContainer.style.display = "block";
-                } else {
-                    seasonContainer.style.display = "none";
-                }
-            }
-        });
-        
-      //유저 아이디 필터링	
-        $(document).ready(function() {
-            $('#filter-button').click(function() {
-                $('.modal-body').each(function() {
-                	var useridFromServer = document.getElementById('userIdContainer').getAttribute('data-userid');
-                    var userIdText = $(this).find('.user-id').text().trim();
-                    // 'userId: '를 제거하고 실제 userId 값만 추출
-                    var userId = userIdText.replace('userId: ', '').trim();
-                    if (userId !== useridFromServer) {
-                        $(this).addClass('hidden');
-                    } else {
-                        $(this).removeClass('hidden');
-                    }
+                document.getElementById("review").value = "";
+                document.querySelectorAll('input[name="starpoint"]').forEach(radio => {
+                    radio.checked = false;
                 });
-            });
-            $('#reset-button').click(function() {
-                $('.modal-body').removeClass('hidden');
-            });
-        });
-        
-        //버튼 클릭 처리
-        document.addEventListener("DOMContentLoaded", function() {
-            const buttons = document.querySelectorAll('.filter-btn');
-			const defaultbtn = document.querySelector('.default-btn');
-			defaultbtn.classList.add('active');
-            // 각 버튼에 클릭 이벤트 리스너를 추가합니다.
-            buttons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // 모든 버튼에서 'active' 클래스를 제거합니다.
-                    buttons.forEach(btn => btn.classList.remove('active'));
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    }
 
-                    // 클릭된 버튼에 'active' 클래스를 추가합니다.
-                    button.classList.add('active');
-                });
-            });
+    document.getElementById("toggleSeasons").onclick = function() {
+        var seasonContainer = document.querySelector(".season-container");
+        if (seasonContainer.style.display === "none" || seasonContainer.style.display === "") {
+            seasonContainer.style.display = "block";
+        } else {
+            seasonContainer.style.display = "none";
+        }
+    }
+
+    const buttons = document.querySelectorAll('.filter-btn');
+    const defaultbtn = document.querySelector('.default-btn');
+    defaultbtn.classList.add('active');
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            buttons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
         });
-       
+    });
+});
+
     </script>
 <style>
 </style>
@@ -370,8 +381,12 @@ function refreshDiv(divId) {
 			<div class="total-container">
 				<c:if test="${loginMemberId != 'null'}">
 					<div class="container2">
-						<button id="reset-button" class="default-btn reviewFilter ">전체 리뷰</button>
-						<button id="filter-button" class="filter-btn  reviewFilter">내 리뷰</button>
+						<button id="reset-button" class="default-btn reviewFilter "
+							style="width: 100px">전체 리뷰</button>
+						<button id="filter-button" class="filter-btn  reviewFilter"
+							style="width: 100px">내 리뷰</button>
+						<button id="follow-button" class="follow-btn reviewFilter "
+							style="width: 100px">팔로워 리뷰</button>
 					</div>
 
 				</c:if>
@@ -388,7 +403,7 @@ function refreshDiv(divId) {
 											<div class="review-title user-id" style="font-size: 16px">${review.userId}</div>
 											<div class="review-rating">${review.rating}</div>
 										</div>
-										<div class="review-text">${review.reviewContent}</div>
+										<div class="review-text" style="font-size: 14px">${review.reviewContent}</div>
 									</div>
 								</div>
 							</div>
@@ -400,8 +415,8 @@ function refreshDiv(divId) {
 		</c:if>
 	</div>
 
-	<div id="myModal" class="detail-modal">
-		<div class="detail-modal-content">
+	<div id="myModal" class="modal">
+		<div class="modal-content">
 			<div class="title">
 				<img src="<%=request.getContextPath()%>/resources/images/modify.png"
 					width="25px;"> <span>REGISTER REVIEW</span>
@@ -430,10 +445,7 @@ function refreshDiv(divId) {
 						<textarea id="review4" name="review3" required><%=mediatype%></textarea>
 					</div>
 					<div class="form-group">
-						<label for="review"> <img
-							src="<%=request.getContextPath()%>/resources/images/reviewregister.png"
-							width="10px;"> 별점
-						</label>
+						<label>별점</label>
 						<div class="starpoint_wrap">
 							<div class="starpoint_box">
 								<label for="starpoint_1" class="label_star" title="0.5"><span

@@ -217,9 +217,7 @@
                 $(button).removeClass('mutual-follow-btn').addClass('follow-btn');
                 	console.log("팔로우버튼 바꿀예정 ")
                 $(button).attr('onclick', 'followUser(' + following_id + ', this)');
-                	console.log("팔로우버튼 바꿧다.")
-                // 팔로워 리스트에서 제거
-             // 팔로워 리스트에서 제거
+
                 followList = followList.filter(follow => follow.user_number !== following_id);
                 
             },
@@ -260,9 +258,5 @@
             }
         });
     }
-
-	
-	
-
 
 </script>
