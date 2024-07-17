@@ -1,32 +1,38 @@
 @charset "UTF-8";
 
 .calendar-container {
-	padding: 37px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
 }
+
 
 .left-calendar {
     display: flex;
-    gap: 20px;
-    transform: translate(368%, -17%);
+    flex-direction: column;
+    align-items: center;
+    margin-right: 50px;
+}
+
+.right-calendar {
+    margin-left: 40px;
+}
+
+.profile-section {
     display: flex;
     align-items: center;
 }
 
-
-.left-content {
-    position: absolute;
-    z-index: 2;
-}
-
-
-.profile-section {
-    text-align: center;
-}
-
 .profile-img {
     width: 100%;
-    max-width: 63px;
+    max-width: 98px;
     border-radius: 50%;
+}
+
+
+.profile-name {
+    margin-bottom: 5px;
 }
 
 .prifile-name {
@@ -39,73 +45,91 @@
     text-align: center;
 }
 
+.profile-info {
+    margin-left: 17px;
+    text-align: left;
+}
+
+
+
+.profile-name span:nth-of-type(1) {
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.profile-name span:nth-of-type(2) {
+	color: #8080808c;  
+	font-weight: 600;
+}
+
+.profile-text {  
+	font-size: 13px;   
+	margin: 3px 0;   
+	color: gray;
+}
+
+
+
+
+.buttons-section {
+	margin-top: 35px;	
+}
+
+.button-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 13px;
+}
+
+.button-row div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 .img-name {
     margin-left: 11px;
 }
 	
 
-
-.buttons-section {
+.circle-btn a, .circle-btn div {
     display: flex;
-    justify-content: center;
     align-items: center;
-}
-
-.circle-btn {
-    position: relative;
-    display: flex;
     justify-content: center;
-    align-items: center;
-    width: 63px; /* 원의 크기 */
-    height: 63px; /* 원의 크기 */
+    width: 62px;
+    height: 62px;
     border-radius: 50%;
-    background-color: #f0f0f0; /* 원의 배경색 */
-    text-align: center;
-    border: 1px solid #80808040;
-    cursor: pointer;
+    background-color: #f0f0f09c;
+    font-size: 16px;
+    text-decoration: none;
+    color: #5b5b5b;
+    margin-bottom: 7px;
+    border: 1px solid #8080803d;
+    font-weight: 600;
 }
 
-.circle-text {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 12px; /* 글자 크기 */
-    color: #333; /* 글자 색 */
-    font-weight: 700;
-    text-decoration: none; /* 링크 밑줄 제거 */
-    z-index: 1;
+.circle-btn span {
+	font-size: 10px;
+	letter-spacing: -1px;
 }
 
-.totalreview-count {
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform: translate(-1%, -25%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 21px;
-    height: 21px;
-    border-radius: 50%;
-    background-color: #ff0000d4;
-    color: white;
-    font-size: 13px;
-    z-index: 2;
-    letter-spacing: -1px;
+.circle-btn a:hover, .circle-btn div:hover  {
+	background-color: #ffec5857;
+    transform: scale(1.04); /* 크기를 1.05배로 키움 */
+    transition: transform 0.2s ease-in-out; /* 변환 효과에 0.3초 동안의 전환을 주고 부드럽게 만듦 */
 }
 
-.right-calendar {
-   	margin-top: 0px;
-   	position: relative;
-   	z-index: 1;
-}
+
+
+
+
 
 
 
 
 #calendar {
-    max-width: 710px; /* 원하는 너비로 설정 */
+    max-width: 660px; /* 원하는 너비로 설정 */
     margin: 0 auto; /* 가운데 정렬 */
 }
 
@@ -119,7 +143,6 @@
     text-align: center !important;
     background-color: #ffec5857 !important;
     width: 40px !important;
-    /* height: 40px; */
     color: #534848 !important;
     font-weight: bold !important;
     margin: auto !important;

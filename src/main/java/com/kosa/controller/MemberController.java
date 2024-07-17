@@ -1,13 +1,19 @@
 package com.kosa.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,11 +24,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kosa.dto.MemberDTO;
+import com.kosa.service.FollowService;
 import com.kosa.service.MemberService;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/member")
@@ -35,6 +38,9 @@ public class MemberController {
 
     @Autowired
     private BCryptPasswordEncoder pwEncoder;
+    
+    @Autowired
+	private FollowService service;
 
     // 회원가입 페이지 이동
     @RequestMapping(value = "join", method = RequestMethod.GET)
@@ -166,18 +172,30 @@ public class MemberController {
 
     // 마이페이지 이동
     @RequestMapping(value = "/mypage.do", method = RequestMethod.GET)
-    public String mypage(HttpSession session, RedirectAttributes rttr) throws Exception {
+    public String mypage(HttpSession session, RedirectAttributes rttr, Model model) throws Exception {
         logger.info("마이페이지 진입");
         
         MemberDTO loginMember = (MemberDTO) session.getAttribute("member");
         if (loginMember == null) {
             rttr.addFlashAttribute("msg", "로그인이 필요합니다.");
-            return "redirect:/";
+            return "redirect:/member/login";
         }
 
         // 로그인한 사용자의 정보를 다시 가져와 세션에 업데이트
         MemberDTO member = memberservice.getMemberById(loginMember.getUser_id());
         session.setAttribute("member", member);
+        
+        int follow_count = service.getfollowings(member.getUser_number());
+        int following_count = service.getfollowers(member.getUser_number());
+
+
+        
+        System.out.println("member.getUser_number() : "+member.getUser_number());
+        System.out.println(loginMember.getUser_id() + ") 내가 팔로우 하는사람 몇 명? : " + follow_count);
+		System.out.println(loginMember.getUser_id() + ") 나를 팔로우 하는사람 몇 명? : " + following_count);
+
+		model.addAttribute("follow_count", follow_count);
+		model.addAttribute("following_count", following_count);
         
         return "/member/mypage";
     }

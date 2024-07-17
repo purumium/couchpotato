@@ -15,7 +15,8 @@
     <title>마이페이지</title>
 </head>
 <body>
-    <%@ include file="../common/header.jsp" %>
+	<%@ include file="../common/header.jsp"%>
+	<%@ include file="../follow.jsp"%>
 
     <div class="mypage-container">
         <!-- 프로필 섹션 -->
@@ -40,23 +41,28 @@
             </div>
         </div>
 
-        <!-- 친구 관리 섹션 -->
-        <div class="buttons-section">
-            <div class="button-row">
-                <div class="circle-btn">
-                    <a href="/follwer">0</a> <span>팔로워</span>
-                </div>
-                <div class="circle-btn">
-                    <a href="/following">0</a> <span>팔로잉</span>
-                </div>
-                <div class="circle-btn" onclick="location.href='/usersearch'" id="user-btn">
-                    <div>
-                        <img src="/resources/images/usersearch.png" width="25px" alt="user-search">
-                    </div>
-                    <span>사용자 검색</span>
-                </div>
-            </div>
-        </div>
+		<div class="section">
+			<div>친구 관리</div>
+			<div class="buttons-section">
+				<div class="button-row">
+					<div class="circle-btn" id="follower-btn">
+						<div>${follow_count}</div> <span>팔로워</span>
+					</div>
+
+					<div class="circle-btn" id="following-btn">
+						<div>${following_count}</div> <span>팔로잉</span>
+					</div>
+
+					<div class="circle-btn" id="user-search-btn">
+						<div>
+							<img src="/resources/images/usersearch.png" width="25px"
+								alt="user-search">
+						</div>
+						<span>사용자 검색</span>
+					</div>
+				</div>
+			</div>
+		</div>
 
         <!-- 비밀번호 변경 및 회원 탈퇴 섹션 -->
         <div class="profile-actions">

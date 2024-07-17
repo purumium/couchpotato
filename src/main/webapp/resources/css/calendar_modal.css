@@ -295,22 +295,22 @@
 }
 
 .edit-modal-container input[type="number"] {
-    width: 10%;
-    padding: 3px 16px;
+    width: 18%;
+    padding: 3px 15px;
     border: 1px solid #ccc;
     border-radius: 20px;
     font-size: 11px;
 }
 
 .edit-modal-container textarea {
-    width: 94%;
+    width: 98%;
     padding: 7px 3px 6px 12px;
     border: none;
     border: 1px solid #80808052;
     border-radius: 6px;
     font-size: 11px;
     resize: none;
-    height: 30px;
+    height: 51px;
 }
 
 .editmodal-btn {

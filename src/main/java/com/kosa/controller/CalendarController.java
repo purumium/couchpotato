@@ -20,28 +20,45 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kosa.dto.CalendarDTO;
 import com.kosa.dto.MemberDTO;
 import com.kosa.service.CalendarService;
+import com.kosa.service.FollowService;
 
 @Controller
 public class CalendarController {
 
 	@Autowired
 	private CalendarService calendarService;
+	
+	@Autowired
+	private FollowService followService;
 
 	// 캘린더를 띄웠을 때의 첫 화면: 리뷰 총 개수, 이름, 날짜별로 작성한 리뷰 개수 
 	@GetMapping("/calendar")
-	public String viewCalendar(Model model, HttpSession session) {
+	public String viewCalendar(Model model, HttpSession session) throws Exception {
 		MemberDTO loginMember = (MemberDTO)session.getAttribute("member");
+		
 		if (loginMember == null) { // 세션에 member 속성이 없으면 로그인 페이지로 리다이렉트
 		        return "redirect:/";
 		    }
 		
-		String userId = loginMember.getUser_id();		
+		String userId = loginMember.getUser_id();	
+		int userNumber = loginMember.getUser_number();
 		
 		// 1. 내가 review를 작성한 것이 총 몇 개인지와 유저 이름에 대한 정보
 		Map<String, Object> totalReviews = calendarService.getTotalReviewsByUser(userId);
 		
         // 2. 각 날짜 별로 몇 개의 review를 작성했는지에 대한 정보(count 개수, 날짜 정보 가지고 오기)
         List<Map<String, Object>> reviewsByDate = calendarService.getReviewByDate(userId);
+        
+        // 3. 팔로우, 팔로잉 총 정보
+        int follow_count = followService.getfollowings(userNumber);
+        int following_count = followService.getfollowers(userNumber);
+
+        System.out.println("userNumber : " + userNumber);
+        System.out.println(userNumber + ") 내가 팔로우 하는사람 몇 명? : " + follow_count);
+		System.out.println(userNumber+ ") 나를 팔로우 하는사람 몇 명? : " + following_count);
+
+		model.addAttribute("follow_count", follow_count);
+		model.addAttribute("following_count", following_count);
         
         model.addAttribute("loginMember", loginMember);
         model.addAttribute("reviewsByDate", reviewsByDate);

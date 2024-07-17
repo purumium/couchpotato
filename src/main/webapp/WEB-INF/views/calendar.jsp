@@ -1,11 +1,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ include file="common/calendar_header.jsp"%>
+<%@ include file="follow.jsp"%>
 
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
 	<title>my information</title>
 	<link rel="stylesheet" href="/resources/css/calendar.css?v=1.0" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
@@ -13,40 +18,69 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/locale/ko.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>	
-	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-	<meta http-equiv="Pragma" content="no-cache" />
-	<meta http-equiv="Expires" content="0" />
 </head>
 <body>
-	<%@ include file="common/calendar_header.jsp"%>
 
 	<div class="calendar-container">
 
 		<!-- 왼쪽 -->
-		<div class="left-content">
-			<div class="left-calendar">
-				<!-- 이름, 이미지 -->
-				<div class="profile-section">
-					<div>	
-						<img src="<c:choose>
-						                <c:when test="${not empty member.profile_picture_url}">
-						                    	${member.profile_picture_url}
-						                </c:when>
-						                <c:otherwise>
-												/resources/images/nullProfile.png
-		                				</c:otherwise>
-	              				  </c:choose>" alt="profile picture" class="profile-img">
-           			</div>
-				</div>
-
-				<div class="buttons-section">
-				    <div class="circle-btn" id="reviewlist-btn" onclick="location.href='/myreviewlistbymonth'">
-				        <span class="circle-text">REVIEWLIST</span> 
-				        <span class="totalreview-count">${totalReviews.TOTAL_REVIEWS}</span>
-				    </div>
-				</div>
+		<div class="left-calendar">
+			
+			<!-- 프로필 이미지 -->
+			<div class="profile-section">
+				<div>	
+					<img src="<c:choose>
+					                <c:when test="${not empty member.profile_picture_url}">
+					                    	${member.profile_picture_url}
+					                </c:when>
+					                <c:otherwise>
+											/resources/images/nullProfile.png
+	                				</c:otherwise>
+              				  </c:choose>" alt="profile picture" class="profile-img">
+          			</div>
+       			<div class="profile-info">
+	                <div class="profile-name">
+	                	 <span>${member.username}</span>
+	                	 <span>#${member.user_id}</span>
+	                </div>
+	                <div class="profile-text">${member.email}</div>
+	                <div class="profile-text">${member.date_of_birth}</div>
+	            </div>
 			</div>
+			
+			<!-- 각종 클릭 버튼 -->
+		    <div class="buttons-section">	
+		    	 <div class="button-row">
+			    		<!--  1 -->
+			    		<div class="circle-btn" id="follower-btn">
+							<div>${follow_count}</div> 
+							<span>팔로워</span>
+			    		</div>
+						
+						<!-- 2 -->
+						<div class="circle-btn" id="following-btn">
+							<div>${following_count}</div> 
+							<span>팔로잉</span>
+						</div>
+
+			    		<!-- 3 -->
+			    		<div class="circle-btn" id="user-search-btn">
+							<div>
+								<img src="/resources/images/usersearch.png" width="25px"
+									alt="user-search">
+							</div>
+							<span>사용자 검색</span>
+						</div>
+						
+						<!-- 4 -->
+						<div class="circle-btn" id="reviewlist-btn" onclick="location.href='/myreviewlistbymonth'">
+					        <div class="circle-text">${totalReviews.TOTAL_REVIEWS}</div> 
+					        <span>리뷰 리스트</span>
+			    		</div>
+				</div>
+		    </div>
 		</div>
+
 
 
 		<!-- 오른쪽 : 캘린더 -->
@@ -111,8 +145,7 @@
 		}); // end document
 
 		function contentsDetailsByDate(clickedDate) {
-			$
-					.ajax({
+			$.ajax({
 						url : '/getcontentdetail', // db에서 영화 정보 가져오는 URL
 						type : 'GET', // 요청 방식
 						data : {
