@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ include file="common/header.jsp"%>
 <%@ include file="follow.jsp"%>
+<%@ include file="calendar_modal.jsp"%>
 
 <!DOCTYPE html>
 <html>
@@ -21,76 +22,82 @@
 </head>
 <body>
 
-	<div class="calendar-container">
+<div class="calendar-container">
 
-		<!-- 왼쪽 -->
-		<div class="left-calendar">
-			
-			<!-- 프로필 이미지 -->
-			<div class="profile-section">
-				<div>	
-					<img src="<c:choose>
-					                <c:when test="${not empty member.profile_picture_url}">
-					                    	${member.profile_picture_url}
-					                </c:when>
-					                <c:otherwise>
-											/resources/images/nullProfile.png
-	                				</c:otherwise>
-              				  </c:choose>" alt="profile picture" class="profile-img">
-          			</div>
-       			<div class="profile-info">
-	                <div class="profile-name">
-	                	 <span>${member.username}</span>
-	                	 <span>#${member.user_id}</span>
-	                </div>
-	                <div class="profile-text">${member.email}</div>
-	                <div class="profile-text">${member.date_of_birth}</div>
-	            </div>
-			</div>
-			
-			<!-- 각종 클릭 버튼 -->
-		    <div class="buttons-section">	
-		    	 <div class="button-row">
-			    		<!--  1 -->
-			    		<div class="circle-btn" id="follower-btn">
-							<div>${follow_count}</div> 
-							<span>팔로워</span>
-			    		</div>
-						
-						<!-- 2 -->
-						<div class="circle-btn" id="following-btn">
-							<div>${following_count}</div> 
-							<span>팔로잉</span>
-						</div>
+	<div class="left-calendar">
 
-			    		<!-- 3 -->
-			    		<div class="circle-btn" id="user-search-btn">
-							<div>
-								<img src="/resources/images/usersearch.png" width="25px"
-									alt="user-search">
-							</div>
-							<span>사용자 검색</span>
-						</div>
-						
-						<!-- 4 -->
-						<div class="circle-btn" id="reviewlist-btn" onclick="location.href='/myreviewlistbymonth'">
-					        <div class="circle-text">${totalReviews.TOTAL_REVIEWS}</div> 
-					        <span>리뷰 리스트</span>
-			    		</div>
+			<div class="left-1">
+				<div class="profile-section"><!-- 프로필 이미지 -->
+					<div>	
+						<img src="<c:choose>
+						                <c:when test="${not empty member.profile_picture_url}">
+						                    	${member.profile_picture_url}
+						                </c:when>
+						                <c:otherwise>
+												/resources/images/nullProfile.png
+		                				</c:otherwise>
+	              				  </c:choose>" alt="profile picture" class="profile-img">
+	          			</div>
+	       			<div class="profile-info">
+		                <div class="profile-name">
+		                	 <span>${member.username}</span>
+		                	 <span>#${member.user_id}</span>
+		                </div>
+		                <div class="profile-text">${member.email}</div>
+		                <div class="profile-text">${member.date_of_birth}</div>
+		            </div>
 				</div>
+				
+				<!-- 각종 클릭 버튼 -->
+			    <div class="buttons-section">	
+			    	 <div class="button-row">
+				    		<!--  1 -->
+				    		<div class="circle-btn" id="following-btn">
+								<div>${following_count}</div> 
+								<span>팔로잉</span>
+							</div>
+							
+							<!-- 2 -->
+				    		<div class="circle-btn" id="follower-btn">
+								<div>${follower_count}</div> 
+								<span>팔로워</span>
+				    		</div>
+	
+				    		<!-- 3 -->
+				    		<div class="circle-btn" id="user-search-btn">
+								<div>
+									<img src="/resources/images/usersearch.png" width="25px"
+										alt="user-search">
+								</div>
+								<span>사용자 검색</span>
+							</div>
+							
+							<!-- 4 -->
+							<div class="circle-btn" id="reviewlist-btn" onclick="location.href='/myreviewlistbymonth'">
+						        <div class="circle-text">${totalReviews.TOTAL_REVIEWS}</div> 
+						        <span>리뷰 리스트</span>
+				    		</div>
+					</div>
+			  	</div>
+		    </div>
+		    
+		    <div class="left-2">
+		    	<div>
+		    		<div>
+		    		
+		    		</div>
+		    	</div>
 		    </div>
 		</div>
 
 
-
-		<!-- 오른쪽 : 캘린더 -->
-		<div class="right-calendar">
-			<div id="calendar"></div>
-		</div>
+	<!-- 오른쪽 : 캘린더 -->
+	<div class="right-calendar">
+		<div id="calendar"></div>
 	</div>
+</div>
 
-	<!-- 모달창 include -->
-	<%@ include file="calendar_modal.jsp"%>
+
 
 
 

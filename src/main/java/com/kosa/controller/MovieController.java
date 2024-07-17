@@ -1,5 +1,21 @@
 package com.kosa.controller;
 
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kosa.dto.MemberDTO;
 import com.kosa.dto.MovieDTO;
@@ -9,31 +25,6 @@ import com.kosa.service.FollowService;
 import com.kosa.service.MovieDetailService;
 import com.kosa.service.MovieService;
 import com.kosa.service.ReviewService;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.servlet.http.HttpSession;
 
 @Controller
 public class MovieController {

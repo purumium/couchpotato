@@ -54,14 +54,14 @@ public class CalendarController {
         List<Map<String, Object>> reviewsByDate = calendarService.getReviewByDate(userId);
         
         // 3. 팔로우, 팔로잉 총 정보
-        int follow_count = followService.getfollowings(userNumber);
-        int following_count = followService.getfollowers(userNumber);
+        int follower_count = followService.getfollowers(userNumber);
+        int following_count = followService.getfollowings(userNumber);
 
         System.out.println("userNumber : " + userNumber);
-        System.out.println(userNumber + ") 내가 팔로우 하는사람 몇 명? : " + follow_count);
+        System.out.println(userNumber + ") 내가 팔로우 하는사람 몇 명? : " + follower_count);
 		System.out.println(userNumber+ ") 나를 팔로우 하는사람 몇 명? : " + following_count);
 
-		model.addAttribute("follow_count", follow_count);
+		model.addAttribute("follower_count", follower_count);
 		model.addAttribute("following_count", following_count);
         
         model.addAttribute("loginMember", loginMember);
