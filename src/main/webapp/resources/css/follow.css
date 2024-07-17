@@ -14,16 +14,15 @@
 
 /* 모달 컨텐츠 스타일 */
 .follow-modal-content {
-    background-color: #fefefe; /* 배경색을 흰색으로 설정 */
-    margin: 4% auto; /* 화면 중앙에 배치 */
-    padding: 20px 22px 0px 26px; /* 내부 여백 설정 */
-    border: 1px solid #888; /* 테두리 설정 */
-    width: 35%; /* 너비를 80%로 설정 */
-    border-radius: 10px; /* 모서리를 둥글게 설정 */
-    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* 그림자 설정 */
-    height: 485px;
+    background-color: #fefefe;
+    margin: 11% auto;
+    padding: 10px 19px 0px 26px;
+    border: 1px solid #888;
+    width: 26%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 376px;
     overflow: auto;
-    /* overflow: hidden; */
 }
 
 /* 모달 닫기 버튼 스타일 */
@@ -45,25 +44,35 @@
 .tab-container {
     display: flex; /* 탭들을 가로로 배치합니다 */
     justify-content: space-around; /* 탭들 사이에 균등한 간격을 줍니다 */
-    padding: 10px; /* 탭 컨테이너의 내부 여백을 설정합니다 */
-    border-bottom: 1px solid #ccc; /* 탭 컨테이너의 하단에 회색 테두리를 추가합니다 */
+    /* padding: 10px 0px 1px; */ /* 탭 컨테이너의 내부 여백을 설정합니다 */
+    border-top: 2px solid #00000021;
+    border-bottom: 2px solid #00000021; /* 탭 컨테이너의 하단에 회색 테두리를 추가합니다 */
 }
 
-/* 탭 버튼의 스타일을 지정합니다 */
+.follow-header {
+    display: flex;
+    justify-content: end;
+    margin-bottom: 9px;
+}
+
 .tab-button {
-    background: none; /* 배경색을 제거합니다 */
-    border: none; /* 테두리를 제거합니다 */
-    padding: 10px; /* 내부 여백을 설정합니다 */
-    cursor: pointer; /* 마우스 커서를 포인터로 변경합니다 */
-    font-size: 13px; /* 글자 크기를 16px로 설정합니다 */
+    background: none; 
+    border: none;
+    padding: 10px; 
+    cursor: pointer; 
+    font-size: 12px; 
+    color: #232222;
+    letter-spacing: -1px;
     font-weight: 600;
 }
 
-/* 탭 버튼에 마우스를 올렸을 때의 스타일을 지정합니다 */
-.tab-button:hover {
-    /* background: #f0f0f0; */ /* 배경색을 연한 회색으로 변경합니다 */
-    border-bottom: 3px solid #808080ad;
+
+.tab-button.active {
+    background-color: #007bff; /* 원하는 배경색으로 변경 */
+    color: white; /* 배경색에 맞게 글자색 변경 */
 }
+
+
 
 /* 콘텐츠 컨테이너의 스타일을 지정합니다 */
 .content-container {
@@ -78,10 +87,14 @@
 
 /* 팔로워, 팔로잉, 유저 아이템의 스타일을 지정합니다 */
 .follower-item, .following-item, .user-item {
-    display: flex; /* 아이템들을 가로로 배치합니다 */
-    justify-content: space-between; /* 아이템들 사이에 균등한 간격을 줍니다 */
-    padding: 10px; /* 내부 여백을 10px로 설정합니다 */
-    border-bottom: 1px solid #eee; /* 하단에 연한 회색 테두리를 추가합니다 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 15px;
+    margin: 0 12px;
+    /* width: 56px; */
+    height: 47px;
+    border-bottom: 1px solid #ded4d4;
 }
 
 /* 팔로워, 팔로잉, 유저 이름의 스타일을 지정합니다 */
@@ -91,15 +104,71 @@
 
 /* 맞팔로우 및 팔로우 버튼의 스타일을 지정합니다 */
 .mutual-follow-btn, .follow-btn {
-    background: #007bff; /* 배경색을 파란색으로 설정합니다 */
-    border: none; /* 테두리를 제거합니다 */
-    color: white; /* 글자색을 흰색으로 설정합니다 */
-    padding: 5px 10px; /* 내부 여백을 설정합니다 */
-    cursor: pointer; /* 마우스 커서를 포인터로 변경합니다 */
-    border-radius: 5px; /* 모서리를 둥글게 만듭니다 */
+    /* background: #007bff; */ /* 배경색을 파란색으로 설정합니다 */
+    /* border: none; */ /* 테두리를 제거합니다 */
+    /* color: white; */ /* 글자색을 흰색으로 설정합니다 */
+    /* padding: 5px 10px; */ /* 내부 여백을 설정합니다 */
+    /* cursor: pointer; */ /* 마우스 커서를 포인터로 변경합니다 */
+    /* border-radius: 5px; */ /* 모서리를 둥글게 만듭니다 */
 }
 
 /* 맞팔로우 및 팔로우 버튼에 마우스를 올렸을 때의 스타일을 지정합니다 */
 .mutual-follow-btn:hover, .follow-btn:hover {
     background: #0056b3; /* 배경색을 더 진한 파란색으로 변경합니다 */
 }
+
+
+.user-item-img {
+    width: 44px;
+    border-radius: 40px;
+}
+
+.user-item-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-item-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #484242;
+}
+
+.user-item-btn {
+    background-color: #f6f6f6;
+    border: 1px solid #c0bbbb;
+    padding: 0px 9px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 9px;
+    letter-spacing: -1px;
+    height: 24px;
+    width: 67px;
+}
+
+input#searchUser {
+    border-radius: 10px;
+    width: 200px;
+    border: 2px solid #8080803b;
+    font-size: 10px;
+    height: 25px;
+    margin: 5px 0px 4px 163px;
+    padding: 0px 25px;
+    color: #454141f7;
+}
+
+.content-section {
+    position: relative;
+    padding-top: 12px;
+}
+
+.follow-search-icon {
+    position: absolute;
+    left: 174px;
+    top: 23px;
+    width: 12px;  /* 아이콘 크기 설정 */
+    height: 12px;  /* 아이콘 크기 설정 */
+    pointer-events: none;  /* 클릭 이벤트 방지 */
+}
+	
