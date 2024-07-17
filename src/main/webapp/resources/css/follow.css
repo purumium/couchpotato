@@ -23,6 +23,7 @@
     box-shadow: 0 0 10px rgba(0,0,0,0.1); /* 그림자 설정 */
     height: 485px;
     overflow: auto;
+    /* overflow: hidden; */
 }
 
 /* 모달 닫기 버튼 스타일 */
@@ -60,8 +61,8 @@
 
 /* 탭 버튼에 마우스를 올렸을 때의 스타일을 지정합니다 */
 .tab-button:hover {
+    /* background: #f0f0f0; */ /* 배경색을 연한 회색으로 변경합니다 */
     border-bottom: 3px solid #808080ad;
-    background: #f0f0f0; /* 배경색을 연한 회색으로 변경합니다 */
 }
 
 /* 콘텐츠 컨테이너의 스타일을 지정합니다 */
