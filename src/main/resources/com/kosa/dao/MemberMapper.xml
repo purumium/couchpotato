@@ -41,13 +41,31 @@
         WHERE user_id = #{user_id}
     </update>
 
+    <!-- follows 테이블에서 follower 기록 삭제 -->
+    <delete id="deleteFollowsByFollowerId" parameterType="com.kosa.dto.MemberDTO">
+        DELETE FROM follows 
+        WHERE follower_id = (SELECT user_number FROM users WHERE user_id = #{user_id})
+    </delete>
+    
+    <!-- follows 테이블에서 following 기록 삭제 -->
+    <delete id="deleteFollowsByFollowingId" parameterType="com.kosa.dto.MemberDTO">
+        DELETE FROM follows 
+        WHERE following_id = (SELECT user_number FROM users WHERE user_id = #{user_id})
+    </delete>
+    
+    <!-- reviews 테이블에서 사용자 기록 삭제 -->
+    <delete id="deleteReviewsByUserId" parameterType="com.kosa.dto.MemberDTO">
+        DELETE FROM reviews 
+        WHERE user_number = (SELECT user_number FROM users WHERE user_id = #{user_id})
+    </delete>
+    
     <!-- 회원탈퇴 -->
     <delete id="memberDelete" parameterType="com.kosa.dto.MemberDTO">
         DELETE FROM users
         WHERE user_id = #{user_id}
     </delete>
     
-        <!-- 회원 정보 조회 -->
+    <!-- 회원 정보 조회 -->
     <select id="getMemberById" resultType="com.kosa.dto.MemberDTO">
         SELECT user_id, password, username, email, date_of_birth, profile_picture_url, user_number
         FROM users

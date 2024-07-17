@@ -45,6 +45,9 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void memberDelete(MemberDTO member) throws Exception {
+        memberMapper.deleteFollowsByFollowerId(member);
+        memberMapper.deleteFollowsByFollowingId(member);
+        memberMapper.deleteReviewsByUserId(member);
         memberMapper.memberDelete(member);
     }
 
