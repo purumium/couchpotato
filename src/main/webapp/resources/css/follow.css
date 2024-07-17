@@ -119,8 +119,9 @@
 
 
 .user-item-img {
-    width: 44px;
-    border-radius: 40px;
+    width: 50px;
+    border-radius: 50%;
+    height: 50px;
 }
 
 .user-item-title {
@@ -151,10 +152,10 @@ input#searchUser {
     border-radius: 10px;
     width: 200px;
     border: 2px solid #8080803b;
-    font-size: 10px;
+    font-size: 11px;
     height: 25px;
-    margin: 5px 0px 4px 163px;
-    padding: 0px 25px;
+    margin: 15px 28px 16px 27px;
+    padding: 1px 47px;
     color: #454141f7;
 }
 
