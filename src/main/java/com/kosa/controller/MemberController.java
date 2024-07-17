@@ -178,7 +178,7 @@ public class MemberController {
         MemberDTO loginMember = (MemberDTO) session.getAttribute("member");
         if (loginMember == null) {
             rttr.addFlashAttribute("msg", "로그인이 필요합니다.");
-            return "redirect:/member/login";
+            return "redirect:/";
         }
 
         // 로그인한 사용자의 정보를 다시 가져와 세션에 업데이트

@@ -45,6 +45,10 @@ public class CalendarController {
 		
 		// 1. 내가 review를 작성한 것이 총 몇 개인지와 유저 이름에 대한 정보
 		Map<String, Object> totalReviews = calendarService.getTotalReviewsByUser(userId);
+	    if (totalReviews == null) {
+	        totalReviews = new HashMap<>();
+	        totalReviews.put("TOTAL_REVIEWS", 0); // 리뷰가 없을 때 기본값 설정
+	    }
 		
         // 2. 각 날짜 별로 몇 개의 review를 작성했는지에 대한 정보(count 개수, 날짜 정보 가지고 오기)
         List<Map<String, Object>> reviewsByDate = calendarService.getReviewByDate(userId);
