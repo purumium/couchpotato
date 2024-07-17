@@ -5,8 +5,6 @@
 <html>
 <head>
     <meta charset="UTF-8">
-
-    <!-- 캐시 제어 설정 -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
     <meta http-equiv="Pragma" content="no-cache"/>
     <meta http-equiv="Expires" content="0"/>
@@ -15,56 +13,52 @@
     <title>마이페이지</title>
 </head>
 <body>
-	<%@ include file="../common/header.jsp"%>
-	<%@ include file="../follow.jsp"%>
+    <%@ include file="../common/header.jsp"%>
+    <%@ include file="../follow.jsp"%>
 
     <div class="mypage-container">
-        <!-- 프로필 섹션 -->
-        <div class="profile-section">
-            <div class="profile-img-wrap">
-                <img src="<c:choose>
-                            <c:when test="${not empty member.profile_picture_url}">
-                                ${member.profile_picture_url}
-                            </c:when>
-                            <c:otherwise>
-                                /resources/images/default-profile.png
-                            </c:otherwise>
-                          </c:choose>" 
-                     alt="Profile Picture" class="profile-img">
-                <button class="edit-btn">수정</button>
+        <div class="outer-div">
+            <div class="left-div">
+                <div class="profile-img-wrap">
+                    <img src="<c:choose>
+                                <c:when test="${not empty member.profile_picture_url}">
+                                    ${member.profile_picture_url}
+                                </c:when>
+                                <c:otherwise>
+                                    /resources/images/default-profile.png
+                                </c:otherwise>
+                              </c:choose>" 
+                         alt="Profile Picture" class="profile-img">
+                    <button class="edit-btn">수정</button>
+                </div>
+                <div class="profile-info">
+                    <p class="username">${member.username}</p>
+                    <p class="email">${member.email}</p>
+                </div>
             </div>
-            <div class="profile-info">
-                <p class="profile-text">user_id : ${member.user_id}</p>
-                <p class="profile-text">email : ${member.email}</p>
-                <p class="profile-text">이름 : ${member.username}</p>
-                <p class="profile-text">생일 : ${member.date_of_birth}</p>
+            <div class="right-div">
+                <div class="user-details">
+                    <p class="user-id">${member.user_id}</p>
+                    <p class="date-of-birth">${member.date_of_birth}</p>
+                </div>
+                <div class="buttons-section">
+                    <div class="circle-btn" id="follower-btn">
+                        <div>${follow_count}</div>
+                        <span>팔로워</span>
+                    </div>
+                    <div class="circle-btn" id="following-btn">
+                        <div>${following_count}</div>
+                        <span>팔로잉</span>
+                    </div>
+                    <div class="circle-btn" id="user-search-btn">
+                        <div>
+                            <img src="/resources/images/usersearch.png" width="25px" alt="user-search">
+                        </div>
+                        <span>사용자 검색</span>
+                    </div>
+                </div>
             </div>
         </div>
-
-		<div class="section">
-			<div>친구 관리</div>
-			<div class="buttons-section">
-				<div class="button-row">
-					<div class="circle-btn" id="follower-btn">
-						<div>${follow_count}</div> <span>팔로워</span>
-					</div>
-
-					<div class="circle-btn" id="following-btn">
-						<div>${following_count}</div> <span>팔로잉</span>
-					</div>
-
-					<div class="circle-btn" id="user-search-btn">
-						<div>
-							<img src="/resources/images/usersearch.png" width="25px"
-								alt="user-search">
-						</div>
-						<span>사용자 검색</span>
-					</div>
-				</div>
-			</div>
-		</div>
-
-        <!-- 비밀번호 변경 및 회원 탈퇴 섹션 -->
         <div class="profile-actions">
             <div class="section">
                 <div>비밀번호 변경</div>
@@ -72,16 +66,19 @@
                     <form id="pwForm" action="../member/update_pw" method="post">
                         <input type="hidden" name="user_id" value="${member.user_id}">
                         <p>
-                            <label>현재 비밀번호</label> <input class="w3-input" id="old_pw" name="old_pw" type="password" required>
+                            <label>현재 비밀번호</label> 
+                            <input class="w3-input" id="old_pw" name="old_pw" type="password" required>
                         </p>
                         <p>
-                            <label>새 비밀번호</label> <input class="w3-input" id="pw" name="pw" type="password" required>
+                            <label>새 비밀번호</label> 
+                            <input class="w3-input" id="pw" name="pw" type="password" required>
                         </p>
                         <p>
-                            <label>새 비밀번호 확인</label> <input class="w3-input" type="password" id="pw2" required>
+                            <label>새 비밀번호 확인</label> 
+                            <input class="w3-input" type="password" id="pw2" required>
                         </p>
                         <p class="w3-center">
-                            <button type="submit" id="joinBtn" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">비밀번호 변경</button>
+                            <button type="submit" id="joinBtn" class="w3-button w3-ripple w3-margin-top w3-round">비밀번호 변경</button>
                         </p>
                     </form>
                 </div>
@@ -93,17 +90,17 @@
                     <form id="deleteForm" action="../member/delete" method="post">
                         <input type="hidden" name="user_id" value="${member.user_id}">
                         <p>
-                            <label for="password">비밀번호</label> <input class="w3-input" id="password" name="password" type="password" required>
+                            <label for="password">비밀번호</label> 
+                            <input class="w3-input" id="password" name="password" type="password" required>
                         </p>
                         <p class="w3-center">
-                            <button type="submit" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">회원탈퇴</button>
+                            <button type="submit" class="w3-button w3-ripple w3-margin-top w3-round">회원탈퇴</button>
                         </p>
                     </form>
                 </div>
             </div>
         </div>
 
-        <!-- 사진 변경 전용 모달 -->
         <div id="profileUpdateModal" class="profileUpdateModal">
             <div class="profileUpdateModal-content">
                 <span class="profileUpdateModal-close">&times;</span>
@@ -119,7 +116,6 @@
 
     <script>
         $(document).ready(function() {
-            // 비밀번호 변경 폼 검사
             $("#pwForm").submit(function(event) {
                 const oldPw = $("#old_pw").val();
                 const newPw = $("#pw").val();
@@ -142,7 +138,6 @@
                 return true;
             });
 
-            // 회원 탈퇴 폼 검사
             $("#deleteForm").submit(function(event) {
                 if (!confirm('정말로 탈퇴하시겠습니까?')) {
                     event.preventDefault();
@@ -151,17 +146,14 @@
                 return true;
             });
 
-            // 프로필 수정 모달 열기
             $(".edit-btn").click(function() {
                 $("#profileUpdateModal").css("display", "block");
             });
 
-            // 모달 닫기
             $(".profileUpdateModal-close").click(function() {
                 $("#profileUpdateModal").css("display", "none");
             });
 
-            // 모달 외부 클릭 시 닫기
             $(window).click(function(event) {
                 if (event.target.id == "profileUpdateModal") {
                     $("#profileUpdateModal").css("display", "none");

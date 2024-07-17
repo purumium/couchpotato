@@ -6,11 +6,31 @@
     gap: 20px;
 }
 
-.profile-section {
+.outer-div {
     display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    gap: 20px; /* 이미지와 텍스트 사이의 간격 */
+    justify-content: center;
+    align-items: flex-start;
+    gap: 50px;
+    border: 1px solid #e9e9e91a;
+    border-radius: 10px;
+    padding: 45px;
+    width: 80%;
+    max-width: 700px;
+    background-color: #b5b5b524;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.left-div {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.right-div {
+    display: flex;
+    flex-direction: column;
+    gap: 52px;
+    flex-grow: 1;
 }
 
 .profile-img-wrap {
@@ -19,57 +39,74 @@
 }
 
 .profile-img {
-    width: 100px; /* 이미지 크기 확대 */
-    height: 100px; /* 이미지 크기 확대 */
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
 }
 
 .edit-btn {
     position: absolute;
-    bottom: 0;
-    left: 50%;
+    bottom: 1px;
+    left: 80%;
     transform: translateX(-50%);
     background-color: #ffffffa6;
     border: 1px solid #c0bbbb;
     padding: 4px;
-    border-radius: 9px;
+    border-radius: 10px;
     cursor: pointer;
-    font-size: 12px; /* 폰트 크기 확대 */
-    letter-spacing: -1px;
+    font-size: 14px;
+    letter-spacing: 0px;
 }
 
-.profile-info .profile-text {
-    font-size: 18px; /* 사용자 정보 글씨 크기 확대 */
-    margin: 5px 0;
-    text-align: left; /* 왼쪽 정렬 */
+.username {
+    font-size: 22px;
+    margin: -5px 0;
+    text-align: left;
+    font-weight: bold;
+}
+
+.email {
+    font-size: 18px;
+    margin: 4px 0;
+    text-align: left;
+}
+
+.user-id {
+    font-size: 77px;
+    font-weight: bold;
+    margin: -20px;
+    text-align: left;
+}
+
+.date-of-birth {
+    font-size: 25px;
+    margin: 9px;
+    text-align: left;
 }
 
 .buttons-section {
-    margin-bottom: 20px;
-}
-
-.button-row {
     display: flex;
-    justify-content: space-around;
+    gap: 63px;
+    justify-content: flex-start;
 }
 
 .circle-btn {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 5px;
     text-align: center;
+    cursor: pointer;
 }
 
-.circle-btn a, .circle-btn div {
+.circle-btn div {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    border-radius: 80%;
     background-color: #f0f0f09c;
-    font-size: 12px;
+    font-size: 30px;
     text-decoration: none;
     color: #5b5b5b;
     margin-bottom: 7px;
@@ -77,21 +114,22 @@
 }
 
 .circle-btn span {
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: -1px;
 }
 
-.circle-btn a:hover, .circle-btn div:hover {
+.circle-btn div:hover {
     background-color: #ffec5857;
-    transform: scale(1.04); /* 크기를 1.05배로 키움 */
+    transform: scale(1.04);
     transition: transform 0.2s ease-in-out;
-    /* 변환 효과에 0.3초 동안의 전환을 주고 부드럽게 만듦 */
 }
 
 .profile-actions {
     display: flex;
     justify-content: center;
     gap: 20px;
+    width: 80%;
+    max-width: 800px;
 }
 
 .section {
@@ -100,26 +138,26 @@
     border: 1px solid #ccc;
     border-radius: 10px;
     background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .w3-input {
-    width: 96%;
-    padding: 6px 10px; /* 패딩 감소 */
-    margin-bottom: 8px;
-    margin: 5px 0px;
+    width: 100%;
+    padding: 8px 10px;
+    margin: 10px 0;
     box-sizing: border-box;
-    border-radius: 6px; /* 둥근 정도를 줄임 */
+    border-radius: 6px;
     border: 1px solid #d7cfcf;
 }
 
 .w3-button {
-    width: 100%; /* 버튼 너비 조정 */
+    width: 100%;
     background-color: #ebebeb87;
     border: 1px solid #c0bbbb;
-    padding: 5px 10px;
+    padding: 10px 0;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 12px; /* 폰트 크기 확대 */
+    font-size: 14px;
     letter-spacing: -1px;
 }
 
@@ -129,7 +167,7 @@
     padding: 4px;
     border-radius: 9px;
     cursor: pointer;
-    font-size: 12px; /* 폰트 크기 확대 */
+    font-size: 12px;
     letter-spacing: -1px;
     width: 63px;
 }
@@ -141,7 +179,6 @@
     color: #808080c4;
 }
 
-/* 모달 스타일 */
 .profileUpdateModal {
     display: none;
     position: fixed;
@@ -170,7 +207,7 @@
     float: right;
     font-size: 28px;
     font-weight: bold;
-    margin-top: -10px; /* 위로 10픽셀 이동 */
+    margin-top: -10px;
 }
 
 .profileUpdateModal-close:hover, .profileUpdateModal-close:focus {
