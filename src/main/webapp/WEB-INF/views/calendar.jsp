@@ -22,80 +22,89 @@
 </head>
 <body>
 
-<div class="calendar-container">
-
-	<div class="left-calendar">
-
+	<div class="calendar-container">
+		<!-- 왼쪽 -->
+		<div class="left-calendar">
 			<div class="left-1">
-				<div class="profile-section"><!-- 프로필 이미지 -->
-					<div>	
-						<img src="<c:choose>
-						                <c:when test="${not empty member.profile_picture_url}">
-						                    	${member.profile_picture_url}
-						                </c:when>
-						                <c:otherwise>
-												/resources/images/nullProfile.png
-		                				</c:otherwise>
-	              				  </c:choose>" alt="profile picture" class="profile-img">
-	          			</div>
-	       			<div class="profile-info">
-		                <div class="profile-name">
-		                	 <span>${member.username}</span>
-		                	 <span>#${member.user_id}</span>
-		                </div>
-		                <div class="profile-text">${member.email}</div>
-		                <div class="profile-text">${member.date_of_birth}</div>
-		            </div>
-				</div>
-				
-				<!-- 각종 클릭 버튼 -->
-			    <div class="buttons-section">	
-			    	 <div class="button-row">
-				    		<!--  1 -->
-				    		<div class="circle-btn" id="following-btn">
-								<div>${following_count}</div> 
-								<span>팔로잉</span>
-							</div>
-							
-							<!-- 2 -->
-				    		<div class="circle-btn" id="follower-btn">
-								<div>${follower_count}</div> 
-								<span>팔로워</span>
-				    		</div>
-	
-				    		<!-- 3 -->
-				    		<div class="circle-btn" id="user-search-btn">
-								<div>
-									<img src="/resources/images/usersearch.png" width="25px"
-										alt="user-search">
-								</div>
-								<span>사용자 검색</span>
-							</div>
-							
-							<!-- 4 -->
-							<div class="circle-btn" id="reviewlist-btn" onclick="location.href='/myreviewlistbymonth'">
-						        <div class="circle-text">${totalReviews.TOTAL_REVIEWS}</div> 
-						        <span>리뷰 리스트</span>
-				    		</div>
+					<div class="profile-section"><!-- 프로필 이미지 -->
+							<div>	
+								<c:set var="profileImageUrl"  value="${not empty member.profile_picture_url ? 
+											member.profile_picture_url : '/resources/images/nullProfile.png'}" />
+								<img src="${profileImageUrl}" alt="profile picture" class="profile-img">
+			          			</div>
+			       			<div class="profile-info">
+				                <div class="profile-name">
+				                	 <span>${member.username}</span>
+				                	 <span>#${member.user_id}</span>
+				                </div>
+				                <div class="profile-text">${member.email}</div>
+				                <div class="profile-text">${member.date_of_birth}</div>
+				            </div>
 					</div>
-			  	</div>
-		    </div>
-		    
-		    <div class="left-2">
-		    	<div>
-		    		<div>
-		    		
-		    		</div>
-		    	</div>
-		    </div>
+					
+					<!-- 각종 클릭 버튼 -->
+				    <div class="buttons-section">	
+					    	 <div class="button-row">
+						    		<!--  1 -->
+						    		<div class="circle-btn" id="following-btn">
+										<div>${following_count}</div> 
+										<span>팔로잉</span>
+									</div>
+									
+									<!-- 2 -->
+						    		<div class="circle-btn" id="follower-btn">
+										<div>${follower_count}</div> 
+										<span>팔로워</span>
+						    		</div>
+			
+						    		<!-- 3 -->
+						    		<div class="circle-btn" id="user-search-btn">
+										<div>
+											<img src="/resources/images/usersearch.png" width="25px"
+												alt="user-search">
+										</div>
+										<span>사용자 검색</span>
+									</div>
+									
+									<!-- 4 -->
+									<div class="circle-btn" id="reviewlist-btn" onclick="location.href='/myreviewlistbymonth'">
+								        <div class="circle-text">${totalReviews.TOTAL_REVIEWS}</div> 
+								        <span>리뷰 리스트</span>
+						    		</div>
+							</div>
+				  	</div>
+			 </div>
+			    
+			 <div class="left-2">
+					<div class="following-container">
+						<div class="follwing-calendar">
+							<span>내 친구 캘린더 보기</span>
+						</div>
+
+					    <c:forEach var="follow" items="${following}">
+						      <div class="following-list-item">
+								      <div class="following-list">
+								      		<c:set var="followImageUrl" value="${not empty follow.profile_picture_url ? 
+								      					follow.profile_picture_url : '/resources/images/nullProfile.png'}" />
+											<img src="${followImageUrl}" alt="follow picture" class="following-img">
+											<div class="following-list-username">${follow.username}</div>
+											<div class="following-list-user-id">#${follow.user_id}</div>
+								      </div>
+								      <div class="following-list-btn">
+												<button type="button">캘린더보기</button>
+									  </div>
+							  </div>
+					    </c:forEach>
+					</div>
+			</div>
 		</div>
-
-
-	<!-- 오른쪽 : 캘린더 -->
-	<div class="right-calendar">
-		<div id="calendar"></div>
+	
+	
+		<!-- 오른쪽 : 캘린더 -->
+		<div class="right-calendar">
+			<div id="calendar"></div>
+		</div>
 	</div>
-</div>
 
 
 

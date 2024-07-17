@@ -95,6 +95,7 @@ public class FollowController {
 		return "follow";// 결과를 follow 페이지에 전달
 	}
 
+	
 	// 내가 팔로우 한 리스트
 	@GetMapping(value = "/follow_list")
 	public String follow_list(Model model, @RequestParam int user_number) throws Exception {
@@ -107,6 +108,7 @@ public class FollowController {
 		return "follow";
 	}
 
+	
 	// 나를 팔로잉한 사람의 수
 	@GetMapping(value = "/test2")
 	private String follow_count(Model model, @RequestParam int user_number) throws Exception {

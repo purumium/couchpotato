@@ -17,16 +17,19 @@
 		WHERE follower_id = #{user_number}
 	</select>
 
-	<!-- 내가 팔로우하는 사람들의 리스트 following_id = u.user_number -->
+
 	<select id="getfollow_list" resultType="UserFollowDTO" 	parameterType="int">
 		SELECT 
-			u.profile_picture_url, u.user_id, f.follower_id, f.following_id
-		FROM follows f JOIN users u 
-		ON f.following_id = u.user_number
-		WHERE f.follower_id = #{user_number}
+			u.profile_picture_url, u.user_id, u.username, f.follower_id, f.following_id
+		FROM 
+			follows f JOIN users u 
+		ON 
+			f.following_id = u.user_number
+		WHERE 
+			f.follower_id =  #{user_number}
 	</select>
 
-	<!-- 나를 팔로잉하는 사람들의 수 -->
+
 	<select id="getfollowers" resultType="int" parameterType="int">
 		select count(*)
 		from follows

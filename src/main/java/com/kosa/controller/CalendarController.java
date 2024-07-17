@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosa.dto.CalendarDTO;
 import com.kosa.dto.MemberDTO;
+import com.kosa.dto.UserFollowDTO;
 import com.kosa.service.CalendarService;
 import com.kosa.service.FollowService;
 
@@ -38,7 +39,7 @@ public class CalendarController {
 		
 		if (loginMember == null) { // 세션에 member 속성이 없으면 로그인 페이지로 리다이렉트
 		        return "redirect:/";
-		    }
+		}
 		
 		String userId = loginMember.getUser_id();	
 		int userNumber = loginMember.getUser_number();
@@ -57,12 +58,17 @@ public class CalendarController {
         int follower_count = followService.getfollowers(userNumber);
         int following_count = followService.getfollowings(userNumber);
 
-        System.out.println("userNumber : " + userNumber);
-        System.out.println(userNumber + ") 내가 팔로우 하는사람 몇 명? : " + follower_count);
-		System.out.println(userNumber+ ") 나를 팔로우 하는사람 몇 명? : " + following_count);
-
+        // 4. 내가 팔로우한 리스트 정보
+        List<UserFollowDTO> following = followService.getfollow_list(userNumber);
+        
+        System.out.println("내가 팔로우한 리스트 정보 ");
+        for (UserFollowDTO user : following) {
+			System.out.println(user.getUser_id() + ", " + user.getUser_number() + ", " + user.getUser_number());
+		}
+        
 		model.addAttribute("follower_count", follower_count);
 		model.addAttribute("following_count", following_count);
+		model.addAttribute("following", following);  // 내가 팔로우한 리스트 정보
         
         model.addAttribute("loginMember", loginMember);
         model.addAttribute("reviewsByDate", reviewsByDate);
