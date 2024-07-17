@@ -38,7 +38,7 @@
             </div>
             <div class="right-div">
                 <div class="user-details">
-                    <p class="user-id">${member.user_id}</p>
+                    <p class="user-id">#${member.user_id}</p>
                     <p class="date-of-birth">${member.date_of_birth}</p>
                 </div>
                 <div class="buttons-section">
