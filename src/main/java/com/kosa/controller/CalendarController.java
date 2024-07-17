@@ -69,6 +69,7 @@ public class CalendarController {
         model.addAttribute("totalReviews", totalReviews);
         
 		return "calendar";  // calendar.jsp로 이동
+		
 	}
 	
 	

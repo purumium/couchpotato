@@ -185,16 +185,16 @@ public class MemberController {
         MemberDTO member = memberservice.getMemberById(loginMember.getUser_id());
         session.setAttribute("member", member);
         
-        int follow_count = service.getfollowings(member.getUser_number());
-        int following_count = service.getfollowers(member.getUser_number());
-
+        // 팔로우, 팔로잉 정보
+        int follower_count = service.getfollowers(member.getUser_number());
+        int following_count = service.getfollowings(member.getUser_number());
 
         
         System.out.println("member.getUser_number() : "+member.getUser_number());
-        System.out.println(loginMember.getUser_id() + ") 내가 팔로우 하는사람 몇 명? : " + follow_count);
-		System.out.println(loginMember.getUser_id() + ") 나를 팔로우 하는사람 몇 명? : " + following_count);
+        System.out.println(loginMember.getUser_id() + ") 내가 팔로우 하는사람 몇 명? : " + following_count);
+		System.out.println(loginMember.getUser_id() + ") 나를 팔로우 하는사람 몇 명? : " + follower_count);
 
-		model.addAttribute("follow_count", follow_count);
+		model.addAttribute("follower_count", follower_count);
 		model.addAttribute("following_count", following_count);
         
         return "/member/mypage";
