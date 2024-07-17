@@ -16,9 +16,9 @@
 <title>마이페이지</title>
 </head>
 <body>
-
 	<%@ include file="../common/header.jsp"%>
 	<%@ include file="../follow.jsp"%>
+
 
 	<div class="mypage-container">
 		<div class="inline-container">
@@ -39,6 +39,7 @@
 					</form>
 				</div>
 			</div>
+
 
 			<div class="section">
 				<div>친구 관리</div>

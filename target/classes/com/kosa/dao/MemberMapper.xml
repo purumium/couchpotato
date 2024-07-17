@@ -22,7 +22,7 @@
 
     <!-- 로그인 -->
     <select id="memberLogin" resultType="com.kosa.dto.MemberDTO">
-        SELECT user_id, password, email, profile_picture_url
+        SELECT user_id, password, email, profile_picture_url, username, date_of_birth, user_number
         FROM users
         WHERE user_id = #{user_id}
     </select>
@@ -49,7 +49,7 @@
     
         <!-- 회원 정보 조회 -->
     <select id="getMemberById" resultType="com.kosa.dto.MemberDTO">
-        SELECT user_id, password, username, email, date_of_birth, profile_picture_url,user_number
+        SELECT user_id, password, username, email, date_of_birth, profile_picture_url, user_number
         FROM users
         WHERE user_id = #{user_id}
     </select>

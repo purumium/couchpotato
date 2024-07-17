@@ -3,6 +3,8 @@ package com.kosa.controller;
 import java.io.File;
 import java.io.IOException;
 
+//github.com/purumium/couchpotato.git
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -38,7 +40,8 @@ public class MemberController {
     private BCryptPasswordEncoder pwEncoder;
     
     @Autowired
-	FollowService service;
+	private FollowService service;
+
 
     // 회원가입 페이지 이동
     @RequestMapping(value = "join", method = RequestMethod.GET)

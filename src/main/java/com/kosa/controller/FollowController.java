@@ -23,32 +23,6 @@ public class FollowController {
 	@Autowired
 	FollowService service;
 
-////	리스트 (통합)
-//	@GetMapping(value = "/follow_lists")
-//	public String follow_lists(Model model, @RequestParam int user_number) throws Exception {
-//		model.addAttribute("user_number", user_number); // 현재 사용자의 user_number를 모델에 추가
-//
-////		user_list
-//		List<UserFollowDTO> user_list = service.user_list(user_number);
-//		System.out.println("user_list 나의 고유번호" + user_number);
-//		System.out.println("user_list 나를 제외한 리스트 : " + user_list);
-//		model.addAttribute("user_list", user_list);
-//
-////		follow_list
-//		List<UserFollowDTO> follow_list = service.getfollow_list(user_number);
-//		System.out.println("나의 고유번호" + user_number);
-//		System.out.println("내가 팔로우 한 리스트 : " + follow_list);
-//		model.addAttribute("follow_list", follow_list);
-//
-////		following_list
-//		List<UserFollowDTO> following_list = service.getfollowing_list(user_number);
-//		System.out.println("나의 고유번호" + user_number);
-//		System.out.println("나를 팔로잉 한 리스트 : " + following_list);
-//		model.addAttribute("following_list", following_list);
-//
-//		return "follow";
-//	}
-
 	// 특정 사용자를 제외한 전체 리스트 가져오기
 	@GetMapping(value = "/user_list")
 	public String user_list(Model model, @RequestParam int user_number) throws Exception {
@@ -88,7 +62,7 @@ public class FollowController {
 		return "follow";// 결과를 follow 페이지에 전달
 	}
 
-//	내가 팔로우 한 리스트 
+	//	내가 팔로우 한 리스트 
 	@GetMapping(value = "/follow_list")
 	public String follow_list(Model model, @RequestParam int user_number) throws Exception {
 

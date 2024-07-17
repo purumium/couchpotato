@@ -2,7 +2,7 @@
 .follow-modal {
     display: none; /* 기본적으로 모달을 숨깁니다 */
     position: fixed; /* 모달을 화면에 고정 */
-    z-index: 1; /* 모달을 최상위 레벨로 설정 */
+    z-index: 6; /* 모달을 최상위 레벨로 설정 */
     left: 0;
     top: 0;
     width: 100%; /* 전체 화면을 차지하도록 설정 */
@@ -15,12 +15,14 @@
 /* 모달 컨텐츠 스타일 */
 .follow-modal-content {
     background-color: #fefefe; /* 배경색을 흰색으로 설정 */
-    margin: 15% auto; /* 화면 중앙에 배치 */
-    padding: 20px; /* 내부 여백 설정 */
+    margin: 4% auto; /* 화면 중앙에 배치 */
+    padding: 20px 22px 0px 26px; /* 내부 여백 설정 */
     border: 1px solid #888; /* 테두리 설정 */
-    width: 80%; /* 너비를 80%로 설정 */
+    width: 35%; /* 너비를 80%로 설정 */
     border-radius: 10px; /* 모서리를 둥글게 설정 */
     box-shadow: 0 0 10px rgba(0,0,0,0.1); /* 그림자 설정 */
+    height: 485px;
+    overflow: auto;
 }
 
 /* 모달 닫기 버튼 스타일 */
@@ -52,17 +54,20 @@
     border: none; /* 테두리를 제거합니다 */
     padding: 10px; /* 내부 여백을 설정합니다 */
     cursor: pointer; /* 마우스 커서를 포인터로 변경합니다 */
-    font-size: 16px; /* 글자 크기를 16px로 설정합니다 */
+    font-size: 13px; /* 글자 크기를 16px로 설정합니다 */
+    font-weight: 600;
 }
 
 /* 탭 버튼에 마우스를 올렸을 때의 스타일을 지정합니다 */
 .tab-button:hover {
+    border-bottom: 3px solid #808080ad;
     background: #f0f0f0; /* 배경색을 연한 회색으로 변경합니다 */
 }
 
 /* 콘텐츠 컨테이너의 스타일을 지정합니다 */
 .content-container {
-    padding: 20px; /* 내부 여백을 20px로 설정합니다 */
+    /* padding: 20px; */ /* 내부 여백을 20px로 설정합니다 */
+    /* overflow-y: auto; */
 }
 
 /* 콘텐츠 섹션의 기본 스타일을 지정합니다 */

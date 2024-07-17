@@ -11,9 +11,9 @@
         <div class="follow-modal-body">
             <div class="tab-container">
                 <!-- 탭 버튼을 클릭하면 showSection 함수 호출 -->
-                <button class="tab-button" onclick="showSection('follower-section')">팔로워 리스트</button>
-                <button class="tab-button" onclick="showSection('following-section')">팔로잉 리스트</button>
-                <button class="tab-button" onclick="showSection('user-section')">전체 사용자 리스트</button>
+                <button class="tab-button" onclick="showSection('follower-section')">팔로워</button>
+                <button class="tab-button" onclick="showSection('following-section')">팔로잉</button>
+                <button class="tab-button" onclick="showSection('user-section')">사용자 검색</button>
             </div>
             <div class="content-container">
                 <div id="follower-section" class="content-section"></div> <!-- 팔로워 리스트 섹션 -->
@@ -28,8 +28,45 @@
 </div>
 
 <script>
+	$(document).ready(function() {
+	    // 사용자 검색 버튼
+	    $('#user-search-btn').click(function() {
+	        openModal();
+	        showSection('user-section'); // 사용자 검색 섹션 표시
+	    });
+	
+	    // 팔로잉 버튼
+	    $('#following-btn').click(function() {
+	        openModal();
+	        showSection('following-section'); // 팔로잉 섹션 표시
+	    });
+	
+	    // 팔로워 버튼
+	    $('#follower-btn').click(function() {
+	        openModal();
+	        showSection('follower-section'); // 팔로워 섹션 표시
+	    });
+	
+	    // 모달 닫기 버튼
+	    $('#follow-close').click(function() {
+	        closeModal();
+	    });
+	    
+		// 모달 열기
+		function openModal() {
+		    $('#followModal').css('display', 'block');
+		}
+		
+		// 모달 닫기
+		function closeModal() {
+		    $('#followModal').css('display', 'none');
+		    location.reload();
+		}    
+	});
+	
+	
     // 전역 변수로 선언 (현재 로그인한 사용자의 user_number)
-    const userNumber = 21;
+    const userNumber = 82;
     let userList = [];
     let followList = [];
     let followingList = [];
@@ -64,6 +101,7 @@
                 renderFollowLists(followList); // 팔로워 및 팔로잉 리스트 렌더링             
                 renderFollowLists2(followingList); // 팔로워 및 팔로잉 리스트 렌더링
                 displayUsers(userList); // 사용자 리스트 표시 함수 호출
+                console.log("잠와죽겠노 ")
             },
             error: function(xhr, status, error) { // 요청이 실패하면 실행
                 alert('팔로워 리스트와 팔로잉 리스트를 가져오는 데 실패했습니다.');
@@ -102,16 +140,22 @@
 
         // 팔로잉 리스트 출력
         followingList.forEach(function(following) {
+        	 // 현재 사용자가 팔로우하는 사람인지 확인
             let isMutualFollow = followList.some(function(follower) {
                 return following.user_number === follower.user_number;
+                console.log(isMutualFollow+"isMutualFollow")
             });
 
             followingHtml += '<div class="following-item">';
             followingHtml += '<div class="following-name">' + following.profile_picture_url + ' (' + following.user_id + ')</div>';
             if (isMutualFollow) {
+                // 맞팔 상태인 경우 팔로우 취소 버튼 추가
                 followingHtml += '<button class="mutual-follow-btn" onclick="unfollowUser(' + following.follower_id + ', this)">팔로우 취소</button>';
+                console.log("맞팔상태")
             } else {
+            	 // 맞팔 상태가 아닌 경우 팔로우 버튼 추가
                 followingHtml += '<button class="follow-btn" onclick="followUser(' + following.follower_id + ', this)">팔로우</button>';
+                console.log("맞팔아님")
             }
             followingHtml += '</div>';
         });
@@ -137,7 +181,7 @@
             let isFollower = followList.some(function(following) {
                 return following.user_number === user.user_number;
             });
-
+            console.log("전체리스트 불러오기 ")
             userHtml += '<div class="user-item">';
             userHtml += '<div class="user-name">' + user.profile_picture_url + ' (' + user.user_id + ')</div>';
             if (isFollowing) {
@@ -150,6 +194,8 @@
 
         $('#user-list').html(userHtml);
     }
+    
+    
 
  // 팔로우 취소 함수 (맞팔한 친구 - 팔로우 해제)
     function unfollowUser(following_id, button) {
@@ -166,11 +212,12 @@
             data: JSON.stringify(obj),
             success: function(response) {
                 alert('팔로우를 취소했습니다.');
+                console.log("팔로우취소후 ")
                 $(button).text('팔로우');
                 $(button).removeClass('mutual-follow-btn').addClass('follow-btn');
+                	console.log("팔로우버튼 바꿀예정 ")
                 $(button).attr('onclick', 'followUser(' + following_id + ', this)');
-                
-                // 팔로워 리스트에서 제거
+
                 followList = followList.filter(follow => follow.user_number !== following_id);
                 
             },
@@ -180,7 +227,7 @@
         });
     }
 
-    // 팔로우 함수
+//     팔로우 함수
     function followUser(following_id, button) {
         const obj = {
             user_number: userNumber,
@@ -211,6 +258,5 @@
             }
         });
     }
-
 
 </script>
