@@ -29,7 +29,7 @@
 .right-div {
     display: flex;
     flex-direction: column;
-    gap: 52px;
+    gap: 22px;
     flex-grow: 1;
 }
 
@@ -72,15 +72,15 @@
 }
 
 .user-id {
-    font-size: 77px;
+    font-size: 64px;
     font-weight: bold;
-    margin: -20px;
+    margin: -19px;
     text-align: left;
 }
 
 .date-of-birth {
-    font-size: 25px;
-    margin: 9px;
+    font-size: 28px;
+    margin: 20px;
     text-align: left;
 }
 

@@ -22,9 +22,12 @@ public interface MemberMapper {
 	// 비밀번호 변경
 	public void updatePassword(MemberDTO member);
 
-	// 회원 탈퇴
-	public void memberDelete(MemberDTO member);
-
 	// 회원 정보 조회 (프로필 null)
 	public MemberDTO getMemberById(String user_id);
+	
+	// 회원 탈퇴
+	public void deleteFollowsByFollowerId(MemberDTO member);
+	public void deleteFollowsByFollowingId(MemberDTO member);
+	public void deleteReviewsByUserId(MemberDTO member);
+	public void memberDelete(MemberDTO member);
 }

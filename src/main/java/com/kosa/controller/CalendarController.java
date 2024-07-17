@@ -39,7 +39,7 @@ public class CalendarController {
 		
 		if (loginMember == null) { // 세션에 member 속성이 없으면 로그인 페이지로 리다이렉트
 		        return "redirect:/";
-		    }
+		}
 		
 		String userId = loginMember.getUser_id();	
 		int userNumber = loginMember.getUser_number();
@@ -75,6 +75,7 @@ public class CalendarController {
         model.addAttribute("totalReviews", totalReviews);
         
 		return "calendar";  // calendar.jsp로 이동
+		
 	}
 	
 	
