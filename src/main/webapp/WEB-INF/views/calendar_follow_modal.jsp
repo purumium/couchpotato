@@ -11,7 +11,7 @@
                 	 src="/resources/images/popcornpotato.png" width="50px;">
                 <div class="friend-title">
 	                <span class="friend-name"> </span> 
-	                <span class="friend-name2">' S REVIEW CALENDAR</span>
+	                <span class="friend-name2">의 리뷰 캘린더</span>
                 </div>
             </div>
             <span id="close-follow-modal" class="followCalendar-close">&times;</span>
@@ -132,6 +132,7 @@
 				console.log(detailData);
 				
 				detailData.forEach(function(data) {
+					// 
 					resultHtml += '<div class="follow-review-item">'
 							            + '<img src="https://image.tmdb.org/t/p/w300/' + data.content_image_url + '" alt="Movie Thumbnail" class="follow-review-img">'
 							            + '<div class="follow-review-contents">'
@@ -144,12 +145,12 @@
 							                        + '<img src="resources/images/rating_star.png" width="10px;">'
 							                        + data.rating
 							                    + '</div>'
-							                    + '<div class="follow-review-create-at">'
-							                        + data.review_create_at
-							                    + '</div>'
 							                + '</div>' // follow-review-title-rate 닫기
+						                    + '<div class="follow-review-create-at">'
+						                        + data.review_create_at
+						                    + '</div>'
 							            + '</div>' // follow-review-contents 닫기
-							        + '</div>'; // follow-review-item 닫기
+							      + '</div>'; // follow-review-item 닫기
                    console.log(resultHtml);
 	            });
 	            $('#followContent-modal-body').html(resultHtml);

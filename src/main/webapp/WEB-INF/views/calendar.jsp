@@ -158,7 +158,7 @@
 
 					contentsDetailsByDate(clickedDate); // 특정 날짜에 대한 영화 정보 가져오기
 				}
-			}); // end fullCalendar
+			});
 
 			// 날짜별 상세 리뷰 보는 1번 모달창 닫기
 			$('#close').click(function() {
@@ -179,94 +179,92 @@
 		
 		function contentsDetailsByDate(clickedDate) {
 			$.ajax({
-						url : '/getcontentdetail', // db에서 영화 정보 가져오는 URL
-						type : 'GET', // 요청 방식
-						data : {
-							date : clickedDate
-						},
-						success : function(detailData) {
-							// JSON 데이터 파싱
-							var resultHtml = '';
-							var review_date = '';
+					url : '/getcontentdetail', // db에서 영화 정보 가져오는 URL
+					type : 'GET', // 요청 방식
+					data : { date : clickedDate },
+					success : function(detailData) {
+						// JSON 데이터 파싱
+						var resultHtml = '';
+						var review_date = '';
 
-							// 조건: 해당 날짜에 데이터가 있는 경우에는 모달에 출력해주고, 데이터가 없을 경우 모달 숨기기 
-							if (detailData.length > 0) {
-								detailData.forEach(function(data) { // 반복문          
-									var reviewCountView = data.review_count_byname >= 2 ? ''
-											: 'style="display: none;"';
+						// 조건: 해당 날짜에 데이터가 있는 경우에는 모달에 출력해주고, 데이터가 없을 경우 모달 숨기기 
+						if (detailData.length > 0) {
+							detailData.forEach(function(data) { // 반복문          
+								var reviewCountView = data.review_count_byname >= 2 ? ''
+										: 'style="display: none;"';
 
-									resultHtml += '<div class="review-item">'
-											+ '<img src="https://image.tmdb.org/t/p/w300/' + data.content_image_url +  ' alt="Movie Thumbnail" class="review-img">'
-											+ '<div class="review-contents">'
-											+ '<div class="review-title-rate">'
-											+	
-											'<div class="review-title"> '
-											+ '<a href="/movie/detail/' + data.content_type + '/' + data.content_id + '">'
-											+ data.content_name
-											+ '</a> </div>'
-											+ '<div class="review-rating"> <img src="resources/images/rating_star.png" width="8px;">'
-											+ data.rating
-											+ '</div>'
-											+ '<div class="review-count"' + reviewCountView + '> <img src="/resources/images/glass.png">'
-											+ data.review_count_byname
-											+ '회차 </div>'
-											+ '</div>'
-											+ '<div class="review-text">'
-											+ data.review_text
-											+ '</div>'
-											+ '</div>'
-											+ '<div class="review-edit-time">'
-											+ '<div class="button-group">'
-											+ ' <button class="edit-btn" onclick="openEditModal(\''
-											+ data.content_name
-											+ '\', \''
-											+ data.review_create_at
-											+ '\', \''
-											+ data.review_text
-											+ '\', \''
-											+ data.rating
-											+ '\', \''
-											+ data.content_id
-											+ '\', \''
-											+ data.content_type
-											+ '\')">수정</button>'
-											+ '<button class="delete-btn" onclick="deleteReview(\''
-											+ data.content_id
-											+ '\', \''
-											+ data.content_type
-											+ '\', \''
-											+ data.review_create_at
-											+ '\')">삭제</button>'
-											+ '</div>'
-											+ '<div class="review-time">'
-											+ data.review_create_at
-											+ '</div>'
-											+ '</div>'
-											+ '</div>';
-								});
+								resultHtml += '<div class="review-item">'
+										+ '<img src="https://image.tmdb.org/t/p/w300/' + data.content_image_url +  ' alt="Movie Thumbnail" class="review-img">'
+										+ '<div class="review-contents">'
+										+ '<div class="review-title-rate">'
+										+	
+										'<div class="review-title"> '
+										+ '<a href="/movie/detail/' + data.content_type + '/' + data.content_id + '">'
+										+ data.content_name
+										+ '</a> </div>'
+										+ '<div class="review-rating"> <img src="resources/images/rating_star.png" width="8px;">'
+										+ data.rating
+										+ '</div>'
+										+ '<div class="review-count"' + reviewCountView + '> <img src="/resources/images/glass.png">'
+										+ data.review_count_byname
+										+ '회차 </div>'
+										+ '</div>'
+										+ '<div class="review-text">'
+										+ data.review_text
+										+ '</div>'
+										+ '</div>'
+										+ '<div class="review-edit-time">'
+										+ '<div class="button-group">'
+										+ ' <button class="edit-btn" onclick="openEditModal(\''
+										+ data.content_name
+										+ '\', \''
+										+ data.review_create_at
+										+ '\', \''
+										+ data.review_text
+										+ '\', \''
+										+ data.rating
+										+ '\', \''
+										+ data.content_id
+										+ '\', \''
+										+ data.content_type
+										+ '\')">수정</button>'
+										+ '<button class="delete-btn" onclick="deleteReview(\''
+										+ data.content_id
+										+ '\', \''
+										+ data.content_type
+										+ '\', \''
+										+ data.review_create_at
+										+ '\')">삭제</button>'
+										+ '</div>'
+										+ '<div class="review-time">'
+										+ data.review_create_at
+										+ '</div>'
+										+ '</div>'
+										+ '</div>';
+							});
 
-								if (detailData.length > 2) {
-									$('.modal-content').css('height', '370px');
-									$('.modal-content').css('margin',
-											'11% auto');
-									$('.modal-body').css('overflow-y', 'auto');
-								}
+// 							if (detailData.length > 2) {
+// 								$('.modal-content').css('height', '370px');
+// 								$('.modal-content').css('margin',
+// 										'11% auto');
+// 								$('.modal-body').css('overflow-y', 'auto');
+// 							}
 
-								// 모달 바디에 결과 HTML 삽입
-								$('#modal-body').html(resultHtml);
-								// 모달 표시
-								$('#myModal').css('display', 'block');
-								
-							} else {
-								// 데이터가 없을 경우 모달 숨기기
-								$('#myModal').css('display', 'none');
-								location.reload(); // 화면 새로고침, calendar.jsp 화면을 다시 불러옴
-							}
-						},
-						error : function(xhr, status, error) {
-							alert('영화 정보를 불러오는 데 실패했습니다.');
+							// 모달 바디에 결과 HTML 삽입
+							$('#modal-body').html(resultHtml);
+							// 모달 표시
+							$('#myModal').css('display', 'block');
+							
+						} else {
+							// 데이터가 없을 경우 모달 숨기기
+							$('#myModal').css('display', 'none');
+							location.reload(); // 화면 새로고침, calendar.jsp 화면을 다시 불러옴
 						}
-					});
+					},
+					error : function(xhr, status, error) {
+						alert('영화 정보를 불러오는 데 실패했습니다.');
+					}
+				});
 		}
 
 		
