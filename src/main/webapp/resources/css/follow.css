@@ -144,11 +144,12 @@
 }
 
 .search-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 13px 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 10px 0px;
 }
+
 
 input#followSearchContainer {
     border-radius: 10px;
