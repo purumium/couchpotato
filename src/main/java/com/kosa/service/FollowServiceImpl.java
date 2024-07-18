@@ -29,7 +29,6 @@ public class FollowServiceImpl implements FollowService {
         List<UserFollowDTO> user_list;
         try {
             user_list = mapper.user_list(user_number);
-            System.out.println("Mapper에서 가져온 user_list: " + user_list);
         } catch (Exception e) {
             log.info(e.getMessage());
             throw e;
@@ -56,7 +55,6 @@ public class FollowServiceImpl implements FollowService {
         List<UserFollowDTO> follow_list;
         try {
             follow_list = mapper.getfollow_list(user_number);
-            System.out.println("Mapper에서 가져온 follow_list: " + follow_list);
         } catch (Exception e) {
             log.info(e.getMessage());
             throw e;
@@ -83,7 +81,6 @@ public class FollowServiceImpl implements FollowService {
         List<UserFollowDTO> following_list;
         try {
             following_list = mapper.getfollowing_list(user_number);
-            System.out.println("Mapper에서 가져온 getfollowing_list: " + following_list);
         } catch (Exception e) {
             log.info(e.getMessage());
             throw e;
