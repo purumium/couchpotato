@@ -5,12 +5,13 @@
 <%@ page import="java.io.IOException"%>
 <%@ page import="com.fasterxml.jackson.core.type.TypeReference"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/detail.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/calendar_modal.css?v=1.0" />
 <title>TV Show Details</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -368,6 +369,7 @@ $(document).ready(function() {
 										<div class="review-title-rate">
 											<div class="review-title user-id" style="font-size: 16px">${review.userId}</div>
 											<div class="review-rating">${review.rating}</div>
+											<div class="edit_review_create_at" style="margin-left:10px;">${fn:substringBefore(review.create_at, ' ')}</div>
 										</div>
 										<div class="review-text" style="font-size: 14px">${review.reviewContent}</div>
 									</div>
