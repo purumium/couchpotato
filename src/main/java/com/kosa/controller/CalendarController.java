@@ -48,6 +48,7 @@ public class CalendarController {
 		Map<String, Object> totalReviews = calendarService.getTotalReviewsByUser(userId);
 	    if (totalReviews == null) {
 	        totalReviews = new HashMap<>();
+	        
 	        totalReviews.put("TOTAL_REVIEWS", 0); // 리뷰가 없을 때 기본값 설정
 	    }
 		
@@ -112,6 +113,16 @@ public class CalendarController {
 		}
 	    
 	    return calendarlist; // JSON 형태로 반환됨
+	}
+	
+	
+	@GetMapping("/getFriendCalendarByDate")
+	@ResponseBody
+	public List<Map<String, Object>> getFriendCalendar(@RequestParam("userId") String userId, Model model) {
+        // 각 날짜 별로 몇 개의 review를 작성했는지에 대한 정보(count 개수, 날짜 정보 가지고 오기)
+        List<Map<String, Object>> freindReviewsByDate = calendarService.getReviewByDate(userId);
+		
+		return freindReviewsByDate;
 	}
 	
 	
