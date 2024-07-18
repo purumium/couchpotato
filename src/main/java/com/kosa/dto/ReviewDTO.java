@@ -14,6 +14,7 @@ public class ReviewDTO {
     private String reviewContent;
     private double rating;
     private String imgurl;
+    private String create_at;
 
     // Getter와 Setter는 생략했습니다. 필요시 추가하세요.
 }
