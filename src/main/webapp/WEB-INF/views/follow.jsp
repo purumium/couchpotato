@@ -104,7 +104,6 @@
                 renderFollowLists(followList); // 팔로워 및 팔로잉 리스트 렌더링             
                 renderFollowLists2(followingList); // 팔로워 및 팔로잉 리스트 렌더링
                 displayUsers(userList); // 사용자 리스트 표시 함수 호출
-                console.log("잠와죽겠노 ")
             },
             error: function(xhr, status, error) { // 요청이 실패하면 실행
                 alert('팔로워 리스트와 팔로잉 리스트를 가져오는 데 실패했습니다.');
@@ -118,7 +117,7 @@
     // 팔로워 리스트 렌더링 함수
     function renderFollowLists(followList) {
         let followerHtml = '';
-		console.log("followList"+followList);
+
         // 팔로워 리스트 출력
         followList.forEach(function(follower) {
 
@@ -147,7 +146,6 @@
         	 // 현재 사용자가 팔로우하는 사람인지 확인
             let isMutualFollow = followList.some(function(follower) {
                 return following.user_id === follower.user_id;
-                console.log(isMutualFollow+"isMutualFollow")
             });
         	 
            	followingHtml += '<div class="user-item">' +
@@ -161,11 +159,9 @@
 			if (isMutualFollow) {
 				// 맞팔 상태인 경우 팔로우 취소 버튼 추가
 				followingHtml += '<button class="user-item-btn" onclick="unfollowUser(' + following.follower_id + ', this)">팔로우 취소</button>';
-				console.log("맞팔상태");
 			} else {
 				// 맞팔 상태가 아닌 경우 팔로우 버튼 추가
 				followingHtml += '<button class="user-item-btn" onclick="followUser(' + following.follower_id + ', this)">팔로우</button>';
-				console.log("맞팔아님");
 			}
 			
 			followingHtml += '</div>';
@@ -185,13 +181,10 @@
     // 전체사용자 리스트 표시 함수
     function displayUsers(users) {
         let userHtml = '';
-        console.log(followingList);
-        console.log(users);
+
         users.forEach(function(user) {
             let isFollowing = followList.some(function(follow) {
             	
-            	console.log(follow.user_number);
-            	console.log(user.user_number);
                 return follow.user_id === user.user_id;
             });
 
@@ -221,9 +214,7 @@
 
     // 팔로우 취소 함수 (맞팔한 친구 - 팔로우 해제)
        function unfollowUser(following_id, button) {
-       	console.log("세션 테스트");
-       	console.log(following_id);
-   		console.log(userNumber);
+
            const obj = {
            		
                user_number: userNumber,
@@ -238,10 +229,10 @@
                data: JSON.stringify(obj),
                success: function(response) {
                    alert('팔로우를 취소했습니다.');
-                   console.log("팔로우취소후 ")
+
                    $(button).text('팔로우');
                    $(button).removeClass('mutual-follow-btn').addClass('follow-btn');
-                   	console.log("팔로우버튼 바꿀예정 ")
+ 
                    $(button).attr('onclick', 'followUser(' + following_id + ', this)');
 
                    followList = followList.filter(follow => follow.user_number !== following_id);

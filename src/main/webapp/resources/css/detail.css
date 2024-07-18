@@ -6,9 +6,9 @@ body {
 
 
 .total-container {
-    margin: 35px auto 21px;
+    margin: 40px auto 21px;
     border: 1px solid #80808042;
-    padding: 40px 8px;
+    padding: 20px 8px;
     width: 1070px;
     height: auto;
     border-radius: 12px;
@@ -244,7 +244,7 @@ body {
 	background-color: #f9f9f9fa;
 	border: 1px solid #c0bbbbad;
 	padding: 10px 38px;
-	border-radius: 12px;
+	border-radius: 20px;
 	cursor: pointer;
 	letter-spacing: 0px;
 	font-size: 13px;
@@ -287,7 +287,19 @@ body {
 	padding: 20px 10px; /* 줄인 패딩 */
 	display: flex;
 	flex-wrap: wrap; /* 요소가 넘칠 경우 줄바꿈 */
-	gap: 10px; /* 각 요소 사이의 간격 설정 */
+	gap: 27px; /* 각 요소 사이의 간격 설정 */
+}
+
+.review-container2 {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 20px 10px; /* 줄인 패딩 */
+	display: flex;
+	flex-wrap: wrap; /* 요소가 넘칠 경우 줄바꿈 */
+	gap: 13px;
 }
 
 .review-container {
@@ -474,6 +486,35 @@ body {
 
 
 
+
+.hidden {
+	display: none;
+}
+
+.reviewFilter {
+    text-align: center;
+    background-color: #f9f9f96b;
+    border: 1px solid #c0bbbbad;
+    border-radius: 23px;
+    cursor: pointer;
+    letter-spacing: 0px;
+    font-size: 13px;
+    color: #211818;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: background-color 0.3s;
+    padding: 9px 37px;
+    width: 150px;
+}
+
+.reviewFilter:hover {
+	background-color: #d8d6cabd;
+}
+
+
+
+
+
 .review-container {
 	width: calc(32% - 20px); /* 한 줄에 3개씩 정렬 */
 	padding: 10px;
@@ -492,7 +533,7 @@ body {
 	display: flex;
 	align-items: center;
 	background-color: #f5f5f5;
-	border-radius: 10px;
+	border-radius: 15px;
 	padding: 18px 15px;
 	margin: 0px 8px 20px 0px;
 }
@@ -514,7 +555,7 @@ body {
     align-items: center;
     justify-content: normal;
     border-bottom: 1px solid #80808063;
-    padding: 0px 0px 4px 11px;
+    padding: 0px 0px 7px 11px;
 }
 
 
@@ -527,12 +568,12 @@ body {
 
 .review-rating {
     margin-left: 10px;
-    font-size: 10px;
+    font-size: 13px;
     color: gray;
-    padding: 0px 15px;
-    line-height: 17px;
+    padding: 0px 9px;
+    letter-spacing: 1px;
     border-radius: 20px;
-    border: 1px solid #e5e53a;
+    border: 1px solid #b3b337;
     background-color: #f9f98238;
     text-align: center;
     font-weight: bold;
@@ -568,7 +609,6 @@ body {
 .review-text {
 	color: #777;
 	margin: 8px;
-	font-size: 13px;
 	letter-spacing: -1px;
 	line-height: 20px;
 }
@@ -587,6 +627,5 @@ body {
 .review-title.user-id {
     font-size: 15px;
     font-weight: bold;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 }
-

@@ -1,9 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ include file="common/header.jsp"%>
-<%@ include file="follow.jsp"%>
+<%@ include file="common/calendar_header.jsp"%>
 <%@ include file="calendar_modal.jsp"%>
+<%@ include file="calendar_follow_modal.jsp"%>
+<%@ include file="follow.jsp"%>
 
 <!DOCTYPE html>
 <html>
@@ -60,7 +61,7 @@
 						    		<!-- 3 -->
 						    		<div class="circle-btn" id="user-search-btn">
 										<div>
-											<img src="/resources/images/usersearch.png" width="25px"
+											<img src="/resources/images/usersearch.png" width="30px"
 												alt="user-search">
 										</div>
 										<span>사용자 검색</span>
@@ -75,27 +76,41 @@
 				  	</div>
 			 </div>
 			    
-			 <div class="left-2">
-					<div class="following-container">
-						<div class="follwing-calendar">
-							<span>내 친구 캘린더 보기</span>
-						</div>
-
-					    <c:forEach var="follow" items="${following}">
-						      <div class="following-list-item">
-								      <div class="following-list">
-								      		<c:set var="followImageUrl" value="${not empty follow.profile_picture_url ? 
-								      					follow.profile_picture_url : '/resources/images/nullProfile.png'}" />
-											<img src="${followImageUrl}" alt="follow picture" class="following-img">
-											<div class="following-list-username">${follow.username}</div>
-											<div class="following-list-user-id">#${follow.user_id}</div>
-								      </div>
-								      <div class="following-list-btn">
-												<button type="button">캘린더보기</button>
-									  </div>
-							  </div>
-					    </c:forEach>
-					</div>
+			<div class="left-2">
+			    <div class="following-container">
+			        <div class="following-calendar-header">
+			            <span>내 친구 캘린더 보기</span>
+			        </div>
+			        
+			        <div class="following-list-container">
+			            <c:choose>
+			                <c:when test="${empty following}">
+			                    <div class="following-list-empty">
+			                        <img src="/resources/images/nofollow.png" width="200px">
+			                    </div>
+			                </c:when>
+			
+			                <c:otherwise>
+			                    <c:forEach var="follow" items="${following}">
+			                        <div class="following-list-item">
+			                            <div class="following-list">
+			                                <c:set var="followImageUrl" value="${not empty follow.profile_picture_url ? 
+			                                    follow.profile_picture_url : '/resources/images/nullProfile.png'}" />
+			                                <img src="${followImageUrl}" alt="follow picture" class="following-img">
+			                                <div class="following-list-username">${follow.username}</div>
+			                                <div class="following-list-user-id">#${follow.user_id}</div>
+			                            </div>
+			                            <div class="following-list-btn">
+			                                <button type="button" data-userid ="${follow.user_id}" id="following-list-btn">
+			                                		캘린더보기
+	                                		</button>
+			                            </div>
+			                        </div>
+			                    </c:forEach>
+			                </c:otherwise>
+			            </c:choose>
+			        </div>
+			    </div>
 			</div>
 		</div>
 	
@@ -160,6 +175,7 @@
 
 		}); // end document
 
+		
 		function contentsDetailsByDate(clickedDate) {
 			$.ajax({
 						url : '/getcontentdetail', // db에서 영화 정보 가져오는 URL
@@ -239,6 +255,7 @@
 								$('#modal-body').html(resultHtml);
 								// 모달 표시
 								$('#myModal').css('display', 'block');
+								
 							} else {
 								// 데이터가 없을 경우 모달 숨기기
 								$('#myModal').css('display', 'none');
@@ -251,6 +268,7 @@
 					});
 		}
 
+		
 		function deleteReview(contentId, contentType, reviewCreateAt) {
 			// JavaScript 객체
 			const obj = {
@@ -276,6 +294,7 @@
 			})
 		}
 
+		
 		function openEditModal(contentName, reviewCreateAt, reviewText, rating,
 				contentId, contentType) {
 			$('#edit_content_id').val(contentId);
@@ -305,9 +324,6 @@
 				review_create_at : reviewCreateAt,
 				rating : rating
 			};
-
-			console.log("제출하는 중 --- ");
-			console.log(modifiedData);
 
 			$.ajax({
 				url : '/modifyreview',

@@ -16,6 +16,7 @@
 	</div>
 </div>
 
+
 <!-- 두번째 모달(수정하는 모달) -->
 <div id="editModal" class="edit-modal">
 	<div class="edit-modal-content">
