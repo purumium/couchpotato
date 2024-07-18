@@ -62,10 +62,6 @@ public class CalendarController {
         // 4. 내가 팔로우한 리스트 정보
         List<UserFollowDTO> following = followService.getfollow_list(userNumber);
         
-        System.out.println("내가 팔로우한 리스트 정보 ");
-        for (UserFollowDTO user : following) {
-			System.out.println(user.getUser_id() + ", " + user.getUser_number() + ", " + user.getUser_number());
-		}
         
 		model.addAttribute("follower_count", follower_count);
 		model.addAttribute("following_count", following_count);
@@ -118,13 +114,45 @@ public class CalendarController {
 	
 	@GetMapping("/getFriendCalendarByDate")
 	@ResponseBody
-	public List<Map<String, Object>> getFriendCalendar(@RequestParam("userId") String userId, Model model) {
+	public List<Map<String, Object>> getFriendCalendar(@RequestParam("followUserId") String userId, Model model) {
         // 각 날짜 별로 몇 개의 review를 작성했는지에 대한 정보(count 개수, 날짜 정보 가지고 오기)
         List<Map<String, Object>> freindReviewsByDate = calendarService.getReviewByDate(userId);
+        
+	    System.out.println("친구의 총 컨텐츠 가지고 오기 : " + userId);
+		
+	    for (Map<String, Object> review : freindReviewsByDate) {
+	        System.out.println("Review : ");
+	        for (Map.Entry<String, Object> entry : review.entrySet()) {
+	            System.out.println(entry.getKey() + ": " + entry.getValue());
+	        }
+	    }
+        
 		
 		return freindReviewsByDate;
 	}
 	
+	
+	// 각 날짜에 맞는 상세 리뷰 정보
+	@GetMapping("/getfriendcontentdetail")
+	@ResponseBody
+	public List<CalendarDTO> getfriendcontentdetail(
+				@RequestParam("date") String reviewCreateAt, @RequestParam("userId") String userId) {
+		
+		// userid와 리뷰 날짜를 넘겨서 콘텐츠 상세 정보 가지고 오기
+		CalendarDTO calDto = new CalendarDTO();
+		calDto.setUser_id(userId);
+		calDto.setReview_create_at(reviewCreateAt);
+		
+	    List<CalendarDTO> follwerContentByDate = calendarService.getContentDetailByDate(calDto);
+	    
+	    System.out.println("친구의 컨텐츠 가지고 오기 : " + userId);
+		
+	    for (CalendarDTO c : follwerContentByDate) {
+			System.out.println(c.getContent_name() + ", " + c.getRating() + ", " + c.getReview_create_at() );
+		}
+	    
+	    return follwerContentByDate; // JSON 형태로 반환됨
+	}
 	
 	
 	@PostMapping("/deletereview")

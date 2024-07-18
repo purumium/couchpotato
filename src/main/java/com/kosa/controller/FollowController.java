@@ -37,23 +37,18 @@ public class FollowController {
 
 		// 본인 제외 전체 사용자 리스트 가져오기--ㅇ
 		List<UserFollowDTO> user_list = service.user_list(user_number);
-		System.out.println("--전체 리스트 가져오기" + user_list);
 
 		// 내가 팔로우한 사람의 수
 		int follow_count = service.getfollowings(user_number);
-		System.out.println("--내가 팔로우 한 사람의 수" + follow_count);
 
 		// 내가 팔로우 한 사람 리스트
 		List<UserFollowDTO> follow_list = service.getfollow_list(user_number);
-		System.out.println("--내가 팔로우 한 사람 리스트" + follow_list);
-
+		
 		// 나를 팔로우한 사람의 수
 		int following_count = service.getfollowers(user_number);
-		System.out.println("--나를 팔로우 한 사람의 수" + following_count);
 
 		// 나를 팔로우 한 사람 리스트
 		List<UserFollowDTO> following_list = service.getfollowing_list(user_number);
-		System.out.println("--나를 팔로우 한 사람 리스트" + following_list);
 
 		return "test";
 	}
@@ -63,8 +58,7 @@ public class FollowController {
 	public String user_list(Model model, @RequestParam int user_number) throws Exception {
 		// 전체 사용자 리스트 가져오기
 		List<UserFollowDTO> user_list = service.user_list(user_number);
-		System.out.println("user_list 나의 고유번호" + user_number);
-		System.out.println("user_list 나를 제외한 리스트 : " + user_list);
+
 		model.addAttribute("user_list", user_list);
 
 		// 맞팔 확인
@@ -88,7 +82,6 @@ public class FollowController {
 	public String following_count(Model model, @RequestParam int user_number) throws Exception {
 		// user_number 파라미터를 받아 해당 사용자가 팔로우하는 사람의 수를 가져옴
 		int follow_count = service.getfollowings(user_number);
-		System.out.println(user_number + "가 팔로우 하는사람 몇 명? : " + follow_count);
 
 		model.addAttribute("follow_count", follow_count);
 
@@ -101,8 +94,7 @@ public class FollowController {
 	public String follow_list(Model model, @RequestParam int user_number) throws Exception {
 
 		List<UserFollowDTO> follow_list = service.getfollow_list(user_number);
-		System.out.println("나의 고유번호" + user_number);
-		System.out.println("내가 팔로우 한 리스트 follow_list : " + follow_list);
+
 		model.addAttribute("follow_list", follow_list);
 
 		return "follow";
@@ -114,7 +106,6 @@ public class FollowController {
 	private String follow_count(Model model, @RequestParam int user_number) throws Exception {
 		user_number = 15;
 		int following_count = service.getfollowers(user_number);
-		System.out.println(user_number + "를 팔로우 하는사람 몇 명? : " + following_count);
 
 		model.addAttribute("following_count", following_count);
 
@@ -126,8 +117,7 @@ public class FollowController {
 	public String following_list(Model model, @RequestParam int user_number) throws Exception {
 
 		List<UserFollowDTO> following_list = service.getfollowing_list(user_number);
-		System.out.println("나의 고유번호" + user_number);
-		System.out.println("나를 팔로잉 한 리스트 following_list : " + following_list);
+
 		model.addAttribute("following_list", following_list);
 
 		return "follow";
@@ -141,8 +131,6 @@ public class FollowController {
 		MemberDTO loginMember = (MemberDTO) session.getAttribute("member");
 		int user_number = loginMember.getUser_number();
 		String loginMemberId = loginMember.getUser_id().toString();
-		System.out.println(user_number); // 13
-		System.out.println(loginMemberId); // test
 		
 		Map<String, Object> response = new HashMap<>();
 
@@ -170,14 +158,8 @@ public class FollowController {
 		ufdto.setFollowing_id(following_id);
 		ufdto.setUser_number(user_number);
 
-		System.out.println("isfollow follower_id: " + follower_id);
-		System.out.println("isfollow following_id: " + following_id);
-		System.out.println("isfollow user_number: " + user_number);
-
 		// 맞팔 확인
 		int followStatus = service.checkFollowStatus(ufdto);
-
-		System.out.println("ufdto" + ufdto);
 
 		if (followStatus == 1) {
 			// 팔로우 상태면 언팔로우
@@ -208,9 +190,6 @@ public class FollowController {
 		ufdto.setFollowing_id(following_id);
 		ufdto.setUser_number(user_number);
 
-		System.out.println("follow에 있는 정보" + "user_number : " + user_number + ", follower_id : " + follower_id
-				+ ", following_id : " + following_id);
-
 		service.getfollow(ufdto);
 		return ResponseEntity.ok("follow");
 	}
@@ -223,9 +202,6 @@ public class FollowController {
 		int follower_id = requestBody.get("follower_id");
 		int following_id = requestBody.get("following_id");
 
-		System.out.println("unfollow에 있는 정보 user_number : " + user_number + ", follower_id : " + follower_id
-				+ ", following_id : " + following_id);
-
 		// following_id가 0인 경우 잘못된 요청으로 간주
 		if (following_id == 0) {
 			return ResponseEntity.badRequest().body("Invalid following_id");
@@ -236,8 +212,6 @@ public class FollowController {
 		ufdto.setFollowing_id(following_id);
 		ufdto.setUser_number(user_number);
 
-		System.out.println("unfollow 요청 수신됨 - user_number: " + user_number + ", follower_id: " + follower_id
-				+ ", following_id: " + following_id);
 
 		service.getunfollow(ufdto);
 		return ResponseEntity.ok("unfollow");

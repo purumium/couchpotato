@@ -168,10 +168,6 @@
     overflow-y: auto;
 }
 
-.following-list-item {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-}
 
 .following-list-item:nth-child(even) {
     background-color: #f9f9f9; /* 짝수 항목의 배경색 변경 */
@@ -196,11 +192,11 @@
 }
 
 .following-list-item {
-    display: flex;
+	display: flex;
     align-items: center;
     border-bottom: 1px solid #80808036;
-    padding: 6px 15px 6px 3px;
-    justify-content: space-between;
+    padding: 5px 15px 2px 3px;
+    justify-content: space-between;	
 }
 
 .following-list {
@@ -241,20 +237,20 @@
 
 
 #calendar {
-    max-width: 597px; /* 원하는 너비로 설정 */
+    max-width: 565px; /* 원하는 너비로 설정 */
     margin: 0 auto; /* 가운데 정렬 */
 }
 
 .fc-event {
     position: relative !important;
     display: block !important;
-    font-size: 1.3em !important;
-    line-height: 1.9 !important;
+    font-size: 1.0em !important;
+    line-height: 2.0 !important;
     border-radius: 40px !important;
     border: 1px solid #e6d12b !important;
     text-align: center !important;
     background-color: #ffec5857 !important;
-    width: 40px !important;
+    width: 30px !important;
     color: #534848 !important;
     font-weight: bold !important;
     margin: auto !important;

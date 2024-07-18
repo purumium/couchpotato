@@ -101,8 +101,9 @@
 			                                <div class="following-list-user-id">#${follow.user_id}</div>
 			                            </div>
 			                            <div class="following-list-btn">
-			                                <button type="button" data-userid ="${follow.user_id}" id="following-list-btn">
-			                                		캘린더보기
+			                                <button type="button" data-userid= "${follow.user_id}" data-username ="${follow.username}" 
+			                                		data-userimg ="${follow.profile_picture_url}"
+			                                		class="following-calendar-btn"> 캘린더보기
 	                                		</button>
 			                            </div>
 			                        </div>
@@ -131,10 +132,10 @@
 			const events = [];
 
 			<c:forEach var="review" items="${reviewsByDate}" varStatus="reviewStatus">
-			events.push({
-				title : '${review.REVIEW_TOTAL_COUNT}',
-				start : '${review.REVIEW_CREATE_AT}'
-			})
+				events.push({
+					title : '${review.REVIEW_TOTAL_COUNT}',
+					start : '${review.REVIEW_CREATE_AT}'
+				})
 			</c:forEach>
 
 			$('#calendar').fullCalendar({
