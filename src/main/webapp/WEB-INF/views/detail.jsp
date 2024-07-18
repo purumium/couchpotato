@@ -11,40 +11,7 @@
 <head>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/detail.css">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/member/mypage.css">
 <title>TV Show Details</title>
-<style>
-.review-container {
-	border: 1px solid #ddd;
-	padding: 10px;
-	margin: 10px 0;
-}
-
-.hidden {
-	display: none;
-}
-
-.reviewFilter {
-    text-align: center;
-    background-color: #f9f9f9fa;
-    border: 1px solid #c0bbbbad;
-    border-radius: 12px;
-    cursor: pointer;
-    letter-spacing: 0px;
-    font-size: 13px;
-    color: #211818;
-    font-weight: bold;
-    letter-spacing: 1px;
-    transition: background-color 0.3s;
-    padding: 9px 37px;
-    width: 150px;
-}
-
-.reviewFilter:hover {
-	background-color: #d8d6cabd;
-}
-</style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 
@@ -392,7 +359,7 @@ $(document).ready(function() {
 
 				<div>
 
-					<div class="container2">
+					<div class="review-container2">
 						<c:forEach var="review" items="${selectreviews}">
 							<div id="modal-body" class="modal-body">
 								<div class="review-item">

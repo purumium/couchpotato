@@ -118,6 +118,8 @@ $(document).ready(function() {
 
     function renderFollowLists(followList) {
         let followerHtml = '';
+      
+
         if (followList.length === 0) {
             followerHtml = '<p class="empty-message">회원님이 팔로우하는 사람들이 여기에 표시됩니다.</p>';
         } else {
@@ -133,6 +135,7 @@ $(document).ready(function() {
                                 '</div>';
             });
         }
+
         $('#follower-section').html(followerHtml);
         bindUnfollowButtons(); // 버튼에 이벤트 바인딩
     }
@@ -159,6 +162,7 @@ $(document).ready(function() {
                                 '</div>';
             });
         }
+
         $('#following-section').html(followingHtml);
         bindFollowButtons(); // 버튼에 이벤트 바인딩
     }
@@ -171,6 +175,7 @@ $(document).ready(function() {
 
     function displayUsers(users) {
         let userHtml = '';
+
         if (users.length === 0) {
             userHtml = '<p class="empty-message">couchpotato</p>';
         } else {
@@ -178,6 +183,7 @@ $(document).ready(function() {
                 let isFollowing = followList.some(function(follow) {
                     return follow.user_id === user.user_id;
                 });
+
 
                 userHtml += '<div class="user-item">' +
                                 '<div class="user-item-title">' +
@@ -197,6 +203,7 @@ $(document).ready(function() {
         
     }
 
+
     function bindUnfollowButtons() {
         $('.unfollow-btn').click(function() {
             const following_id = $(this).data('following-id') || $(this).data('user-number');
@@ -210,6 +217,7 @@ $(document).ready(function() {
             followUser(following_id, this);
         });
     }
+
 
     function unfollowUser(following_id, button) {
         console.log('unfollowUser 호출됨: ', following_id);
