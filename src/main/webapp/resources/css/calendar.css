@@ -205,9 +205,10 @@
 }
 
 .following-img {
-    width: 43px;
+    width: 45px;
     margin-right: 10px;
     border-radius: 30px;
+    height: 45px;
 }
 
 .following-list-username {
