@@ -7,10 +7,11 @@
     <div class="followCalendar-modal-content">
         <div class="followCalendar-modal-header">
             <div class="followCalendar-modal-header-title">
-                <img id="friend-profile-img" src="${pageContext.request.contextPath}/resources/images/nullProfile.png" width="36px;">
-                <div class="frind-title">
-	                <span class="friend-name"> </span>
-	                <span class="freind-name-title">의 리뷰 캘린더</span>
+                <img id="friend-profile-img" 
+                	 src="/resources/images/popcornpotato.png" width="50px;">
+                <div class="friend-title">
+	                <span class="friend-name"> </span> 
+	                <span class="friend-name2">' S REVIEW CALENDAR</span>
                 </div>
             </div>
             <span id="close-follow-modal" class="followCalendar-close">&times;</span>
@@ -44,19 +45,11 @@
            $('.following-calendar-btn').click(function() {
                var userId = $(this).data('userid');
                var username = $(this).data('username');
-               var userImg = $(this).data('userimg');
                
                console.log("유저의 유저의 이름 : " + userId + ", " + username);
                
                // 이름
-               $('.friend-name').text(username);
-               
-               // 프로필 이미지 변경
-               if (userImg == null) {
-            	   $('#friend-profile-img').attr('src', '${pageContext.request.contextPath}/resources/images/nullProfile.png');
-               } else {
-            	   $('#friend-profile-img').attr('src', userImg);
-               }
+               $('.friend-name').text(username);         
                
                // 모달창 열림
                $('#followCalendar-Modal').css('display', 'block');
@@ -139,22 +132,25 @@
 				console.log(detailData);
 				
 				detailData.forEach(function(data) {
-	                resultHtml += '<div class="follow-review-item">'
-	                           		 	+ '<img src="https://image.tmdb.org/t/p/w300/' + data.content_image_url + '" alt="Movie Thumbnail" class="follow-review-img">'
-	                            		+ '<div class="follow-review-contents">'
-	                            			+ '<div class="follow-review-title-rate">'
-	                           				+ '<div class="follow-review-title"> '
-	                           					 + '<a href="/movie/detail/' + data.content_type + '/' + data.content_id + '">'
-	                            				 + data.content_name + '</a>' 
-                            				+ '</div>'
-				                            + '<div class="follow-review-rating"> <img src="resources/images/rating_star.png" width="8px;">'
-				                            	+ data.rating
-				                            + '</div>'
-				                            + '<div class="follow-review-count"> <img src="/resources/images/glass.png">'
-				                            	+ data.review_create_at + ' </div>'
-				                            + '</div>'
-				                            + '</div>'
-	                           	 + '</div>' 
+					resultHtml += '<div class="follow-review-item">'
+							            + '<img src="https://image.tmdb.org/t/p/w300/' + data.content_image_url + '" alt="Movie Thumbnail" class="follow-review-img">'
+							            + '<div class="follow-review-contents">'
+							                + '<div class="follow-review-title-rate">'
+							                    + '<div class="follow-review-title">'
+							                        + '<a href="/movie/detail/' + data.content_type + '/' + data.content_id + '">'
+							                        + data.content_name + '</a>'
+							                    + '</div>'
+							                    + '<div class="follow-review-rating">'
+							                        + '<img src="resources/images/rating_star.png" width="10px;">'
+							                        + data.rating
+							                    + '</div>'
+							                    + '<div class="follow-review-create-at">'
+							                        + data.review_create_at
+							                    + '</div>'
+							                + '</div>' // follow-review-title-rate 닫기
+							            + '</div>' // follow-review-contents 닫기
+							        + '</div>'; // follow-review-item 닫기
+                   console.log(resultHtml);
 	            });
 	            $('#followContent-modal-body').html(resultHtml);
 	            
