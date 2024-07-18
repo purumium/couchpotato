@@ -352,7 +352,7 @@ $(document).ready(function() {
 						<button id="filter-button" class="filter-btn  reviewFilter"
 							>내 리뷰</button>
 						<button id="follow-button" class="follow-btn reviewFilter "
-							>팔로워 리뷰</button>
+							>팔로잉 리뷰</button>
 					</div>
 
 				</c:if>

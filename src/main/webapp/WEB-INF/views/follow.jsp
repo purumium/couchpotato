@@ -140,7 +140,7 @@
                                        '<img src="/resources/images/nullProfile.png" class="user-item-img">') +
                                    '<span class="user-item-name">' + follower.user_id + '</span>' +
                                '</div>';
-                followerHtml += '<button class="user-item-btn" onclick="unfollowUser(' + follower.following_id + ', this)">팔로우 취소</button>';             
+                followerHtml += '<button class="user-item-btn follow-btn" onclick="unfollowUser(' + follower.following_id + ', this)">팔로우 취소</button>';             
              followerHtml += '</div>';
          });
     }
@@ -173,10 +173,10 @@
                                   
          if (isMutualFollow) {
             // 맞팔 상태인 경우 팔로우 취소 버튼 추가
-            followingHtml += '<button class="user-item-btn" onclick="unfollowUser(' + following.follower_id + ', this)">팔로우 취소</button>';
+            followingHtml += '<button class="user-item-btn follow-btn" onclick="unfollowUser(' + following.follower_id + ', this)">팔로우 취소</button>';
          } else {
             // 맞팔 상태가 아닌 경우 팔로우 버튼 추가
-            followingHtml += '<button class="user-item-btn" onclick="followUser(' + following.follower_id + ', this)">팔로우</button>';
+            followingHtml += '<button class="user-item-btn follow-btn" onclick="followUser(' + following.follower_id + ', this)">팔로우</button>';
          }
          
          followingHtml += '</div>';
@@ -220,9 +220,9 @@
                             '</div>';
                   
          if (isFollowing) {
-            userHtml += '<button class="user-item-btn" onclick="unfollowUser(' + user.user_number + ', this)">팔로우 취소</button>';
+            userHtml += '<button class="user-item-btn follow-btn" onclick="unfollowUser(' + user.user_number + ', this)">팔로우 취소</button>';
          } else {
-            userHtml += '<button class="user-item-btn" onclick="followUser(' + user.user_number + ', this)">팔로우</button>';
+            userHtml += '<button class="user-item-btn follow-btn" onclick="followUser(' + user.user_number + ', this)">팔로우</button>';
          }
          userHtml += '</div>';
           });

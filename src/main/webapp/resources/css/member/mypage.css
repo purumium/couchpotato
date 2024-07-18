@@ -5,9 +5,8 @@
     padding: 0px;
 }
 
-
 .mypage-container {
-    margin-top: 60px;
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -21,7 +20,7 @@
     gap: 50px;
     border: 1px solid #e9e9e91a;
     border-radius: 10px;
-    padding: 45px;
+    padding: 30px 45px;
     width: 87%;
     max-width: 700px;
     background-color: #b5b5b524;
@@ -47,15 +46,15 @@
 }
 
 .profile-img {
-    width: 200px;
-    height: 200px;
+    width: 190px;
+    height: 190px;
     border-radius: 50%;
 }
 
 .edit-btn {
     position: absolute;
     bottom: 1px;
-    left: 80%;
+    left: 76%;
     transform: translateX(-50%);
     background-color: #ffffffa6;
     border: 1px solid #c0bbbb;
@@ -181,11 +180,19 @@
     width: 63px;
 }
 
+#pwForm p, #deleteForm p {
+    margin: 11px 0; /* p 요소의 마진을 줄임 */
+}
+
 #pwForm p>label, #deleteForm p>label {
     font-size: 12px;
     margin: 5px 0px 5px 3px;
     font-weight: 200;
     color: #808080c4;
+}
+
+#pwForm p input, #deleteForm p input {
+    margin: 3px 0; /* 인풋 필드의 마진을 줄임 */
 }
 
 .profileUpdateModal {

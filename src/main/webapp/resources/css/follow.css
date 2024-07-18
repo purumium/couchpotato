@@ -110,7 +110,7 @@
 
 /* 맞팔로우 및 팔로우 버튼에 마우스를 올렸을 때의 스타일을 지정합니다 */
 .mutual-follow-btn:hover, .follow-btn:hover {
-    background: #0056b3; /* 배경색을 더 진한 파란색으로 변경합니다 */
+    background: #dddddda1; /* 배경색을 더 진한 파란색으로 변경합니다 */
 }
 
 .user-item-img {
