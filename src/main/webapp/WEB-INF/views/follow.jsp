@@ -10,7 +10,7 @@
         <div class="follow-modal-body">
             <div class="tab-container">
                 <!-- 탭 버튼을 클릭하면 showSection 함수 호출 -->
-                <button class="tab-button" onclick="showSection('follower-section')">팔로잉</button>
+                <button class="tab-button active" onclick="showSection('follower-section')">팔로잉</button>
                 <button class="tab-button" onclick="showSection('following-section')">팔로워</button>
                 <button class="tab-button" onclick="showSection('user-section')">사용자 검색</button>
             </div>
@@ -80,7 +80,11 @@
     function showSection(sectionId) {
         $('.content-section').hide(); // 모든 섹션 숨기기
         $('#' + sectionId).show(); // 선택한 섹션만 보이기
-        loadFollowLists();//내용변경후 보이기
+        loadFollowLists(); //내용변경후 보이기
+        
+        // 탭 버튼의 활성화 상태 업데이트
+        $('.tab-button').removeClass('active'); // 모든 탭 버튼에서 활성화 클래스 제거
+        $('button[onclick="showSection(\'' + sectionId + '\')"]').addClass('active'); // 선택한 섹션의 탭 버튼에 활성화 클래스 추가
     }
 
     // 문서가 준비되면 실행
@@ -291,7 +295,5 @@
                }
            });
        }
-
-</script>
 
 </script>
