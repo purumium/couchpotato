@@ -164,7 +164,7 @@
 }
 
 .following-list-container {
-    max-height: calc(100% - 40px); /* 전체 높이에서 header의 높이를 뺀 값 */
+    max-height: calc(100% - 30px); /* 전체 높이에서 header의 높이를 뺀 값 */
     overflow-y: auto;
 }
 
