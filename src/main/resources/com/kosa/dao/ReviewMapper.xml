@@ -15,7 +15,7 @@
 		SELECT r.user_number as userNumber, r.CONTENT_NAME as contentName,
 		r.CONTENT_ID as contentId, r.CONTENT_TYPE as contentType, 
 		r.REVIEW_TEXT as reviewContent,
-		r.RATING as rating, u.user_id as userId
+		r.RATING as rating, u.user_id as userId, r.REVIEW_CREATE_AT as create_at
 		FROM  reviews r JOIN users u
 		ON  r.user_number = u.user_number
 		WHERE 
