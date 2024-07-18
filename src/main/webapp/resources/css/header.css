@@ -64,8 +64,10 @@
     pointer-events: none;  /* 클릭 이벤트 방지 */
 }
 
-.search-bar input[type="text"] {
-    width: 310px;
+
+.header .search-bar input[type="text"] {
+    width: 450px;
+
     padding: 11px 10px 9px 41px;
     border: 2px solid #ddd;
     border-radius: 35px;

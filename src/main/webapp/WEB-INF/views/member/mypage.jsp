@@ -16,6 +16,7 @@
 <body>
 	<%@ include file="../common/header.jsp"%>
 	<%@ include file="../follow.jsp"%>
+	<div class="calendar-container">
 
 	<div class="mypage-container">
 		<div class="outer-div">
@@ -121,6 +122,7 @@
 				</form>
 			</div>
 		</div>
+	</div>
 	</div>
 
 	<script>
