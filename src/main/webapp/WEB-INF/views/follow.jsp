@@ -122,10 +122,13 @@
     // 팔로워 리스트 렌더링 함수
     function renderFollowLists(followList) {
         let followerHtml = '';
+        if (followList.length === 0) {
+        followerHtml = '<p class="empty-message">회원님이 팔로우하는 사람들이 여기에 표시됩니다.</p>';
+    } else {
+
 
         // 팔로워 리스트 출력
         followList.forEach(function(follower) {
-
              followerHtml += '<div class="user-item">' +
                                '<div class="user-item-title">' + 
                                    (follower.profile_picture_url ? 
@@ -136,15 +139,18 @@
                 followerHtml += '<button class="user-item-btn" onclick="unfollowUser(' + follower.following_id + ', this)">팔로우 취소</button>';             
              followerHtml += '</div>';
          });
+    }
         $('#follower-section').html(followerHtml);
     }
     
-    
-    
-    
+   
     // 팔로잉 리스트 렌더링 함수
     function renderFollowLists2(followingList) {
         let followingHtml = '';   
+        
+        if(followingList.length === 0) { 
+        	   followingHtml = '<p class="empty-message"> 회원님을 팔로우하는 사람들이 여기에 표시됩니다.</p>';
+        } else {
 
         // 팔로잉 리스트 출력
         followingList.forEach(function(following) {
@@ -171,8 +177,10 @@
          
          followingHtml += '</div>';
         });
+        }
         $('#following-section').html(followingHtml);
-    }
+    
+ }
     
     
     // 사용자 리스트 필터링 함수
@@ -186,7 +194,9 @@
     // 전체사용자 리스트 표시 함수
     function displayUsers(users) {
         let userHtml = '';
-
+        if (users.length === 0) {
+            userHtml = '<p class="empty-message">검색하신 사용자가 없습니다.</p>';
+        } else {
         users.forEach(function(user) {
             let isFollowing = followList.some(function(follow) {
                
@@ -212,6 +222,7 @@
          }
          userHtml += '</div>';
           });
+        }
         $('#user-list').html(userHtml);
     }
     
