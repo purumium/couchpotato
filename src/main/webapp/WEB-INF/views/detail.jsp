@@ -133,7 +133,7 @@ $(document).ready(function() {
                     refreshDiv('refresh');
                     alert("저장 성공");
                 } else if (data === "already") {
-                    alert("이미 리뷰를 작성하였습니다");
+                    alert("오늘 이미 리뷰를 작성하였습니다");
                 } else {
                     alert("저장 실패");
                 }
@@ -342,7 +342,6 @@ $(document).ready(function() {
 	<%
 		}
 	%>
-
 	<div id="refresh">
 		<c:if test="${not empty selectreviews}">
 			<div class="total-container">
@@ -360,14 +359,15 @@ $(document).ready(function() {
 
 				<div>
 
-					<div class="review-container2">
+					<div class="review-container2">	
 						<c:forEach var="review" items="${selectreviews}">
 							<div id="modal-body" class="modal-body">
 								<div class="review-item">
 									<div class="review-contents"
 										style="height: 100px; overflow-y: auto;">
 										<div class="review-title-rate">
-											<div class="review-title user-id" style="font-size: 16px">${review.userId}</div>
+											<div class="review-title user-id" style="font-size: 16px; display:none;">${review.userId}</div>
+											<div class="review-title user-id2" style="font-size: 16px">${review.userName}</div>
 											<div class="review-rating">${review.rating}</div>
 											<div class="edit_review_create_at" style="margin-left:10px;">${fn:substringBefore(review.create_at, ' ')}</div>
 										</div>

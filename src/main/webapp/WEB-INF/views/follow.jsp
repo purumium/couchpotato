@@ -4,28 +4,26 @@
 
 <div id="followModal" class="follow-modal">
     <div class="follow-modal-content">
-        <div class="follow-header">
-            <span id="follow-close" class="follow-close">&times;</span>
-        </div>
-        <div class="follow-modal-body">
+        <div class="sticky-container">
+            <div class="follow-header">
+                <span id="follow-close" class="follow-close">&times;</span>
+            </div>
             <div class="tab-container">
-                <!-- 탭 버튼을 클릭하면 showSection 함수 호출 -->
                 <button class="tab-button active" onclick="showSection('follower-section')">팔로잉</button>
                 <button class="tab-button" onclick="showSection('following-section')">팔로워</button>
                 <button class="tab-button" onclick="showSection('user-section')">사용자 검색</button>
             </div>
+            <div class="search-container"> 
+                <input type="text" id="followSearchContainer" placeholder="사용자 검색" onkeyup="filterUsers()">
+            </div>
+        </div>
+        <div class="follow-modal-body">
             <div class="content-container">
-                <div id="follower-section" class="content-section"></div> <!-- 팔로워 리스트 섹션 -->
-                <div id="following-section" class="content-section"></div> <!-- 팔로잉 리스트 섹션 -->
+                <div id="follower-section" class="content-section"></div>
+                <div id="following-section" class="content-section"></div>
                 <div id="user-section" class="content-section">
-                
-                <div class="search-container"> 
-                    <input type="text" id="followSearchContainer" placeholder="사용자 검색" onkeyup="filterUsers()"> <!-- 검색 입력 필드 -->
+                    <div id="user-list"></div>
                 </div>
-                    <div id="user-list"></div> <!-- 검색 결과를 표시할 요소 -->
-                    
-                    
-                </div> <!-- 전체 사용자 리스트 섹션 -->
             </div>
         </div>
     </div>
@@ -187,11 +185,25 @@
  }
     
     
-    // 사용자 리스트 필터링 함수
+ // 사용자 리스트 필터링 함수
     function filterUsers() {
         const searchTerm = $('#followSearchContainer').val().toLowerCase();
-        const filteredUsers = userList.filter(user => user.user_id.toLowerCase().includes(searchTerm));
-        displayUsers(filteredUsers);
+        const currentSection = $('.content-section:visible').attr('id'); // 현재 보이는 섹션 확인
+
+        switch (currentSection) {
+            case 'follower-section':
+                const filteredFollowers = followList.filter(user => user.user_id.toLowerCase().includes(searchTerm));
+                renderFollowLists(filteredFollowers); // 팔로워 리스트 필터링 및 렌더링
+                break;
+            case 'following-section':
+                const filteredFollowing = followingList.filter(user => user.user_id.toLowerCase().includes(searchTerm));
+                renderFollowLists2(filteredFollowing); // 팔로잉 리스트 필터링 및 렌더링
+                break;
+            case 'user-section':
+                const filteredUsers = userList.filter(user => user.user_id.toLowerCase().includes(searchTerm));
+                displayUsers(filteredUsers); // 사용자 리스트 필터링 및 렌더링
+                break;
+        }
     }
     
 
