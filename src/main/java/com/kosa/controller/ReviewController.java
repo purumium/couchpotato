@@ -25,17 +25,19 @@ public class ReviewController {
 			ReviewDTO reviewDTO = new ReviewDTO();
 			reviewDTO.setUserNumber(review.getUserNumber());
 			reviewDTO.setContentId(review.getContentId());
-//        	boolean reviewExists = reviewService.checkReviewExists(reviewDTO);
+			
+			
+        	boolean reviewExists = reviewService.checkReviewExists(reviewDTO);
 
-//        	if(reviewExists) {
-//        		return "already";
-//        	}else {
-//        		reviewService.saveReview(review);
-//                return "success";
-//        	}
+        	if(reviewExists) {
+        		return "already";
+        	}else {
+        		reviewService.saveReview(review);
+                return "success";
+        	}
 
-			reviewService.saveReview(review);
-			return "success";
+//			reviewService.saveReview(review);
+//			return "success";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "fail";
