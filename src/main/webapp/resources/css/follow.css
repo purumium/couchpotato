@@ -1,3 +1,13 @@
+/* 추가: sticky-container의 스타일 */
+.sticky-container {
+    position: sticky;
+    top: 0;
+    background-color: #fefefe; /* 배경색을 모달과 일치시킴 */
+    z-index: 10; /* 다른 콘텐츠보다 위에 오도록 설정 */
+    padding: 10px 0;
+}
+
+
 /* 모달의 스타일을 지정합니다 */
 .follow-modal {
     display: none; /* 기본적으로 모달을 숨깁니다 */
@@ -16,12 +26,12 @@
 .follow-modal-content {
     background-color: #fefefe;
     margin: 11% auto;
-    padding: 10px 19px 0px 26px;
+    padding: 0px 19px 0px 26px;
     border: 1px solid #888;
     width: 25%;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    height: 505px;
+    height: 45%;
     overflow: auto;
 }
 
