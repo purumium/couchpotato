@@ -19,7 +19,7 @@
 
 | **선푸름(팀장)** | **김호영** | **박유은** | **조성현** |
 | :------: |  :------: | :------: | :------: |
-| <img src="https://github.com/user-attachments/assets/ae98ce5b-74bc-4923-8667-ede3a24c56b5?v=4" height="150" width="150"> | <img src="https://github.com/user-attachments/assets/27571ece-ea40-4b85-a595-0069736b684d?v=4" height="150" width="150"> | <img src="https://github.com/user-attachments/assets/181f827d-5d71-4ea5-9d54-12be70a23f2e?v=4" height="150" width="150"> | <img src="https://github.com/user-attachments/assets/5f5d1bf6-0a1b-4162-82ae-0292b991b1e0?v=4" height="150" width="150"> |
+| <img src="https://github.com/user-attachments/assets/ae98ce5b-74bc-4923-8667-ede3a24c56b5?v=4" height="130" width="130"> | <img src="https://github.com/user-attachments/assets/27571ece-ea40-4b85-a595-0069736b684d?v=4" height="130" width="130"> | <img src="https://github.com/user-attachments/assets/181f827d-5d71-4ea5-9d54-12be70a23f2e?v=4" height="130" width="130"> | <img src="https://github.com/user-attachments/assets/5f5d1bf6-0a1b-4162-82ae-0292b991b1e0?v=4" height="130" width="130"> |
 
 </div>
 
